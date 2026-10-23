@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>World Chaos Map: case study · Shaw Labs</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="How World Chaos Map scores every country from 0 to 100 using only what the news reports, why v2 got it wrong, and how v3 fixed it.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23142047'/%3E%3Cpath d='M26 14h12M28 14v14L17 48a4 4 0 0 0 3.5 6h23A4 4 0 0 0 47 48L36 28V14' fill='none' stroke='%23f3f4ef' stroke-width='4' stroke-linejoin='round'/%3E%3Ccircle cx='32' cy='44' r='4' fill='%23d0473a'/%3E%3C/svg%3E">
+<link rel="canonical" href="https://www.shawlabs.dev/world-chaos-map">
+<meta property="og:type" content="website">
+<meta property="og:title" content="World Chaos Map: case study · Shaw Labs">
+<meta property="og:description" content="How World Chaos Map scores every country from 0 to 100 using only what the news reports, why v2 got it wrong, and how v3 fixed it.">
+<meta property="og:url" content="https://www.shawlabs.dev/world-chaos-map">
+<meta property="og:image" content="https://www.shawlabs.dev/assets/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@shawsurajss">
+<meta name="theme-color" content="#f3f4ef" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0c1830" media="(prefers-color-scheme: dark)">
+<style>/* Concept: an engineering notebook. Graph paper, blue pen, a red margin line.
+   Projects are experiments with numbers; case studies read like lab reports.
+   Family ties to shawsuraj.com: same display, text and mono faces. */
+:root{
+  --paper:#f3f4ef; --paper-2:#e8eae3; --card:#fbfbf8; --grid:rgba(36,64,184,.075); --grid-major:rgba(36,64,184,.13);
+  --ink:#142047; --ink-2:#3a4466; --ink-3:#6b7290; --rule:#c9cdd8;
+  --pen:#2440b8; --pen-soft:#dfe4f6; --margin:#d0473a; --ok:#1c7a50; --ok-soft:#d6e9de; --wip:#a8660b; --wip-soft:#f0e1c6;
+  --display:"Bricolage Grotesque","Arial Narrow",system-ui,sans-serif;
+  --text:"Newsreader",Georgia,"Times New Roman",serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#0c1830; --paper-2:#122241; --card:#0f1e3a; --grid:rgba(143,176,255,.07); --grid-major:rgba(143,176,255,.13);
+  --ink:#e6ecff; --ink-2:#b8c3e6; --ink-3:#8590b3; --rule:#253760;
+  --pen:#8fb0ff; --pen-soft:#1a2c56; --margin:#ff7a66; --ok:#58c690; --ok-soft:#12301f; --wip:#efa63e; --wip-soft:#37270f; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0c1830; --paper-2:#122241; --card:#0f1e3a; --grid:rgba(143,176,255,.07); --grid-major:rgba(143,176,255,.13);
+  --ink:#e6ecff; --ink-2:#b8c3e6; --ink-3:#8590b3; --rule:#253760;
+  --pen:#8fb0ff; --pen-soft:#1a2c56; --margin:#ff7a66; --ok:#58c690; --ok-soft:#12301f; --wip:#efa63e; --wip-soft:#37270f; color-scheme:dark}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;color:var(--ink);font-family:var(--text);font-size:19px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+  background-color:var(--paper);
+  background-image:linear-gradient(var(--grid-major) 1px,transparent 1px),linear-gradient(90deg,var(--grid-major) 1px,transparent 1px),
+    linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:120px 120px,120px 120px,24px 24px,24px 24px;background-position:-1px -1px}
+a{color:var(--pen);text-decoration-thickness:1px;text-underline-offset:3px}
+a:hover{text-decoration-thickness:2px}
+:focus-visible{outline:2px solid var(--pen);outline-offset:3px;border-radius:2px}
+::selection{background:var(--pen);color:var(--paper)}
+h1,h2,h3,h4{font-family:var(--display);text-wrap:balance;margin:0;font-weight:800;letter-spacing:-.025em;line-height:1.02}
+p{margin:0 0 1em;max-width:66ch}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.page{position:relative;padding-left:clamp(0px,6vw,88px)}
+.page::before{content:"";position:absolute;left:clamp(0px,4vw,60px);top:0;bottom:0;width:2px;background:var(--margin);opacity:.55}
+@media (max-width:700px){.page{padding-left:0}.page::before{display:none}}
+.label{font-family:var(--mono);font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);margin:0}
+.mono{font-family:var(--mono)}
+.hand{font-family:var(--mono);color:var(--pen)}
+.skip{position:absolute;left:-999px;top:8px;background:var(--ink);color:var(--paper);padding:8px 12px;z-index:99}
+.skip:focus{left:12px}
+
+/* nav */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:40;background:var(--paper);border-bottom:1.5px solid var(--ink)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:41;background:var(--paper)}
+.top .wrap{display:flex;align-items:center;gap:16px;min-height:58px;flex-wrap:wrap}
+.mark{font-family:var(--display);font-weight:800;font-size:21px;letter-spacing:-.03em;text-decoration:none;color:var(--ink);display:flex;align-items:center;gap:8px}
+.mark .flask{width:22px;height:22px;color:var(--pen)}
+.nav{display:flex;flex-wrap:wrap;gap:4px;margin-left:auto;font-family:var(--mono);font-size:14px}
+.nav a{text-decoration:none;color:var(--ink-2);padding:6px 10px;border-radius:3px}
+.nav a:hover{background:var(--pen-soft);color:var(--ink)}
+.nav a[aria-current="page"]{background:var(--ink);color:var(--paper)}
+
+/* hero */
+.hero{padding-block:60px 44px}
+.hero .meta{display:flex;flex-wrap:wrap;gap:6px 22px;font-family:var(--mono);font-size:13px;color:var(--ink-3);margin-bottom:28px}
+.hero h1{font-size:clamp(68px,11.5vw,170px);letter-spacing:-.055em;line-height:.86}
+.hero h1 span{color:var(--pen)}
+.hero .lede{font-size:clamp(23px,2.5vw,30px);line-height:1.32;max-width:30ch;margin-top:26px}
+.hero .note{font-family:var(--mono);font-size:14px;color:var(--pen);margin-top:18px;transform:rotate(-1.2deg);display:inline-block;border-bottom:1.5px dashed var(--pen);padding-bottom:2px}
+
+section.block{padding-block:64px;border-top:1.5px solid var(--ink)}
+.sec-head{display:grid;grid-template-columns:200px minmax(0,1fr);gap:10px 40px;align-items:baseline;margin-bottom:30px}
+.sec-head h2{font-size:clamp(34px,4.6vw,58px);letter-spacing:-.04em}
+@media (max-width:860px){.sec-head{grid-template-columns:1fr}}
+
+/* experiments index */
+.exp{width:100%;border-collapse:collapse;background:var(--card);border:1.5px solid var(--ink);font-size:17px}
+.exp th{font-family:var(--mono);font-weight:500;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);text-align:left;padding:10px 14px;border-bottom:1.5px solid var(--ink);white-space:nowrap}
+.exp td{padding:16px 14px;border-bottom:1px solid var(--rule);vertical-align:top}
+.exp tr:last-child td{border-bottom:0}
+.exp td.id{font-family:var(--mono);font-size:14px;color:var(--pen);white-space:nowrap}
+.exp td b{font-family:var(--display);font-weight:700;font-size:20px;display:block;color:var(--ink)}
+.exp td .q{color:var(--ink-2);display:block;margin-top:2px}
+.exp td.st{white-space:nowrap}
+.exp td.go{white-space:nowrap;font-family:var(--mono);font-size:14px}
+.exp tr.lead td{background:var(--pen-soft)}
+.chip{font-family:var(--mono);font-size:11.5px;letter-spacing:.05em;padding:3px 8px;border-radius:2px;display:inline-block;text-transform:uppercase}
+.chip.live{background:var(--ok-soft);color:var(--ok)} .chip.wip{background:var(--wip-soft);color:var(--wip)} .chip.res{background:var(--pen-soft);color:var(--pen)} .chip.done{background:var(--paper-2);color:var(--ink-2)}
+.tableWrap{overflow-x:auto}
+.tableWrap .exp{min-width:720px}
+
+/* rules */
+.rules{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 48px;counter-reset:r}
+.rules li{counter-increment:r;padding:18px 0 18px 52px;border-bottom:1px solid var(--rule);position:relative}
+.rules li::before{content:counter(r,decimal-leading-zero);position:absolute;left:0;top:18px;font-family:var(--mono);font-size:14px;color:var(--pen);border:1.5px solid var(--pen);border-radius:50%;width:34px;height:34px;display:grid;place-items:center}
+.rules b{font-family:var(--display);font-size:21px;display:block;letter-spacing:-.01em}
+.rules span{color:var(--ink-2);font-size:17px}
+@media (max-width:800px){.rules{grid-template-columns:1fr}}
+
+/* note */
+.note-card{background:var(--card);border:1.5px solid var(--ink);padding:clamp(22px,4vw,44px);box-shadow:8px 8px 0 var(--pen-soft)}
+.note-card h3{font-size:clamp(30px,3.4vw,44px);margin-bottom:6px}
+.note-card .meta{font-family:var(--mono);font-size:13px;color:var(--ink-3);margin-bottom:20px}
+.note-card p{font-size:20px}
+.note-card .pull{font-family:var(--display);font-weight:700;font-size:clamp(22px,2.4vw,30px);line-height:1.25;color:var(--pen);border-left:3px solid var(--pen);padding-left:18px;margin:24px 0}
+
+/* report (case study) */
+.rep-head{padding-block:56px 36px}
+.rep-tag{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:1.5px solid var(--ink);background:var(--card);margin-bottom:36px}
+.rep-tag div{padding:12px 16px;border-right:1px solid var(--rule);min-width:0}
+.rep-tag div:last-child{border-right:0}
+.rep-tag span{display:block;font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
+.rep-tag b{font-family:var(--display);font-size:18px}
+.rep-head h1{font-size:clamp(46px,7.6vw,108px);letter-spacing:-.05em;line-height:.9;max-width:14ch}
+.rep-head .lede{font-size:clamp(22px,2.3vw,28px);line-height:1.35;max-width:36ch;margin-top:24px}
+.rep-head .links{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}
+.btn{font-family:var(--display);font-weight:700;font-size:16px;text-decoration:none;background:var(--ink);color:var(--paper);padding:12px 20px;border-radius:999px}
+.btn:hover{background:var(--pen);color:var(--paper)}
+.btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--ink)}
+.toc{font-family:var(--mono);font-size:14px;display:flex;flex-wrap:wrap;gap:6px 18px;padding:14px 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);margin-top:34px}
+.toc a{text-decoration:none}
+.r-sec{padding-block:52px;border-top:1.5px solid var(--ink);display:grid;grid-template-columns:200px minmax(0,1fr);gap:12px 44px}
+.r-sec > .n{font-family:var(--mono);font-size:14px;color:var(--pen)}
+.r-sec > .n b{display:block;font-family:var(--display);font-weight:800;font-size:22px;color:var(--ink);letter-spacing:-.02em;margin-top:6px;line-height:1.1}
+.r-sec .body{min-width:0}
+.r-sec h2{font-size:clamp(30px,3.8vw,46px);letter-spacing:-.035em;margin-bottom:18px}
+.r-sec p{font-size:19px}
+@media (max-width:860px){.r-sec{grid-template-columns:1fr}.rep-tag{grid-template-columns:repeat(2,minmax(0,1fr))}.rep-tag div:nth-child(2){border-right:0}.rep-tag div:nth-child(-n+2){border-bottom:1px solid var(--rule)}}
+
+.rule-box{background:var(--card);border:1.5px solid var(--ink);padding:24px 26px;font-family:var(--display);font-weight:700;font-size:clamp(22px,2.6vw,32px);line-height:1.2;box-shadow:8px 8px 0 var(--pen-soft)}
+.rule-box small{display:block;font-family:var(--mono);font-weight:400;font-size:13px;color:var(--ink-3);margin-top:12px;letter-spacing:0}
+.formula{font-family:var(--mono);font-size:clamp(16px,1.8vw,20px);background:var(--card);border:1px dashed var(--pen);color:var(--pen);padding:16px 20px;margin:6px 0 20px;overflow-x:auto;white-space:nowrap}
+.data{width:100%;border-collapse:collapse;font-size:16.5px;background:var(--card);border:1.5px solid var(--ink)}
+.data th{font-family:var(--mono);font-weight:500;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);text-align:left;padding:9px 12px;border-bottom:1.5px solid var(--ink)}
+.data td{padding:10px 12px;border-bottom:1px solid var(--rule)}
+.data td.num{font-family:var(--mono);text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+.data tr:last-child td{border-bottom:0}
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px}
+@media (max-width:860px){.two{grid-template-columns:1fr}}
+figure{margin:8px 0 24px}
+figure svg{width:100%;height:auto;display:block}
+figcaption{font-size:15px;color:var(--ink-2);margin-top:8px}
+figcaption b{font-family:var(--mono);font-weight:500;color:var(--pen)}
+svg text{font-family:var(--mono);fill:var(--ink-2)}
+.removed{list-style:none;padding:0;margin:0}
+.removed li{padding:10px 0;border-bottom:1px solid var(--rule);font-size:17px}
+.removed li s{color:var(--margin);text-decoration-thickness:2px;font-family:var(--mono);font-size:15px}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:1.5px solid var(--ink);background:var(--card);margin:6px 0 24px}
+.stats div{padding:16px;border-right:1px solid var(--rule)}
+.stats div:last-child{border-right:0}
+.stats b{display:block;font-family:var(--display);font-weight:800;font-size:clamp(28px,3.4vw,40px);letter-spacing:-.03em;font-variant-numeric:tabular-nums;color:var(--pen)}
+.stats span{font-family:var(--mono);font-size:12.5px;color:var(--ink-3)}
+@media (max-width:700px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.stats div:nth-child(2){border-right:0}.stats div:nth-child(-n+2){border-bottom:1px solid var(--rule)}}
+.margin-note{font-family:var(--mono);font-size:14px;color:var(--pen);border-left:2px solid var(--pen);padding:4px 0 4px 14px;margin:18px 0}
+
+/* footer */
+.foot{padding-block:56px 40px;border-top:1.5px solid var(--ink);background:var(--paper)}
+.foot .row{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px 32px;align-items:baseline}
+.foot h2{font-size:clamp(30px,4vw,48px);letter-spacing:-.04em}
+.foot nav{display:flex;flex-wrap:wrap;gap:8px 20px;font-family:var(--mono);font-size:14px}
+.foot small{display:block;margin-top:28px;font-family:var(--mono);font-size:12.5px;color:var(--ink-3)}
+
+@media (max-width:560px){body{font-size:18px}.nav{width:100%;margin-left:0;padding-bottom:8px;font-size:13px}.nav a{padding:5px 7px}section.block,.r-sec{padding-block:44px}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top"><div class="wrap"><a class="mark" href="/"><svg class="flask" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M9 3h6M10 3v6L4.5 18.5A1.7 1.7 0 0 0 6 21h12a1.7 1.7 0 0 0 1.5-2.5L14 9V3"/><path d="M7.5 15h9"/></svg>Shaw Labs</a><nav class="nav" aria-label="Site"><a href="/">Lab</a><a href="/#experiments">Experiments</a><a href="/world-chaos-map" aria-current="page">Case study</a><a href="/#notes">Notes</a><a href="https://www.shawsuraj.com" rel="me">shawsuraj.com</a></nav></div></header>
+<main id="main">
+<header class="rep-head">
+  <div class="wrap page">
+    <div class="rep-tag">
+      <div><span>Experiment</span><b>SL-03</b></div>
+      <div><span>Status</span><b>Live · v3.2.0</b></div>
+      <div><span>Started</span><b>Oct 2025</b></div>
+      <div><span>Built by</span><b>One person</b></div>
+    </div>
+    <h1>Measuring chaos without picking favourites.</h1>
+    <p class="lede">World Chaos Map gives every country a score from 0 to 100, every four hours, using only what the news reports. This is how it works, what I got wrong, and what I changed.</p>
+    <div class="links"><a class="btn" href="https://worldchaosmap.app">Open the map</a><a class="btn ghost" href="https://docs.worldchaosmap.app">Read the docs</a></div>
+    <nav class="toc" aria-label="Sections"><a href="#question">01 Question</a><a href="#rule">02 Rule</a><a href="#pipeline">03 Pipeline</a><a href="#harm">04 Harm</a><a href="#v2">05 What v2 got wrong</a><a href="#backtest">06 Backtest</a><a href="#feeds">07 The news supply</a><a href="#budget">08 Free tier</a><a href="#limits">09 Limits</a></nav>
+  </div>
+</header>
+
+<div class="wrap page">
+
+<section class="r-sec" id="question">
+  <div class="n">01<b>The question</b></div>
+  <div class="body">
+    <h2>Can the news alone tell you where things are falling apart?</h2>
+    <p>In late 2025 the news felt overwhelming: conflicts, protests, disasters and cyber attacks, all scrolling past with no shape. I wanted one map that showed where pressure was building, and I wanted it honest enough that I could defend every number on it.</p>
+    <p>The hard part is not drawing the map. It is scoring 250 countries fairly from messy, uneven, multilingual news, where some countries get a hundred articles a day and some get one a week.</p>
+  </div>
+</section>
+
+<section class="r-sec" id="rule">
+  <div class="n">02<b>The rule</b></div>
+  <div class="body">
+    <div class="rule-box">The news dictates the chaos, not my opinion.<small>No country appears in any list, cap, floor or override. Identical news about two different countries produces identical scores, and a unit test enforces it.</small></div>
+    <p style="margin-top:22px">Every design decision after this had to pass that rule. It is also why the model is a set of rules I can explain, not a black box: when a score looks wrong, I can point to the article and the step that moved it.</p>
+  </div>
+</section>
+
+<section class="r-sec" id="pipeline">
+  <div class="n">03<b>The pipeline</b></div>
+  <div class="body">
+    <h2>Every four hours, a rolling 26 hour window.</h2>
+    <div class="tableWrap">
+      <table class="data">
+        <thead><tr><th>Step</th><th>What happens</th></tr></thead>
+        <tbody>
+          <tr><td class="mono">1 Ingest</td><td>RSS feeds read concurrently, plus USGS, GDACS, ReliefWeb, WHO and GDELT. Runs on GitHub Actions.</td></tr>
+          <tr><td class="mono">2 Clean</td><td>Normalise, de-duplicate in memory, bulk upsert incidents and their sources to Supabase.</td></tr>
+          <tr><td class="mono">3 Place</td><td>Re-attribute every story to the country it happened in, not where the attacker came from.</td></tr>
+          <tr><td class="mono">4 Harm</td><td>Score each article for real harm: deaths, injuries, arrests, airstrikes, curfews.</td></tr>
+          <tr><td class="mono">5 Stories</td><td>Group articles about the same event in the same country within 48 hours.</td></tr>
+          <tr><td class="mono">6 Day</td><td>Turn each day's stories into one daily intensity, led by the worst events.</td></tr>
+          <tr><td class="mono">7 Trend</td><td>Combine a 30 day level, a memory of lethal violence and a surge against the country's own baseline.</td></tr>
+          <tr><td class="mono">8 Score</td><td>Map to 0 to 100, smooth the fall, band it, and serve it to the map through a CDN.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="margin-note">"Russian strike on Kyiv" is Ukraine. "Houthis target Riyadh airport" is Saudi Arabia. The place being hit wins.</p>
+  </div>
+</section>
+
+<section class="r-sec" id="harm">
+  <div class="n">04<b>Reading harm</b></div>
+  <div class="body">
+    <h2>Deaths count most. Reactions are not events.</h2>
+    <p>Each article gets a harm signal between 0 and 1, built from the evidence in it. Volume is not evidence: a heavily covered but calm country produces many low harm stories, which barely move the score.</p>
+    <div class="two">
+      <table class="data">
+        <thead><tr><th>Evidence</th><th style="text-align:right">Signal</th></tr></thead>
+        <tbody>
+          <tr><td>1 death</td><td class="num">0.40</td></tr>
+          <tr><td>100 deaths</td><td class="num">0.76</td></tr>
+          <tr><td>Airstrike or shelling</td><td class="num">0.50</td></tr>
+          <tr><td>Curfew, martial law, coup</td><td class="num">0.45</td></tr>
+          <tr><td>Looting or arson</td><td class="num">0.35</td></tr>
+        </tbody>
+      </table>
+      <table class="data">
+        <thead><tr><th>Headline</th><th style="text-align:right">Harm</th></tr></thead>
+        <tbody>
+          <tr><td>"Drone strike kills 3"</td><td class="num">≈ 0.74</td></tr>
+          <tr><td>Riot police clash, 1,800 arrested</td><td class="num">0.60</td></tr>
+          <tr><td>A leader "blasts" another's claims</td><td class="num">&lt; 0.30</td></tr>
+          <tr><td>Minister condemns protest violence</td><td class="num">&lt; 0.10</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="margin-top:22px">Each day's stories then combine into one daily intensity. The worst event sets the day, and every extra story adds with diminishing returns:</p>
+    <div class="formula">D = 1 − exp(−S / 0.35),   S = Σ W<sub>i</sub>² · 0.5<sup>i</sup></div>
+    <p>That one line replaced a whole list of special cases from v2.</p>
+  </div>
+</section>
+
+<section class="r-sec" id="v2">
+  <div class="n">05<b>What v2 got wrong</b></div>
+  <div class="body">
+    <h2>Every hardcoded rule was a confession.</h2>
+    <p>Version 2 worked, but only because I kept patching it. When a country looked wrong I added a rule for it. By the end, the map reflected my patches as much as the news. Version 3 rebuilt the score from scratch and deleted all of them:</p>
+    <ul class="removed">
+      <li><s>HIGH_VOLUME_COUNTRIES</s>, 43 hardcoded countries whose scores were discounted</li>
+      <li><s>LOW_EVENT_SOFT_CAP</s>, which pinned about 15 countries at exactly 55</li>
+      <li><s>STABLE_COUNTRIES</s>, a severity cap applied during ingestion</li>
+      <li><s>Spillover dampening</s>, which cut the scores of invaded countries such as Ukraine</li>
+      <li><s>Floors, boosts and volume penalties</s>, each added to fix one country at a time</li>
+    </ul>
+    <p style="margin-top:20px">On the same data, v2 put France at 31 and Ukraine at 75. Nobody could explain why without reading my code.</p>
+  </div>
+</section>
+
+<section class="r-sec" id="backtest">
+  <div class="n">06<b>Backtest</b></div>
+  <div class="body">
+    <h2>Deadly violence now outranks riots.</h2>
+    <p>Every change is replayed on a real data export before it ships. In v3.2.0, riots without deaths were capped below lethal violence, and wars with killing reported on several days got a longer memory. Replayed on 7 October 2026:</p>
+    <figure>
+      <svg viewBox="0 0 560 316" role="img" aria-label="Backtest of 7 October 2026: scores before and after v3.2.0 for seven countries"><line x1="110" y1="22" x2="110" y2="278" stroke="currentColor" opacity=".15"/><text x="110" y="14" font-size="11" text-anchor="middle">0</text><line x1="215" y1="22" x2="215" y2="278" stroke="currentColor" opacity=".15"/><text x="215" y="14" font-size="11" text-anchor="middle">25</text><line x1="320" y1="22" x2="320" y2="278" stroke="currentColor" opacity=".15"/><text x="320" y="14" font-size="11" text-anchor="middle">50</text><line x1="425" y1="22" x2="425" y2="278" stroke="currentColor" opacity=".15"/><text x="425" y="14" font-size="11" text-anchor="middle">75</text><line x1="530" y1="22" x2="530" y2="278" stroke="currentColor" opacity=".15"/><text x="530" y="14" font-size="11" text-anchor="middle">100</text><text x="98" y="48" font-size="13" text-anchor="end" style="fill:var(--ink)">Ukraine</text><line x1="501" y1="44" x2="501" y2="44" stroke="var(--pen)" stroke-width="3" opacity=".45"/><circle cx="501" cy="44" r="6" fill="var(--paper)" stroke="var(--ink-3)" stroke-width="2"/><circle cx="501" cy="44" r="6" fill="var(--pen)"/><text x="513" y="48" font-size="11.5">93</text><text x="98" y="84" font-size="13" text-anchor="end" style="fill:var(--ink)">France</text><line x1="370" y1="80" x2="442" y2="80" stroke="var(--pen)" stroke-width="3" opacity=".45"/><circle cx="442" cy="80" r="6" fill="var(--paper)" stroke="var(--ink-3)" stroke-width="2"/><circle cx="370" cy="80" r="6" fill="var(--pen)"/><text x="454" y="84" font-size="11.5">79 → 62</text><text x="98" y="120" font-size="13" text-anchor="end" style="fill:var(--ink)">Myanmar</text><line x1="341" y1="116" x2="396" y2="116" stroke="var(--pen)" stroke-width="3" opacity=".45"/><circle cx="341" cy="116" r="6" fill="var(--paper)" stroke="var(--ink-3)" stroke-width="2"/><circle cx="396" cy="116" r="6" fill="var(--pen)"/><text x="408" y="120" font-size="11.5">55 → 68</text><text x="98" y="156" font-size="13" text-anchor="end" style="fill:var(--ink)">Syria</text><line x1="219" y1="152" x2="324" y2="152" stroke="var(--pen)" stroke-width="3" opacity=".45"/><circle cx="219" cy="152" r="6" fill="var(--paper)" stroke="var(--ink-3)" stroke-width="2"/><circle cx="324" cy="152" r="6" fill="var(--pen)"/><text x="336" y="156" font-size="11.5">26 → 51</text><text x="98" y="192" font-size="13" text-anchor="end" style="fill:var(--ink)">Ethiopia</text><line x1="312" y1="188" x2="312" y2="188" stroke="var(--pen)" stroke-width="3" opacity=".45"/><circle cx="312" cy="188" r="6" fill="var(--paper)" stroke="var(--ink-3)" stroke-width="2"/><circle cx="312" cy="188" r="6" fill="var(--pen)"/><text x="324" y="192" font-size="11.5">48</text><text x="98" y="228" font-size="13" text-anchor="end" style="fill:var(--ink)">Sudan</text><line x1="215" y1="224" x2="257" y2="224" stroke="var(--pen)" stroke-width="3" opacity=".45"/><circle cx="215" cy="224" r="6" fill="var(--paper)" stroke="var(--ink-3)" stroke-width="2"/><circle cx="257" cy="224" r="6" fill="var(--pen)"/><text x="269" y="228" font-size="11.5">25 → 35</text><text x="98" y="264" font-size="13" text-anchor="end" style="fill:var(--ink)">Israel</text><line x1="211" y1="260" x2="253" y2="260" stroke="var(--pen)" stroke-width="3" opacity=".45"/><circle cx="211" cy="260" r="6" fill="var(--paper)" stroke="var(--ink-3)" stroke-width="2"/><circle cx="253" cy="260" r="6" fill="var(--pen)"/><text x="265" y="264" font-size="11.5">24 → 34</text></svg>
+      <figcaption><b>Figure 1.</b> Score before (hollow) and after (filled) v3.2.0. France's riots drop below Ukraine's war. Thinly covered conflicts in Myanmar, Syria and Sudan stop disappearing. Ukraine and Ethiopia do not move.</figcaption>
+    </figure>
+    <p class="margin-note">Somalia, DR Congo and Niger still score low on this export, because it holds almost no reports of deaths for them. That is a coverage problem, not a formula problem, and it is fixed with better sources, not a manual override.</p>
+  </div>
+</section>
+
+<section class="r-sec" id="feeds">
+  <div class="n">07<b>The news supply</b></div>
+  <div class="body">
+    <h2>Accuracy first: repairing the inputs.</h2>
+    <p>A model is only as good as what it reads. An audit in October 2026 found that only about 420 of 1,162 listed feeds had ever worked, official alerts had stopped arriving, and GitHub was skipping about a third of scheduled runs.</p>
+    <div class="stats">
+      <div><b>118</b><span>feeds repaired</span></div>
+      <div><b>29</b><span>local feeds added</span></div>
+      <div><b>487</b><span>feeds removed</span></div>
+      <div><b>486</b><span>feeds now, all checked</span></div>
+    </div>
+    <p>The audit runs by hand so every source change is reviewed. New feeds were added for places the map under-covered, such as Somalia, DR Congo, Sudan, the Sahel and Myanmar. robots.txt is respected everywhere, and known state propaganda outlets are dropped before processing. A watchdog inside Supabase restarts the ingest when GitHub skips a run.</p>
+  </div>
+</section>
+
+<section class="r-sec" id="budget">
+  <div class="n">08<b>Free tier</b></div>
+  <div class="body">
+    <h2>Built to run for nothing.</h2>
+    <p>Everything runs on the free tiers of GitHub Actions, Supabase and Vercel. That shaped the design: each run reads only the scoring columns of about 18,000 incidents (around 8 MB), writes in a few bulk requests instead of thousands of single rows, and keeps only aggregates from GDELT. The map is served through a CDN cache and polls every five minutes, pausing in hidden tabs.</p>
+    <p class="mono" style="font-size:15px;color:var(--ink-3)">TypeScript · React · Vite · MapLibre · Supabase (Postgres) · GitHub Actions · Vercel</p>
+  </div>
+</section>
+
+<section class="r-sec" id="limits">
+  <div class="n">09<b>Limits</b></div>
+  <div class="body">
+    <h2>What the score is not.</h2>
+    <p>It measures recent, observable, reported pressure. It is not a prediction or a risk forecast. Where coverage is thin, confidence is shown as low, and a score built mostly from gap filling is capped at medium confidence. The methodology, sources and changelog are public on the docs site.</p>
+    <p><b>Next, in v3.2.1:</b> confidence for each story, a check on alarming claims, clustering at ingest time, and conflict data from UCDP.</p>
+  </div>
+</section>
+
+</div>
+
+</main>
+<footer class="foot"><div class="wrap page">
+<div class="row"><h2>Shaw Labs.</h2>
+<nav aria-label="Elsewhere"><a href="https://www.shawsuraj.com" rel="me">shawsuraj.com</a><a href="https://github.com/shawsuraj" rel="me">GitHub</a><a href="https://www.linkedin.com/in/shawsuraj/" rel="me">LinkedIn</a><a href="mailto:shaw@shawsuraj.com">shaw@shawsuraj.com</a></nav></div>
+<small>The lab of Suraj Shaw, London. Built by hand, no trackers.</small>
+</div></footer>
+</body>
+</html>

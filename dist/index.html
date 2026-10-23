@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Shaw Labs</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Shaw Labs: where Suraj Shaw builds in the open. Experiments, case studies and notes, starting with World Chaos Map.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23142047'/%3E%3Cpath d='M26 14h12M28 14v14L17 48a4 4 0 0 0 3.5 6h23A4 4 0 0 0 47 48L36 28V14' fill='none' stroke='%23f3f4ef' stroke-width='4' stroke-linejoin='round'/%3E%3Ccircle cx='32' cy='44' r='4' fill='%23d0473a'/%3E%3C/svg%3E">
+<link rel="canonical" href="https://www.shawlabs.dev/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Shaw Labs">
+<meta property="og:description" content="Shaw Labs: where Suraj Shaw builds in the open. Experiments, case studies and notes, starting with World Chaos Map.">
+<meta property="og:url" content="https://www.shawlabs.dev/">
+<meta property="og:image" content="https://www.shawlabs.dev/assets/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@shawsurajss">
+<meta name="theme-color" content="#f3f4ef" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0c1830" media="(prefers-color-scheme: dark)">
+<style>/* Concept: an engineering notebook. Graph paper, blue pen, a red margin line.
+   Projects are experiments with numbers; case studies read like lab reports.
+   Family ties to shawsuraj.com: same display, text and mono faces. */
+:root{
+  --paper:#f3f4ef; --paper-2:#e8eae3; --card:#fbfbf8; --grid:rgba(36,64,184,.075); --grid-major:rgba(36,64,184,.13);
+  --ink:#142047; --ink-2:#3a4466; --ink-3:#6b7290; --rule:#c9cdd8;
+  --pen:#2440b8; --pen-soft:#dfe4f6; --margin:#d0473a; --ok:#1c7a50; --ok-soft:#d6e9de; --wip:#a8660b; --wip-soft:#f0e1c6;
+  --display:"Bricolage Grotesque","Arial Narrow",system-ui,sans-serif;
+  --text:"Newsreader",Georgia,"Times New Roman",serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#0c1830; --paper-2:#122241; --card:#0f1e3a; --grid:rgba(143,176,255,.07); --grid-major:rgba(143,176,255,.13);
+  --ink:#e6ecff; --ink-2:#b8c3e6; --ink-3:#8590b3; --rule:#253760;
+  --pen:#8fb0ff; --pen-soft:#1a2c56; --margin:#ff7a66; --ok:#58c690; --ok-soft:#12301f; --wip:#efa63e; --wip-soft:#37270f; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0c1830; --paper-2:#122241; --card:#0f1e3a; --grid:rgba(143,176,255,.07); --grid-major:rgba(143,176,255,.13);
+  --ink:#e6ecff; --ink-2:#b8c3e6; --ink-3:#8590b3; --rule:#253760;
+  --pen:#8fb0ff; --pen-soft:#1a2c56; --margin:#ff7a66; --ok:#58c690; --ok-soft:#12301f; --wip:#efa63e; --wip-soft:#37270f; color-scheme:dark}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;color:var(--ink);font-family:var(--text);font-size:19px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+  background-color:var(--paper);
+  background-image:linear-gradient(var(--grid-major) 1px,transparent 1px),linear-gradient(90deg,var(--grid-major) 1px,transparent 1px),
+    linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:120px 120px,120px 120px,24px 24px,24px 24px;background-position:-1px -1px}
+a{color:var(--pen);text-decoration-thickness:1px;text-underline-offset:3px}
+a:hover{text-decoration-thickness:2px}
+:focus-visible{outline:2px solid var(--pen);outline-offset:3px;border-radius:2px}
+::selection{background:var(--pen);color:var(--paper)}
+h1,h2,h3,h4{font-family:var(--display);text-wrap:balance;margin:0;font-weight:800;letter-spacing:-.025em;line-height:1.02}
+p{margin:0 0 1em;max-width:66ch}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.page{position:relative;padding-left:clamp(0px,6vw,88px)}
+.page::before{content:"";position:absolute;left:clamp(0px,4vw,60px);top:0;bottom:0;width:2px;background:var(--margin);opacity:.55}
+@media (max-width:700px){.page{padding-left:0}.page::before{display:none}}
+.label{font-family:var(--mono);font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);margin:0}
+.mono{font-family:var(--mono)}
+.hand{font-family:var(--mono);color:var(--pen)}
+.skip{position:absolute;left:-999px;top:8px;background:var(--ink);color:var(--paper);padding:8px 12px;z-index:99}
+.skip:focus{left:12px}
+
+/* nav */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:40;background:var(--paper);border-bottom:1.5px solid var(--ink)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:41;background:var(--paper)}
+.top .wrap{display:flex;align-items:center;gap:16px;min-height:58px;flex-wrap:wrap}
+.mark{font-family:var(--display);font-weight:800;font-size:21px;letter-spacing:-.03em;text-decoration:none;color:var(--ink);display:flex;align-items:center;gap:8px}
+.mark .flask{width:22px;height:22px;color:var(--pen)}
+.nav{display:flex;flex-wrap:wrap;gap:4px;margin-left:auto;font-family:var(--mono);font-size:14px}
+.nav a{text-decoration:none;color:var(--ink-2);padding:6px 10px;border-radius:3px}
+.nav a:hover{background:var(--pen-soft);color:var(--ink)}
+.nav a[aria-current="page"]{background:var(--ink);color:var(--paper)}
+
+/* hero */
+.hero{padding-block:60px 44px}
+.hero .meta{display:flex;flex-wrap:wrap;gap:6px 22px;font-family:var(--mono);font-size:13px;color:var(--ink-3);margin-bottom:28px}
+.hero h1{font-size:clamp(68px,11.5vw,170px);letter-spacing:-.055em;line-height:.86}
+.hero h1 span{color:var(--pen)}
+.hero .lede{font-size:clamp(23px,2.5vw,30px);line-height:1.32;max-width:30ch;margin-top:26px}
+.hero .note{font-family:var(--mono);font-size:14px;color:var(--pen);margin-top:18px;transform:rotate(-1.2deg);display:inline-block;border-bottom:1.5px dashed var(--pen);padding-bottom:2px}
+
+section.block{padding-block:64px;border-top:1.5px solid var(--ink)}
+.sec-head{display:grid;grid-template-columns:200px minmax(0,1fr);gap:10px 40px;align-items:baseline;margin-bottom:30px}
+.sec-head h2{font-size:clamp(34px,4.6vw,58px);letter-spacing:-.04em}
+@media (max-width:860px){.sec-head{grid-template-columns:1fr}}
+
+/* experiments index */
+.exp{width:100%;border-collapse:collapse;background:var(--card);border:1.5px solid var(--ink);font-size:17px}
+.exp th{font-family:var(--mono);font-weight:500;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);text-align:left;padding:10px 14px;border-bottom:1.5px solid var(--ink);white-space:nowrap}
+.exp td{padding:16px 14px;border-bottom:1px solid var(--rule);vertical-align:top}
+.exp tr:last-child td{border-bottom:0}
+.exp td.id{font-family:var(--mono);font-size:14px;color:var(--pen);white-space:nowrap}
+.exp td b{font-family:var(--display);font-weight:700;font-size:20px;display:block;color:var(--ink)}
+.exp td .q{color:var(--ink-2);display:block;margin-top:2px}
+.exp td.st{white-space:nowrap}
+.exp td.go{white-space:nowrap;font-family:var(--mono);font-size:14px}
+.exp tr.lead td{background:var(--pen-soft)}
+.chip{font-family:var(--mono);font-size:11.5px;letter-spacing:.05em;padding:3px 8px;border-radius:2px;display:inline-block;text-transform:uppercase}
+.chip.live{background:var(--ok-soft);color:var(--ok)} .chip.wip{background:var(--wip-soft);color:var(--wip)} .chip.res{background:var(--pen-soft);color:var(--pen)} .chip.done{background:var(--paper-2);color:var(--ink-2)}
+.tableWrap{overflow-x:auto}
+.tableWrap .exp{min-width:720px}
+
+/* rules */
+.rules{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 48px;counter-reset:r}
+.rules li{counter-increment:r;padding:18px 0 18px 52px;border-bottom:1px solid var(--rule);position:relative}
+.rules li::before{content:counter(r,decimal-leading-zero);position:absolute;left:0;top:18px;font-family:var(--mono);font-size:14px;color:var(--pen);border:1.5px solid var(--pen);border-radius:50%;width:34px;height:34px;display:grid;place-items:center}
+.rules b{font-family:var(--display);font-size:21px;display:block;letter-spacing:-.01em}
+.rules span{color:var(--ink-2);font-size:17px}
+@media (max-width:800px){.rules{grid-template-columns:1fr}}
+
+/* note */
+.note-card{background:var(--card);border:1.5px solid var(--ink);padding:clamp(22px,4vw,44px);box-shadow:8px 8px 0 var(--pen-soft)}
+.note-card h3{font-size:clamp(30px,3.4vw,44px);margin-bottom:6px}
+.note-card .meta{font-family:var(--mono);font-size:13px;color:var(--ink-3);margin-bottom:20px}
+.note-card p{font-size:20px}
+.note-card .pull{font-family:var(--display);font-weight:700;font-size:clamp(22px,2.4vw,30px);line-height:1.25;color:var(--pen);border-left:3px solid var(--pen);padding-left:18px;margin:24px 0}
+
+/* report (case study) */
+.rep-head{padding-block:56px 36px}
+.rep-tag{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:1.5px solid var(--ink);background:var(--card);margin-bottom:36px}
+.rep-tag div{padding:12px 16px;border-right:1px solid var(--rule);min-width:0}
+.rep-tag div:last-child{border-right:0}
+.rep-tag span{display:block;font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
+.rep-tag b{font-family:var(--display);font-size:18px}
+.rep-head h1{font-size:clamp(46px,7.6vw,108px);letter-spacing:-.05em;line-height:.9;max-width:14ch}
+.rep-head .lede{font-size:clamp(22px,2.3vw,28px);line-height:1.35;max-width:36ch;margin-top:24px}
+.rep-head .links{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}
+.btn{font-family:var(--display);font-weight:700;font-size:16px;text-decoration:none;background:var(--ink);color:var(--paper);padding:12px 20px;border-radius:999px}
+.btn:hover{background:var(--pen);color:var(--paper)}
+.btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--ink)}
+.toc{font-family:var(--mono);font-size:14px;display:flex;flex-wrap:wrap;gap:6px 18px;padding:14px 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);margin-top:34px}
+.toc a{text-decoration:none}
+.r-sec{padding-block:52px;border-top:1.5px solid var(--ink);display:grid;grid-template-columns:200px minmax(0,1fr);gap:12px 44px}
+.r-sec > .n{font-family:var(--mono);font-size:14px;color:var(--pen)}
+.r-sec > .n b{display:block;font-family:var(--display);font-weight:800;font-size:22px;color:var(--ink);letter-spacing:-.02em;margin-top:6px;line-height:1.1}
+.r-sec .body{min-width:0}
+.r-sec h2{font-size:clamp(30px,3.8vw,46px);letter-spacing:-.035em;margin-bottom:18px}
+.r-sec p{font-size:19px}
+@media (max-width:860px){.r-sec{grid-template-columns:1fr}.rep-tag{grid-template-columns:repeat(2,minmax(0,1fr))}.rep-tag div:nth-child(2){border-right:0}.rep-tag div:nth-child(-n+2){border-bottom:1px solid var(--rule)}}
+
+.rule-box{background:var(--card);border:1.5px solid var(--ink);padding:24px 26px;font-family:var(--display);font-weight:700;font-size:clamp(22px,2.6vw,32px);line-height:1.2;box-shadow:8px 8px 0 var(--pen-soft)}
+.rule-box small{display:block;font-family:var(--mono);font-weight:400;font-size:13px;color:var(--ink-3);margin-top:12px;letter-spacing:0}
+.formula{font-family:var(--mono);font-size:clamp(16px,1.8vw,20px);background:var(--card);border:1px dashed var(--pen);color:var(--pen);padding:16px 20px;margin:6px 0 20px;overflow-x:auto;white-space:nowrap}
+.data{width:100%;border-collapse:collapse;font-size:16.5px;background:var(--card);border:1.5px solid var(--ink)}
+.data th{font-family:var(--mono);font-weight:500;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);text-align:left;padding:9px 12px;border-bottom:1.5px solid var(--ink)}
+.data td{padding:10px 12px;border-bottom:1px solid var(--rule)}
+.data td.num{font-family:var(--mono);text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+.data tr:last-child td{border-bottom:0}
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px}
+@media (max-width:860px){.two{grid-template-columns:1fr}}
+figure{margin:8px 0 24px}
+figure svg{width:100%;height:auto;display:block}
+figcaption{font-size:15px;color:var(--ink-2);margin-top:8px}
+figcaption b{font-family:var(--mono);font-weight:500;color:var(--pen)}
+svg text{font-family:var(--mono);fill:var(--ink-2)}
+.removed{list-style:none;padding:0;margin:0}
+.removed li{padding:10px 0;border-bottom:1px solid var(--rule);font-size:17px}
+.removed li s{color:var(--margin);text-decoration-thickness:2px;font-family:var(--mono);font-size:15px}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:1.5px solid var(--ink);background:var(--card);margin:6px 0 24px}
+.stats div{padding:16px;border-right:1px solid var(--rule)}
+.stats div:last-child{border-right:0}
+.stats b{display:block;font-family:var(--display);font-weight:800;font-size:clamp(28px,3.4vw,40px);letter-spacing:-.03em;font-variant-numeric:tabular-nums;color:var(--pen)}
+.stats span{font-family:var(--mono);font-size:12.5px;color:var(--ink-3)}
+@media (max-width:700px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.stats div:nth-child(2){border-right:0}.stats div:nth-child(-n+2){border-bottom:1px solid var(--rule)}}
+.margin-note{font-family:var(--mono);font-size:14px;color:var(--pen);border-left:2px solid var(--pen);padding:4px 0 4px 14px;margin:18px 0}
+
+/* footer */
+.foot{padding-block:56px 40px;border-top:1.5px solid var(--ink);background:var(--paper)}
+.foot .row{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px 32px;align-items:baseline}
+.foot h2{font-size:clamp(30px,4vw,48px);letter-spacing:-.04em}
+.foot nav{display:flex;flex-wrap:wrap;gap:8px 20px;font-family:var(--mono);font-size:14px}
+.foot small{display:block;margin-top:28px;font-family:var(--mono);font-size:12.5px;color:var(--ink-3)}
+
+@media (max-width:560px){body{font-size:18px}.nav{width:100%;margin-left:0;padding-bottom:8px;font-size:13px}.nav a{padding:5px 7px}section.block,.r-sec{padding-block:44px}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top"><div class="wrap"><a class="mark" href="/"><svg class="flask" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M9 3h6M10 3v6L4.5 18.5A1.7 1.7 0 0 0 6 21h12a1.7 1.7 0 0 0 1.5-2.5L14 9V3"/><path d="M7.5 15h9"/></svg>Shaw Labs</a><nav class="nav" aria-label="Site"><a href="/" aria-current="page">Lab</a><a href="/#experiments">Experiments</a><a href="/world-chaos-map">Case study</a><a href="/#notes">Notes</a><a href="https://www.shawsuraj.com" rel="me">shawsuraj.com</a></nav></div></header>
+<main id="main">
+<section class="hero">
+  <div class="wrap page">
+    <div class="meta"><span>Notebook 01</span><span>London</span><span>Opened 2023</span><span>Last entry: Oct 2026</span></div>
+    <h1>Shaw<br><span>Labs.</span></h1>
+    <p class="lede">Where I build things in the open, and write down what I learned from each one.</p>
+    <span class="note">the person behind it lives at shawsuraj.com</span>
+  </div>
+</section>
+
+<section class="block" id="experiments">
+  <div class="wrap page">
+    <div class="sec-head"><p class="label">Index</p><h2>Experiments.</h2></div>
+    <p style="margin-bottom:24px;color:var(--ink-2)">Each one starts with a question. Numbered in the order I started them.</p>
+    <div class="tableWrap">
+      <table class="exp">
+        <thead><tr><th>No.</th><th>Experiment and its question</th><th>Started</th><th>Status</th><th>Read</th></tr></thead>
+        <tbody>
+          <tr><td class="id">SL-01</td><td><b>VerumVeil</b><span class="q">Can a secret hide inside an ordinary sentence?</span></td><td class="mono">2023</td><td class="st"><span class="chip done">shipped</span></td><td class="go"><a href="https://github.com/shawsuraj/VerumVeil">code</a></td></tr>
+          <tr><td class="id">SL-02</td><td><b>MaetriXs</b><span class="q">What if you trained your social life the way you train at the gym?</span></td><td class="mono">Aug 2025</td><td class="st"><span class="chip wip">building</span></td><td class="go"><a href="https://maetrixs.com">maetrixs.com</a></td></tr>
+          <tr class="lead"><td class="id">SL-03</td><td><b>World Chaos Map</b><span class="q">Can you score every country's instability from the news, without picking favourites?</span></td><td class="mono">Oct 2025</td><td class="st"><span class="chip live">live · v3.2</span></td><td class="go"><a href="/world-chaos-map">case study</a></td></tr>
+          <tr><td class="id">SL-04</td><td><b>One Sentence</b><span class="q">What happens when writing has no audience?</span></td><td class="mono">Jan 2026</td><td class="st"><span class="chip live">live · invite</span></td><td class="go"><a href="https://www.one-sentence.org/">one-sentence.org</a></td></tr>
+          <tr><td class="id">SL-05</td><td><b>LifeOS</b><span class="q">Can parts of a person be modelled honestly, and updated as they change?</span></td><td class="mono">Feb 2026</td><td class="st"><span class="chip res">research</span></td><td class="go"><a href="https://www.shawsuraj.com/researcher">research page</a></td></tr>
+          <tr><td class="id">SL-06</td><td><b>Public Opinion</b><span class="q">Where is real public sentiment, under the loudest voices?</span></td><td class="mono">Mar 2026</td><td class="st"><span class="chip wip">experiment</span></td><td class="go mono" style="color:var(--ink-3)">not public</td></tr>
+          <tr><td class="id">SL-07</td><td><b>Last Drink</b><span class="q">Can a drinks app reward pacing instead of volume?</span></td><td class="mono">2026</td><td class="st"><span class="chip wip">in design</span></td><td class="go mono" style="color:var(--ink-3)">soon</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="rules">
+  <div class="wrap page">
+    <div class="sec-head"><p class="label">House rules</p><h2>How the lab works.</h2></div>
+    <ol class="rules">
+      <li><b>The data decides.</b><span>No hardcoded favourites. On World Chaos Map, identical news about two countries must give identical scores, and a test enforces it.</span></li>
+      <li><b>Rules before models.</b><span>A simple rule I can explain ships before anything clever. Baselines first, then something better if it earns it.</span></li>
+      <li><b>Show the working.</b><span>Every product ships with documentation on how it works and where it falls short.</span></li>
+      <li><b>Respect the source.</b><span>robots.txt is honoured. Known propaganda outlets are blocked before they reach the pipeline.</span></li>
+      <li><b>Accuracy before growth.</b><span>When the numbers look wrong, the fix comes before the next feature or the next post.</span></li>
+      <li><b>Ship early, write it down.</b><span>Real enough to be useful beats ready. Then a note on what I learned.</span></li>
+    </ol>
+  </div>
+</section>
+
+<section class="block" id="notes">
+  <div class="wrap page">
+    <div class="sec-head"><p class="label">Notes</p><h2>Written down.</h2></div>
+    <article class="note-card">
+      <h3>On building in public</h3>
+      <p class="meta">Dec 2025 · process, building</p>
+      <p>I have been shipping side projects for years without telling anyone.</p>
+      <p>The fear is not judgement. It is shipping something unfinished and having that be the first impression. But the problem with waiting until something is ready is that ready never arrives.</p>
+      <p>So this lab is an experiment in the opposite: show the scaffolding. Write decisions down as they are made. The code is not perfect. The ideas are not fully formed.</p>
+      <p class="pull">The bar is not "good enough to share". The bar is "real enough to be useful to someone".</p>
+      <p>World Chaos Map started as a weekend experiment I posted in a Discord. It is now the most interesting thing I have built. That would not have happened if I had waited.</p>
+    </article>
+  </div>
+</section>
+
+</main>
+<footer class="foot"><div class="wrap page">
+<div class="row"><h2>Shaw Labs.</h2>
+<nav aria-label="Elsewhere"><a href="https://www.shawsuraj.com" rel="me">shawsuraj.com</a><a href="https://github.com/shawsuraj" rel="me">GitHub</a><a href="https://www.linkedin.com/in/shawsuraj/" rel="me">LinkedIn</a><a href="mailto:shaw@shawsuraj.com">shaw@shawsuraj.com</a></nav></div>
+<small>The lab of Suraj Shaw, London. Built by hand, no trackers.</small>
+</div></footer>
+</body>
+</html>
