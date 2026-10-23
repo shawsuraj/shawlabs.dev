@@ -1,54 +1,77 @@
-{"title":"Sky Portal · Shaw Labs","desc":"Sky Portal: a web app that replaces a spreadsheet with a team directory, an organisation map of team dependencies, messaging and meetings. Built in Django by a team of five; Suraj Shaw led the interface design.","nav":"writing"}
+{"title":"Sky Portal · Shaw Labs","desc":"Sky Portal: a Django web app that replaces a spreadsheet with a team directory, a live map of team dependencies, messaging and meetings. Suraj Shaw led the interface design, built the organisation map and dashboard, and held the codebase together.","nav":"writing"}
 <header class="col art-head">
   <p class="kicker">Sky Portal · web app · 2026</p>
   <h1>Sky Portal</h1>
-  <p class="dek">Sky's engineering teams were tracked in a spreadsheet. We built a web app to replace it: find any team, see who it depends on, message them and book a meeting.</p>
-  <p class="by">Built by a team of five · <a href="https://github.com/shawsuraj/sky-portal">Code on GitHub</a></p>
+  <p class="dek">Sky's engineering teams were tracked in a spreadsheet. Five of us built a web app to replace it: find any team, see who it depends on, message them and book a meeting.</p>
+  <p class="by">Suraj Shaw and team · <a href="https://github.com/shawsuraj/sky-portal">Code on GitHub</a></p>
 </header>
+
+<figure class="wide">
+  <div class="browser"><div class="bar"><i></i><i></i><i></i><span>Sky Portal · Organisation</span></div><img src="assets/sky-org-map.jpg" alt="The Sky Portal organisation map: 46 teams as coloured nodes by department, joined by 52 dependency arrows, with filters, search and a legend" width="1190" height="810" loading="lazy"></div>
+  <figcaption>The organisation map I built. 46 teams, coloured by department, and the 52 dependencies between them. Filter by department or dependency type, search, click a team for its details, or export the map as an image.</figcaption>
+</figure>
 
 <article class="col">
   <div class="facts">
     <div><b>5</b><span>people</span></div>
-    <div><b>6</b><span>main pages</span></div>
-    <div><b>3</b><span>storyboarded journeys</span></div>
-    <div><b>1</b><span>spreadsheet replaced</span></div>
+    <div><b>70</b><span>of 119 commits mine</span></div>
+    <div><b>46</b><span>teams on the map</span></div>
+    <div><b>52</b><span>dependencies</span></div>
   </div>
 
   <h2>What it does</h2>
   <ul>
     <li><b>Dashboard.</b> Total teams, departments, unread messages, recently visited teams and recent activity.</li>
     <li><b>Teams.</b> Search and filter every engineering team, then open one to see its mission, manager, members, code repositories and dependencies.</li>
-    <li><b>Organisation.</b> An interactive network map of how teams depend on each other, filterable by department and dependency type.</li>
+    <li><b>Organisation.</b> An interactive network map of how teams depend on each other.</li>
     <li><b>Messages.</b> Inbox, sent, drafts and compose, for messages between teams.</li>
     <li><b>Schedule.</b> A calendar, upcoming meetings and a form to book one.</li>
-    <li><b>Accounts.</b> Register, log in, reset a password and update a profile.</li>
+    <li><b>Accounts.</b> Register, log in, reset a password and update a profile. Every other page sits behind a login.</li>
   </ul>
 
-  <h2>My part</h2>
-  <p>I led the interface design. I drew the low fidelity wireframes in Figma, then three storyboards showing complete journeys: register and log in, search for a team and open it, and message or book a meeting with that team. Then the high fidelity designs, refined with feedback from the group and our tutor.</p>
-  <p>The design rules were simple, because the users are engineers, managers and non-technical staff:</p>
+  <h2>Designing it</h2>
+  <p>I led the interface design. I drew the low fidelity wireframes in Figma, three storyboards showing complete journeys (sign up and log in, find a team, then message or book a meeting with it), and then the high fidelity designs, refined with feedback from the group and our tutor.</p>
+  <p>The users are engineers, managers and non-technical staff, so the rules were simple: a fixed sidebar with the current page highlighted, search at the top because finding a team fast was the main requirement, team cards with tabs for overview, members, repositories and dependencies, and colour only where it means something.</p>
+</article>
+
+<figure class="wide">
+  <div class="pair">
+    <img src="assets/sky-wire-teams.jpg" alt="Low fidelity wireframe of the Team Directory: grey boxes for team cards, search and filters" width="1200" height="854" loading="lazy">
+    <img src="assets/sky-hifi-teams.jpg" alt="High fidelity design of the Team Directory: team cards with status, department, leader, members, repositories, skills and View Profile buttons" width="1200" height="854" loading="lazy">
+  </div>
+  <figcaption>The Team Directory, from wireframe to high fidelity design in Figma.</figcaption>
+</figure>
+
+<figure class="wide">
+  <div class="pair">
+    <img src="assets/sky-hifi-dashboard.jpg" alt="High fidelity Figma design of the dashboard, called Engineering Control Center, with stat cards, recently visited teams and recent activity" width="1200" height="854" loading="lazy">
+    <div class="browser"><div class="bar"><i></i><i></i><i></i><span>Sky Portal · Dashboard</span></div><img src="assets/sky-dashboard.jpg" alt="The built dashboard: 46 teams, 6 departments, unread messages and recently visited teams" width="1190" height="590" loading="lazy"></div>
+  </div>
+  <figcaption>The dashboard as designed, and as built.</figcaption>
+</figure>
+
+<article class="col">
+  <h2>Building it</h2>
+  <p>Django and SQLite, with each of us owning a section. I built:</p>
   <ul>
-    <li>A fixed sidebar, with the current page highlighted.</li>
-    <li>Search at the top, because finding a team quickly was the main requirement.</li>
-    <li>Team cards, with tabs for overview, members, repositories and dependencies.</li>
-    <li>Blue for actions, green for active status, red for notifications, on a neutral background.</li>
+    <li><b>The organisation map.</b> Two views: one renders the page, the other is a JSON endpoint that vis.js calls whenever a filter changes, so the graph redraws without reloading the page. It only draws an arrow when both teams are visible, so filtering never leaves arrows pointing at nothing. Around it: a grid view, search that highlights matching teams, zoom controls, a legend, a side panel for each team, and PNG export.</li>
+    <li><b>The dashboard</b>, reading live counts from the teams and messages data.</li>
+    <li><b>The base template, sidebar and top bar.</b> I built these first, in the first days, so every other page could extend them and look the same.</li>
   </ul>
-  <p>In the build, I made the dashboard, the organisation map and the shared base template that every page sits on.</p>
 
-  <h2>The rest of the team</h2>
-  <p>Vinicius designed the ERD and built the teams pages. Muhammed designed the database. Hamdan built messaging and wrote the user test plans. Shqipdon built scheduling and wrote the admin test plans. I reviewed the ERD and database against the requirements, and pointed out repeated attributes that could be simplified, and a missing audit log use case for admins.</p>
-
-  <h2>Under the hood</h2>
-  <p>Django and SQLite. The database follows the ERD: an organisation has departments, departments have teams, and users join teams through a team member table. Skills, repositories and team dependencies hang off each team, with tables for messages, meetings and an audit log of changes. A script seeds it all from the original spreadsheet. The organisation map is drawn with vis.js from a JSON endpoint.</p>
-
-  <h2>What I would do differently</h2>
+  <h2>Holding it together</h2>
+  <p>The repo was mine, so I reviewed and merged the team's pull requests from feature branches into a shared dev branch, then into main. And when the parts did not fit, I fixed them:</p>
   <ul>
-    <li>Understand the ERD and use cases before designing screens. Once I did, the screens got much easier.</li>
-    <li>Learn the tool first. I learned Figma while designing, which slowed the first weeks.</li>
-    <li>Leave the fine visual detail until the flows are right.</li>
-    <li>Set firm deadlines instead of extending them, especially for the database, which ran late.</li>
+    <li><b>Real data.</b> Nobody had loaded any, so every page was empty. I wrote a command that seeds the database from the original spreadsheet.</li>
+    <li><b>The data model.</b> I replaced the simple team members link with a proper team member table that can store roles, added the fields the spreadsheet had, and reset the migrations that were conflicting between us.</li>
+    <li><b>The knock-on effects.</b> That change broke the teams pages and the schedule at once. I fixed all of them in the same pull request rather than leave the app unable to run.</li>
+    <li><b>Security.</b> Every page was public. I added a global login wall and CSRF protection, and kept the login and sign-up pages open.</li>
+    <li><b>Loose ends.</b> Missing URL routes, duplicate settings, a profile page that crashed for some users, and a syntax error in the meeting delete view.</li>
   </ul>
 
-  <p style="font-size:16px;color:var(--ink-3)">Django, Python, SQLite, vis.js, Figma.</p>
+  <h2>The team</h2>
+  <p>Vinicius designed the ERD and built the teams pages. Muhammed designed the database. Hamdan built messaging and wrote the user test plans. Shqipdon built scheduling and wrote the admin test plans.</p>
+
+  <p style="font-size:16px;color:var(--ink-3)">Django, Python, SQLite, JavaScript, vis.js, Figma, Git.</p>
   <p class="endnote"><a href="https://github.com/shawsuraj/sky-portal">The code is on GitHub</a>. <a href="index.html#projects">All projects</a>.</p>
 </article>

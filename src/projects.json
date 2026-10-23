@@ -101,8 +101,8 @@
  {
   "name": "Sky Portal",
   "url": "sky-portal.html",
-  "what": "A team directory for an engineering company, replacing a spreadsheet: search teams, see who depends on whom on a live network map, message and book meetings. Built by a team of five; I led the interface design and built the dashboard and organisation map.",
-  "stack": "Python, Django, SQLite, vis.js",
+  "what": "A team directory for an engineering company, replacing a spreadsheet: search teams, see who depends on whom on a live network map, message and book meetings. I led the design, built the organisation map and dashboard, and merged and fixed the codebase.",
+  "stack": "Python, Django, SQLite, JavaScript, vis.js, Figma",
   "status": "Done",
   "year": "2026",
   "shelf": true,
