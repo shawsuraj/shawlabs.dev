@@ -1,21 +1,205 @@
 [
-  {"name":"World Chaos Map","url":"https://worldchaosmap.app","what":"Scores every country from 0 to 100 from the news, every four hours. 486 audited feeds, rule based, no manual overrides.","stack":"TypeScript, React, Vite, MapLibre, Supabase, Postgres, GitHub Actions, Vercel","status":"Live","year":"2025"},
-  {"name":"One Sentence","url":"https://www.one-sentence.org/","what":"Strangers write a story together, one sentence each, seeing only the line before.","stack":"React, TypeScript, Vite","status":"Live, invite only","year":"2026"},
-  {"name":"MaetriXs","url":"https://maetrixs.com","what":"A fitness tracker for your social life. Log real meetings, earn XP, grow a connection graph.","stack":"React, TypeScript, Tailwind","status":"Building","year":"2025"},
-  {"name":"Public Opinion","url":"","what":"A public sentiment layer for the internet. Ask, vote and watch opinion move in real time.","stack":"React, TypeScript, Supabase","status":"Early, private","year":"2026"},
-  {"name":"Last Drink","url":"","what":"A drink tracker for nights out that rewards pacing. Hourly and nightly caps, water points, no progress bar.","stack":"In design","status":"Design","year":"2026"},
-  {"name":"LifeOS","url":"https://www.shawsuraj.com/researcher","what":"Research programme on modelling how one person thinks and behaves. My final year project is the first piece.","stack":"Python, machine learning, cognitive psychology","status":"Research","year":"2026"},
-  {"name":"Who gets the loan?","url":"https://github.com/shawsuraj/loan-approval-ml","what":"Predicts declined loans and maximum loan size across 54,000 applications. A tuned decision tree caught 65% of declines at 90% precision.","stack":"Python, pandas, scikit-learn, Jupyter","status":"Coursework","year":"2026",
-   "shelf":true,"sym":"Ml","kind":"machine learning","line":"Which loans get declined? Three notebooks, six models, and a regression score so good it made me suspicious."},
-  {"name":"Sky Portal","url":"https://github.com/shawsuraj/sky-portal","what":"Portal for an engineering org: teams, messages, meetings, and a network map of team dependencies.","stack":"Python, Django, SQLite, vis.js","status":"Coursework","year":"2026",
-   "shelf":true,"sym":"Sp","kind":"coursework","line":"A Django portal for an engineering org, with a live network map of which teams depend on which."},
-  {"name":"Smart Campus API","url":"https://github.com/shawsuraj/smart-campus-api","what":"REST API for campus rooms, sensors and nested sensor readings.","stack":"Java, JAX-RS, Jersey, Jetty","status":"Coursework","year":"2026",
-   "shelf":true,"sym":"Ca","kind":"coursework","line":"A REST API for rooms, sensors and their readings. JAX-RS on embedded Jetty, nothing but memory."},
-  {"name":"VerumVeil","url":"https://github.com/shawsuraj/VerumVeil","what":"Hide messages in plain sight with three password based ciphers: AI Sentence Crypt, SkipCode and Emoji Crypt.","stack":"Python, CLI","status":"Prototype","year":"2024"},
-  {"name":"Nuntius","url":"https://github.com/shawsuraj/nuntius","what":"Explored email spoofing through a web form. Retired once SPF, DKIM and DMARC blocked delivery.","stack":"Python, PHP, ngrok","status":"Retired","year":"2024",
-   "shelf":true,"sym":"Nu","kind":"security","line":"Explored email spoofing through a small web form. Retired once SPF, DKIM and DMARC bounced every message, which was the lesson."},
-  {"name":"Movie Barcode","url":"https://github.com/shawsuraj/movie-barcode","what":"Turns any video into a barcode of its colours, one stripe per frame.","stack":"Python, OpenCV, NumPy","status":"Done, v1.5","year":"2020",
-   "shelf":true,"sym":"Mb","kind":"media","line":"Turns any video into a barcode of its colours, one stripe per frame. Python, v1.5.","img":"assets/movie-barcode.jpg"},
-  {"name":"ModSec WAF","url":"https://github.com/shawsuraj/modsec-waf","what":"Script that turns a Linux VM into a web application firewall, tested in a three machine lab.","stack":"Bash, ModSecurity, Apache","status":"Done","year":"2019",
-   "shelf":true,"sym":"Wf","kind":"security","line":"One script that turns a Linux VM into a web application firewall. Tested with a target, a WAF and an attacker on one network."}
+ {
+  "name": "World Chaos Map",
+  "url": "https://worldchaosmap.app",
+  "what": "Scores every country from 0 to 100 from the news, every four hours. 486 audited feeds, rule based, no manual overrides.",
+  "stack": "TypeScript, React, Vite, MapLibre, Supabase, Postgres, GitHub Actions, Vercel",
+  "status": "Live",
+  "year": "2025",
+  "tags": [
+   "product"
+  ]
+ },
+ {
+  "name": "One Sentence",
+  "url": "https://www.one-sentence.org/",
+  "what": "Strangers write a story together, one sentence each, seeing only the line before.",
+  "stack": "React, TypeScript, Vite",
+  "status": "Live, invite only",
+  "year": "2026",
+  "tags": [
+   "product"
+  ]
+ },
+ {
+  "name": "MaetriXs",
+  "url": "https://maetrixs.com",
+  "what": "A fitness tracker for your social life. Log real meetings, earn XP, grow a connection graph.",
+  "stack": "React, TypeScript, Tailwind",
+  "status": "Building",
+  "year": "2025",
+  "tags": [
+   "product"
+  ]
+ },
+ {
+  "name": "Public Opinion",
+  "url": "",
+  "what": "A public sentiment layer for the internet. Ask, vote and watch opinion move in real time.",
+  "stack": "React, TypeScript, Supabase",
+  "status": "Early, private",
+  "year": "2026",
+  "tags": [
+   "product"
+  ]
+ },
+ {
+  "name": "Last Drink",
+  "url": "",
+  "what": "A drink tracker for nights out that rewards pacing. Hourly and nightly caps, water points, no progress bar.",
+  "stack": "In design",
+  "status": "Design",
+  "year": "2026",
+  "tags": [
+   "product"
+  ]
+ },
+ {
+  "name": "LifeOS",
+  "url": "https://www.shawsuraj.com/researcher",
+  "what": "Research programme on modelling how one person thinks and behaves. My final year project is the first piece.",
+  "stack": "Python, machine learning, cognitive psychology",
+  "status": "Research",
+  "year": "2026",
+  "tags": [
+   "research",
+   "machine learning"
+  ]
+ },
+ {
+  "name": "Loan Approval",
+  "url": "https://github.com/shawsuraj/loan-approval-ml",
+  "what": "Predicts declined loans and maximum loan size across 54,000 applications. A tuned decision tree caught 65% of declines at 90% precision.",
+  "stack": "Python, pandas, scikit-learn, Jupyter",
+  "status": "Coursework",
+  "year": "2026",
+  "shelf": true,
+  "sym": "La",
+  "kind": "machine learning",
+  "line": "Who gets declined, and how much can the rest borrow? Three notebooks, six models, and a regression score so good it made me suspicious.",
+  "tags": [
+   "machine learning",
+   "coursework"
+  ]
+ },
+ {
+  "name": "Sky Portal",
+  "url": "https://github.com/shawsuraj/sky-portal",
+  "what": "Portal for an engineering org: teams, messages, meetings, and a network map of team dependencies.",
+  "stack": "Python, Django, SQLite, vis.js",
+  "status": "Coursework",
+  "year": "2026",
+  "shelf": true,
+  "sym": "Sp",
+  "kind": "coursework",
+  "line": "A Django portal for an engineering org, with a live network map of which teams depend on which.",
+  "tags": [
+   "coursework",
+   "web"
+  ]
+ },
+ {
+  "name": "Smart Campus API",
+  "url": "https://github.com/shawsuraj/smart-campus-api",
+  "what": "REST API for campus rooms, sensors and nested sensor readings.",
+  "stack": "Java, JAX-RS, Jersey, Jetty",
+  "status": "Coursework",
+  "year": "2026",
+  "shelf": true,
+  "sym": "Ca",
+  "kind": "coursework",
+  "line": "A REST API for rooms, sensors and their readings. JAX-RS on embedded Jetty, nothing but memory.",
+  "tags": [
+   "coursework"
+  ]
+ },
+ {
+  "name": "VerumVeil",
+  "url": "https://github.com/shawsuraj/VerumVeil",
+  "what": "Hide messages in plain sight with three password based ciphers: AI Sentence Crypt, SkipCode and Emoji Crypt.",
+  "stack": "Python, CLI",
+  "status": "Prototype",
+  "year": "2024",
+  "tags": [
+   "security",
+   "tool"
+  ]
+ },
+ {
+  "name": "Nuntius",
+  "url": "https://github.com/shawsuraj/nuntius",
+  "what": "Explored email spoofing through a web form. Retired once SPF, DKIM and DMARC blocked delivery.",
+  "stack": "Python, PHP, ngrok",
+  "status": "Retired",
+  "year": "2024",
+  "shelf": true,
+  "sym": "Nu",
+  "kind": "security",
+  "line": "Explored email spoofing through a small web form. Retired once SPF, DKIM and DMARC bounced every message, which was the lesson.",
+  "tags": [
+   "security"
+  ]
+ },
+ {
+  "name": "ClimateWatch",
+  "url": "https://github.com/shawsuraj/ClimateWatch",
+  "what": "A site on climate action with accounts, sign up and login. Looking back, my first attempt at watching the world.",
+  "stack": "PHP, MySQL, Bootstrap, jQuery",
+  "status": "Done",
+  "year": "2022",
+  "tags": [
+   "web"
+  ],
+  "shelf": true,
+  "sym": "Cw",
+  "kind": "web",
+  "line": "A PHP site on climate action, with sign up and login. Looking back, the first sketch of watching the world."
+ },
+ {
+  "name": "Movie Barcode",
+  "url": "https://github.com/shawsuraj/movie-barcode",
+  "what": "Turns any video into a barcode of its colours, one stripe per frame.",
+  "stack": "Python, OpenCV, NumPy",
+  "status": "Done, v1.5",
+  "year": "2020",
+  "shelf": true,
+  "sym": "Mb",
+  "kind": "media",
+  "line": "Turns any video into a barcode of its colours, one stripe per frame. Python, v1.5.",
+  "img": "assets/movie-barcode.jpg",
+  "tags": [
+   "tool"
+  ]
+ },
+ {
+  "name": "ModSec WAF",
+  "url": "https://github.com/shawsuraj/modsec-waf",
+  "what": "Script that turns a Linux VM into a web application firewall, tested in a three machine lab.",
+  "stack": "Bash, ModSecurity, Apache",
+  "status": "Done",
+  "year": "2019",
+  "shelf": true,
+  "sym": "Wf",
+  "kind": "security",
+  "line": "One script that turns a Linux VM into a web application firewall. Tested with a target, a WAF and an attacker on one network.",
+  "tags": [
+   "security"
+  ]
+ },
+ {
+  "name": "Battleship",
+  "url": "https://github.com/shawsuraj/battleship",
+  "what": "Console Battleship against the computer, with sea monsters: the Kraken eats your score, Cetus moves every unsunk ship. Group project at Brunel.",
+  "stack": "Java, Maven",
+  "status": "Done",
+  "year": "2021",
+  "tags": [
+   "game",
+   "coursework"
+  ],
+  "shelf": true,
+  "sym": "Bs",
+  "kind": "game",
+  "line": "Battleship in the terminal, plus sea monsters. Hit the Kraken and it eats your score. Hit Cetus and every ship moves."
+ }
 ]

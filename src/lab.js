@@ -98,4 +98,20 @@
     $(".lo-reset",lo).addEventListener("click",function(){vals=BASE.slice();render();});
     render();
   }
+
+  /* ---------- Plain list: filter chips and search ---------- */
+  var pf=$("[data-pfilter]");
+  if(pf){
+    var chips=$$(".chips button",pf), q=$("input",pf), rows=$$(".plist tbody tr"), none=$(".pnone"), f="all";
+    function apply(){
+      var term=(q.value||"").trim().toLowerCase(), shown=0;
+      rows.forEach(function(r){
+        var ok=(f==="all"||(" "+r.dataset.tags+" ").indexOf(" "+f+" ")>-1)&&(!term||r.textContent.toLowerCase().indexOf(term)>-1);
+        r.hidden=!ok; if(ok)shown++;
+      });
+      none.hidden=shown>0;
+    }
+    chips.forEach(function(c){c.addEventListener("click",function(){f=c.dataset.f;chips.forEach(function(x){x.setAttribute("aria-pressed",x===c);});apply();});});
+    q.addEventListener("input",apply);
+  }
 })();

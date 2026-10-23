@@ -436,6 +436,17 @@ a.el:hover{transform:translateY(-3px);box-shadow:0 6px 0 -1px var(--ink);color:v
 @media (min-width:981px){.els{grid-template-columns:repeat(7,minmax(0,1fr))}.el p{font-size:14px}}
 @media (max-width:760px){.plist tbody th{display:block}.plist .yr{display:inline;margin-left:8px}}
 @media (max-width:760px){.plist tbody th{width:auto;white-space:normal}}
+.pfilter{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;justify-content:space-between;margin:6px 0 14px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips button{font-family:var(--display);font-weight:600;font-size:14px;border:1.5px solid var(--ink);background:var(--bg);color:var(--ink);border-radius:999px;padding:6px 12px;cursor:pointer}
+.chips button span{font-weight:400;opacity:.6;margin-left:2px}
+.chips button[aria-pressed=true]{background:var(--ink);color:var(--bg)}
+.psearch input{font-family:var(--display);font-size:15px;border:1.5px solid var(--ink);border-radius:8px;padding:8px 12px;background:var(--bg);color:var(--ink);width:min(300px,100%)}
+.psearch{flex:0 1 300px}
+.pnone{color:var(--ink-3);font-size:17px;padding:16px 0}
+.plist tr[hidden]{display:none}
+@media (min-width:981px){.els{grid-template-columns:repeat(5,minmax(0,1fr))}}
+@media (max-width:760px){.psearch{flex:1 1 100%}.psearch input{width:100%}}
 </style>
 </head>
 <body>

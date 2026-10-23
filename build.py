@@ -28,14 +28,24 @@ def shelf_html():
                '<p>Whatever I build next lands on the scale or on this shelf.</p></div>')
     return "\n".join(out)
 
+TAGS = [("product", "Products"), ("research", "Research"), ("machine learning", "Machine learning"), ("security", "Security"),
+        ("coursework", "Coursework"), ("game", "Games"), ("web", "Web"), ("tool", "Tools")]
+
 def projects_html():
     rows = []
     for p in PROJECTS:
         name = f'<a href="{p["url"]}">{p["name"]}</a>' if p["url"] else p["name"]
-        rows.append(f'<tr><th scope="row">{name}<span class="yr">{p["year"]}</span></th><td>{p["what"]}</td>'
+        tags = " ".join(t.replace(" ", "-") for t in p["tags"])
+        rows.append(f'<tr data-tags="{tags}"><th scope="row">{name}<span class="yr">{p["year"]}</span></th><td>{p["what"]}</td>'
                     f'<td class="stk">{p["stack"]}</td><td class="sts">{p["status"]}</td></tr>')
-    return ('<div class="plist"><table><thead><tr><th scope="col">Project</th><th scope="col">What it is</th>'
-            '<th scope="col">Built with</th><th scope="col">Status</th></tr></thead><tbody>' + "".join(rows) + '</tbody></table></div>')
+    count = lambda t: sum(1 for p in PROJECTS if t in p["tags"])
+    chips = f'<button type="button" aria-pressed="true" data-f="all">All <span>{len(PROJECTS)}</span></button>' + "".join(
+        f'<button type="button" aria-pressed="false" data-f="{t.replace(" ", "-")}">{label} <span>{count(t)}</span></button>' for t, label in TAGS if count(t))
+    return ('<div class="pfilter" data-pfilter><div class="chips" role="group" aria-label="Filter projects">' + chips + '</div>'
+            '<label class="psearch"><span class="sr">Search projects</span><input type="search" placeholder="Search by name or tech, like Python" autocomplete="off"></label></div>'
+            '<div class="plist"><table><thead><tr><th scope="col">Project</th><th scope="col">What it is</th>'
+            '<th scope="col">Built with</th><th scope="col">Status</th></tr></thead><tbody>' + "".join(rows) + '</tbody></table>'
+            '<p class="pnone" hidden>Nothing matches that yet.</p></div>')
 
 PAGES = ["index", "world-chaos-map", "building-in-public"]
 
