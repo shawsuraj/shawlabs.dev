@@ -8,7 +8,8 @@ SRC = os.path.join(ROOT, "src")
 CSS = open(os.path.join(SRC, "styles.css")).read()
 EXPLORER_HTML = open(os.path.join(SRC, "explorer.html")).read()
 EXPLORER_JS = open(os.path.join(SRC, "explorer.js")).read()
-BENCH_JS = open(os.path.join(SRC, "bench.js")).read()
+BENCH_JS = open(os.path.join(SRC, "bench.js")).read() + "\n" + open(os.path.join(SRC, "lab.js")).read()
+SHELF = json.load(open(os.path.join(SRC, "shelf.json")))
 CHART = open(os.path.join(ROOT, "chart.svg")).read()
 HOST = "https://www.shawlabs.dev"
 FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com">\n<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n'
@@ -16,6 +17,16 @@ FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com">\n<link rel
          '&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap">')
 ICON = ("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23121418'/%3E"
         "%3Ccircle cx='32' cy='32' r='11' fill='%23d93a40'/%3E%3C/svg%3E")
+def shelf_html():
+    out = []
+    for e in SHELF:
+        img = f'<img src="{e["img"]}" alt="" width="600" height="90" loading="lazy">' if e.get("img") else ""
+        out.append(f'<a class="el" href="{e["url"]}"><span class="n">{e["year"]}</span><b>{e["sym"]}</b>'
+                   f'<span class="nm">{e["name"]}</span><span class="k">{e["kind"]}</span>{img}<p>{e["line"]}</p></a>')
+    out.append('<div class="el next"><span class="n">soon</span><b>?</b><span class="nm">Next element</span>'
+               '<p>Whatever I build next lands on the scale or on this shelf.</p></div>')
+    return "\n".join(out)
+
 PAGES = ["index", "world-chaos-map", "building-in-public"]
 
 def nav(cur):
@@ -48,7 +59,7 @@ def page(slug, full):
     first, body = open(os.path.join(SRC, "pages", slug + ".html")).read().split("\n", 1)
     meta = json.loads(first)
     has_explorer = "{{EXPLORER}}" in body
-    body = body.replace("{{EXPLORER}}", EXPLORER_HTML).replace("{{CHART}}", CHART)
+    body = body.replace("{{EXPLORER}}", EXPLORER_HTML).replace("{{CHART}}", CHART).replace("{{SHELF}}", shelf_html())
     content = f'{nav(meta["nav"])}\n<main id="main">\n{body}\n</main>\n{FOOT}'
     if has_explorer:
         content += f"\n<script>{EXPLORER_JS}</script>"

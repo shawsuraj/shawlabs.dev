@@ -1,103 +1,185 @@
-{"title":"Shaw Labs","desc":"Shaw Labs is the bench of Suraj Shaw. Every experiment is here as a small working toy: World Chaos Map, One Sentence, MaetriXs, VerumVeil, Last Drink.","nav":"index"}
-<div class="wide bench-head">
-  <h1>The bench<i></i></h1>
-  <p>Everything I am building, switched on. Poke at it. Each one wears its own clothes, because each one is its own small world. The write-ups are one click deeper.</p>
+{"title":"Shaw Labs","desc":"Shaw Labs: small experiments by Suraj Shaw on how people behave, from one person to eight billion. World Chaos Map, Public Opinion, One Sentence, MaetriXs, VerumVeil, Last Drink, LifeOS.","nav":"index"}
+<div class="lab">
+<div class="lab-wide lab-head">
+  <h1>Small experiments on how people behave.</h1>
+  <p>From one person to eight billion. Each thing I build is a question about people at a different size. Pick one on the scale.</p>
 </div>
 
-<div class="wide bench">
+<div class="lab-wide scale" data-scale>
+  <div class="tiles" role="tablist" aria-label="Experiments, ordered by how many people they involve">
+    <button class="tile" role="tab" id="tab-lo" aria-controls="sp-lo" data-n="1" data-st="research"><span class="n">n = 1</span><b>Lo</b><span class="nm">LifeOS</span><span class="st">research</span></button>
+    <button class="tile" role="tab" id="tab-ld" aria-controls="sp-ld" data-n="1" data-st="design"><span class="n">n = 1</span><b>Ld</b><span class="nm">Last Drink</span><span class="st">in design</span></button>
+    <button class="tile" role="tab" id="tab-vv" aria-controls="sp-vv" data-n="2" data-st="proto"><span class="n">n = 2</span><b>Vv</b><span class="nm">VerumVeil</span><span class="st">prototype</span></button>
+    <button class="tile" role="tab" id="tab-mx" aria-controls="sp-mx" data-n="15" data-st="build"><span class="n">n ≈ 15</span><b>Mx</b><span class="nm">MaetriXs</span><span class="st">building</span></button>
+    <button class="tile" role="tab" id="tab-os" aria-controls="sp-os" data-n="120" data-st="live"><span class="n">n ≈ 100s</span><b>Os</b><span class="nm">One Sentence</span><span class="st">live</span></button>
+    <button class="tile" role="tab" id="tab-po" aria-controls="sp-po" data-n="3e7" data-st="proto"><span class="n">n = anyone</span><b>Po</b><span class="nm">Public Opinion</span><span class="st">early</span></button>
+    <button class="tile" role="tab" id="tab-wc" aria-controls="sp-wc" data-n="8.1e9" data-st="live"><span class="n">n = 8.1bn</span><b>Wc</b><span class="nm">World Chaos Map</span><span class="st">live</span></button>
+  </div>
+  <svg class="leads" aria-hidden="true"></svg>
+  <div class="axis" aria-hidden="true">
+    <div class="ticks"></div>
+    <p class="gap-note">Nothing here yet, between a hundred people and a million.</p>
+  </div>
+  <p class="axis-cap">People in the experiment, log scale</p>
+</div>
 
-  <section class="tool full skin-wcm" data-wcm aria-labelledby="t-wcm">
-    <div class="tool-top"><h2 id="t-wcm">World Chaos Map</h2><span class="st">live · v3.2 · 486 feeds</span><a href="https://worldchaosmap.app">Open the map ↗</a></div>
-    <p class="tool-q">How much is actually going on, country by country? Scored from the news every four hours, with one rule: the news decides, not me.</p>
-    <div class="tool-body">
+<div class="lab-wide specimens">
+
+  <section class="sp" id="sp-wc" role="tabpanel" aria-labelledby="tab-wc">
+    <header class="sp-head"><div class="sp-el"><span>8.1bn</span><b>Wc</b></div><div><p class="sp-name">World Chaos Map · live since January 2026</p><h2>Can one fair rule, and no opinions, rank the whole world's chaos from the news?</h2></div></header>
+    <div class="sp-notes three">
+      <div><h3>Method</h3><p>Every four hours, read 486 audited feeds plus GDELT. Score each article on evidence of harm. No country appears in any list, cap or override.</p></div>
+      <div><h3>Readings</h3><ul><li>v3.2 deleted every country-specific patch from v2.</li><li>Replayed on 7 Oct: France 79 → 62, Myanmar 55 → 68, Syria 26 → 51.</li><li>Of 1,162 feeds listed, only about 420 had ever worked. 486 remain.</li></ul></div>
+      <div><h3>Next</h3><p>Confidence for each story, a check on alarming claims, and conflict data from UCDP.</p><p class="links"><a href="https://worldchaosmap.app">Open the map ↗</a><a href="world-chaos-map.html">How the score works →</a></p></div>
+    </div>
+    <div class="inst skin-wcm" data-wcm>
+      <p class="inst-l">Instrument</p>
       <div class="wcm-grid">
         <div class="wcm-now">
           <div class="lbl"><i></i><span>Loading</span></div>
           <div class="wcm-bands"></div>
           <div class="wcm-count"></div>
           <ol class="wcm-top"></ol>
-          <p class="tiny" style="margin-top:12px"><a href="world-chaos-map.html" style="color:inherit">How the score works →</a></p>
         </div>
         {{EXPLORER}}
       </div>
     </div>
   </section>
 
-  <section class="tool skin-os" data-os aria-labelledby="t-os">
-    <div class="tool-top"><h2 id="t-os">One Sentence</h2><span class="st">live · invite only</span><a href="https://www.one-sentence.org/">one-sentence.org ↗</a></div>
-    <p class="tool-q">A story passed between strangers. You see one line. You add one. Then it is gone.</p>
-    <div class="tool-body">
-      <p class="os-prev"><small>The line before yours</small><span></span></p>
-      <label class="sr" for="os-line">Your sentence</label>
-      <textarea id="os-line" maxlength="200" placeholder="Write the next sentence."></textarea>
-      <button type="button" class="os-go" disabled>Add your line and let go</button>
-      <p class="os-gone" aria-live="polite"></p>
-      <p class="tiny os-note">Demo story. Nothing you type leaves this page.</p>
-    </div>
-  </section>
-
-  <section class="tool skin-mx" data-mx aria-labelledby="t-mx">
-    <div class="tool-top"><h2 id="t-mx">MaetriXs</h2><span class="st">waitlist open</span><a href="https://maetrixs.com">maetrixs.com ↗</a></div>
-    <p class="tool-q">A fitness tracker for your social life. Reps are people. Log a moment and watch your circle grow.</p>
-    <div class="tool-body">
-      <div class="mx-stage"><svg viewBox="0 0 600 210" role="img" aria-label="Your social graph"></svg><div class="mx-xp">social XP<b>0</b></div></div>
-      <div class="mx-acts">
-        <button type="button" data-xp="10" data-who="Barista">1 intentional hello<small>+10 XP</small></button>
-        <button type="button" data-xp="40" data-who="Old friend" data-again="1">Coffee catch-up<small>+40 XP</small></button>
-        <button type="button" data-xp="15" data-who="Neighbour">Remembered a name<small>+15 XP</small></button>
-        <button type="button" data-xp="25" data-who="Uni crew" data-again="1">Friday reconnect<small>+25 XP</small></button>
+  <section class="sp" id="sp-po" role="tabpanel" aria-labelledby="tab-po" hidden>
+    <header class="sp-head"><div class="sp-el"><span>anyone</span><b>Po</b></div><div><p class="sp-name">Public Opinion · early, not public yet</p><h2>If anyone can ask and anyone can vote, does the crowd get clearer or louder?</h2></div></header>
+    <div class="sp-body">
+      <div class="sp-notes">
+        <div><h3>Method</h3><p>A public sentiment layer for the internet. Ask a question, vote, and watch collective opinion move in real time. Clarity, not outrage.</p></div>
+        <div><h3>Readings</h3><p>None yet. It is still on the bench.</p></div>
       </div>
-      <p class="tiny">Demo. Tap the same kind twice and the bond gets thicker instead of adding a stranger.</p>
-    </div>
-  </section>
-
-  <section class="tool skin-vv" data-vv aria-labelledby="t-vv">
-    <div class="vv-seal" aria-hidden="true"></div>
-    <div class="tool-top"><h2 id="t-vv">VerumVeil</h2><span class="st">Emoji Crypt · works here</span><a href="https://github.com/shawsuraj">GitHub ↗</a></div>
-    <p class="tool-q">Hide a message in plain sight. Your password shuffles 64 faces into a private alphabet.</p>
-    <div class="tool-body">
-      <div class="vv-row">
-        <div><label class="sr" for="vv-msg">Message</label><textarea id="vv-msg" placeholder="meet me at nine"></textarea></div>
-        <div><label class="sr" for="vv-pw">Password</label><input id="vv-pw" type="text" placeholder="password: veil" autocomplete="off" spellcheck="false"></div>
+      <div class="inst skin-po" data-po>
+        <p class="inst-l">Instrument</p>
+        <p class="po-q">Should social apps show you why a post is in your feed?</p>
+        <div class="po-vote"><button type="button" data-v="0">Yes</button><button type="button" data-v="1">No</button><button type="button" data-v="2">Not sure</button></div>
+        <div class="po-bars"></div>
+        <p class="tiny po-note">Vote to see the crowd. In this demo the crowd is simulated.</p>
       </div>
-      <div class="vv-out" aria-live="polite"></div>
-      <div class="vv-btns"><button type="button" id="vv-enc">Seal it</button><button type="button" id="vv-dec" class="alt">Open it</button></div>
-      <p class="tiny vv-status">Real cipher, running in your browser. Change the password and open it again.</p>
     </div>
   </section>
 
-  <section class="tool skin-ld" data-ld aria-labelledby="t-ld">
-    <div class="tool-top"><h2 id="t-ld">Last Drink</h2><span class="st">in the works · name not final</span></div>
-    <p class="tool-q">A night out that rewards pacing, not volume. I built it from the other side of the bar.</p>
-    <div class="tool-body">
-      <div class="ld-score"><b>0</b><span>points tonight</span></div>
-      <p class="ld-clock"></p>
-      <div class="ld-acts">
-        <button type="button" data-k="pint">Pint<small>+10</small></button>
-        <button type="button" data-k="cocktail">Cocktail<small>+10</small></button>
-        <button type="button" data-k="water">Water<small>+5 between</small></button>
-        <button type="button" data-k="time">+30 min<small>wait</small></button>
+  <section class="sp" id="sp-os" role="tabpanel" aria-labelledby="tab-os" hidden>
+    <header class="sp-head"><div class="sp-el"><span>100s</span><b>Os</b></div><div><p class="sp-name">One Sentence · live, invite only</p><h2>Can strangers write a story that holds together if each one sees only the line before theirs?</h2></div></header>
+    <div class="sp-body">
+      <div class="sp-notes">
+        <div><h3>Method</h3><p>No profiles, no likes, no audience. You read one sentence, write the next, and never see the story again. Email checks exist only to keep it human.</p></div>
+        <div><h3>Readings</h3><p>Live since January 2026. <a href="https://www.one-sentence.org/">one-sentence.org ↗</a></p></div>
       </div>
-      <p class="ld-msg" aria-live="polite">Start the night. Two an hour earn points. Water earns points only between drinks. There is no progress bar to fill.</p>
-      <ul class="ld-log"></ul>
+      <div class="inst skin-os" data-os>
+        <p class="inst-l">Instrument</p>
+        <p class="os-prev"><small>The line before yours</small><span></span></p>
+        <label class="sr" for="os-line">Your sentence</label>
+        <textarea id="os-line" maxlength="200" placeholder="Write the next sentence."></textarea>
+        <button type="button" class="os-go" disabled>Add your line and let go</button>
+        <p class="os-gone" aria-live="polite"></p>
+        <p class="tiny os-note">Demo story. Nothing you type leaves this page.</p>
+      </div>
     </div>
   </section>
 
-  <section class="tool full skin-plain" aria-labelledby="t-more">
-    <div class="tool-top"><h2 id="t-more">Not switched on yet</h2></div>
-    <div class="tool-body">
-      <p><b>LifeOS.</b> A personal operating system for habits, money and time, and the research question behind it. <a href="https://www.shawsuraj.com/researcher">Read more ↗</a></p>
-      <p><b>Public Opinion.</b> A way to ask a whole campus one question and actually hear the answer. Not public yet.</p>
-      <p><b>Your idea.</b> If something here should exist, tell me: <a href="mailto:shaw@shawsuraj.com">shaw@shawsuraj.com</a>.</p>
+  <section class="sp" id="sp-mx" role="tabpanel" aria-labelledby="tab-mx" hidden>
+    <header class="sp-head"><div class="sp-el"><span>≈ 15</span><b>Mx</b></div><div><p class="sp-name">MaetriXs · building since August 2025</p><h2>If you count hellos and catch-ups like reps, do people make more of them?</h2></div></header>
+    <div class="sp-body">
+      <div class="sp-notes">
+        <div><h3>Method</h3><p>A fitness tracker for your social life. Log the people you actually meet, earn XP, and watch your connection graph grow. A two minute quiz finds your social archetype first.</p></div>
+        <div><h3>Readings</h3><p>Waitlist open. <a href="https://maetrixs.com">maetrixs.com ↗</a></p></div>
+      </div>
+      <div class="inst skin-mx" data-mx>
+        <p class="inst-l">Instrument</p>
+        <div class="mx-stage"><svg viewBox="0 0 600 210" role="img" aria-label="Your social graph"></svg><div class="mx-xp">social XP<b>0</b></div></div>
+        <div class="mx-acts">
+          <button type="button" data-xp="10" data-who="Barista">1 intentional hello<small>+10 XP</small></button>
+          <button type="button" data-xp="40" data-who="Old friend" data-again="1">Coffee catch-up<small>+40 XP</small></button>
+          <button type="button" data-xp="15" data-who="Neighbour">Remembered a name<small>+15 XP</small></button>
+          <button type="button" data-xp="25" data-who="Uni crew" data-again="1">Friday reconnect<small>+25 XP</small></button>
+        </div>
+        <p class="tiny">Demo. Do the same thing twice and the bond gets thicker instead of adding a stranger.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sp" id="sp-vv" role="tabpanel" aria-labelledby="tab-vv" hidden>
+    <header class="sp-head"><div class="sp-el"><span>2</span><b>Vv</b></div><div><p class="sp-name">VerumVeil · three ciphers, 2024</p><h2>Can a secret sit in plain sight, in a row of faces, and stay a secret?</h2></div></header>
+    <div class="sp-body">
+      <div class="sp-notes">
+        <div><h3>Method</h3><p>Three ways to hide in plain sight. AI Sentence Crypt turns your message into an ordinary sentence that means something else. SkipCode, borrowed from Sherlock's The Empty Hearse, buries it among innocent words. Emoji Crypt, the one here, turns it into faces. The password decides everything.</p></div>
+        <div><h3>Readings</h3><p>Honest result: Emoji Crypt is a substitution cipher. It hides a short note from a glance, but frequency analysis would crack a long one. <a href="https://github.com/shawsuraj/VerumVeil">GitHub ↗</a></p></div>
+      </div>
+      <div class="inst skin-vv" data-vv>
+        <p class="inst-l">Instrument</p>
+        <div class="vv-row">
+          <div><label class="sr" for="vv-msg">Message</label><textarea id="vv-msg" placeholder="meet me at nine"></textarea></div>
+          <div><label class="sr" for="vv-pw">Password</label><input id="vv-pw" type="text" placeholder="password: veil" autocomplete="off" spellcheck="false"></div>
+        </div>
+        <div class="vv-out" aria-live="polite"></div>
+        <div class="vv-btns"><button type="button" id="vv-enc">Seal it</button><button type="button" id="vv-dec" class="alt">Open it</button></div>
+        <p class="tiny vv-status">Runs in your browser. Change the password and try to open it.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sp" id="sp-ld" role="tabpanel" aria-labelledby="tab-ld" hidden>
+    <header class="sp-head"><div class="sp-el"><span>1</span><b>Ld</b></div><div><p class="sp-name">Last Drink · in design, name not final</p><h2>Can a drinking app reward going slower instead of drinking more?</h2></div></header>
+    <div class="sp-body">
+      <div class="sp-notes">
+        <div><h3>Method</h3><p>Points stop at hourly, nightly and weekly caps. Water between rounds earns points. There is no progress bar to chase, and alerts flag sudden spikes. Safeguards borrowed from gambling, from day one.</p></div>
+        <div><h3>Why me</h3><p>Five years behind London bars. I have watched the third drink turn into the sixth more times than I can count.</p></div>
+      </div>
+      <div class="inst skin-ld" data-ld>
+        <p class="inst-l">Instrument</p>
+        <div class="ld-score"><b>0</b><span>points tonight</span></div>
+        <p class="ld-clock"></p>
+        <div class="ld-acts">
+          <button type="button" data-k="pint">Pint<small>+10</small></button>
+          <button type="button" data-k="cocktail">Cocktail<small>+10</small></button>
+          <button type="button" data-k="water">Water<small>+5 between</small></button>
+          <button type="button" data-k="time">+30 min<small>wait</small></button>
+        </div>
+        <p class="ld-msg" aria-live="polite">Start the night. Two an hour earn points. Water counts only between drinks.</p>
+        <ul class="ld-log"></ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="sp" id="sp-lo" role="tabpanel" aria-labelledby="tab-lo" hidden>
+    <header class="sp-head"><div class="sp-el"><span>1</span><b>Lo</b></div><div><p class="sp-name">LifeOS · research since February 2026, working name</p><h2>Can parts of how one person thinks and behaves be modelled honestly, and updated as they change?</h2></div></header>
+    <div class="sp-body">
+      <div class="sp-notes">
+        <div><h3>Method</h3><p>Cognitive psychology, behaviour data and machine learning, building toward a personal digital twin. My final year project is the first narrow, testable piece.</p></div>
+        <div><h3>Readings</h3><p>Early. The research plan lives on <a href="https://www.shawsuraj.com/researcher">shawsuraj.com ↗</a></p></div>
+      </div>
+      <div class="inst skin-lo" data-lo>
+        <p class="inst-l">Instrument</p>
+        <p class="lo-q">When did you wake up this week? The model guesses tomorrow.</p>
+        <div class="lo-days"></div>
+        <div class="lo-out"><b>07:00</b><span></span></div>
+        <div class="lo-plot"><i class="band"></i><i class="guess"></i></div>
+        <div class="lo-btns"><button type="button" class="lo-late">Add a late night</button><button type="button" class="lo-reset">Reset</button></div>
+        <p class="tiny lo-note">An average with an honest range. A real twin has to explain the late nights, not just widen the range. That gap is the research.</p>
+      </div>
     </div>
   </section>
 
 </div>
 
+<div class="lab-wide shelf">
+  <h2>Off the scale</h2>
+  <p class="shelf-sub">Not every experiment is about people. These ones poke at machines, mail servers and movies.</p>
+  <div class="els">
+{{SHELF}}
+  </div>
+</div>
+</div>
+
 <section id="writing">
   <div class="col">
     <p class="kicker">Writing</p>
-    <h2>Notes from the bench.</h2>
+    <h2>Notes from the lab.</h2>
     <ul class="posts">
       <li><a href="world-chaos-map.html"><b>How World Chaos Map scores the world</b><span>Oct 2026</span><em>The rule, the pipeline, the real code, and the hardcoded fixes I had to delete.</em></a></li>
       <li><a href="building-in-public.html"><b>On building in public</b><span>Dec 2025</span><em>Why I stopped waiting for things to be ready.</em></a></li>

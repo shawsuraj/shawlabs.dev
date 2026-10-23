@@ -9,3 +9,10 @@ Plain HTML and CSS. No framework, no build step on Vercel.
 - `python3 build.py` writes the site to `dist/`, which Vercel serves (see `vercel.json`).
 
 Add a new case study: copy `src/pages/world-chaos-map.html`, add it to `PAGES` in `build.py`, link it from the experiments table, add it to `sitemap.xml`.
+
+## Adding an experiment
+
+- **About people?** It goes on the scale. In `src/pages/index.html`, add a `.tile` button (set `data-n` to how many people it involves and `data-st` to live, build, design, proto or research) and a matching `.sp` section with the question, method, readings and an instrument. Toy code lives in `src/bench.js` and `src/lab.js`.
+- **Not about people?** It goes on the shelf. Add one object to `src/shelf.json` and rebuild.
+
+Then run `python3 build.py`.
