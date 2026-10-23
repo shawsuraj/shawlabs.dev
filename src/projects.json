@@ -67,6 +67,23 @@
   ]
  },
  {
+  "name": "Network Reconnaissance Detection",
+  "url": "network-reconnaissance.html",
+  "what": "Research on catching the scanning phase of a cyberattack. A neural network trained on about 250,000 labelled network flows from UNSW-NB15.",
+  "stack": "Python, pandas, scikit-learn, TensorFlow, Keras",
+  "status": "In progress",
+  "year": "2026",
+  "tags": [
+   "research",
+   "security",
+   "machine learning"
+  ],
+  "shelf": true,
+  "sym": "Rd",
+  "kind": "research · in progress",
+  "line": "Can a neural network spot an attacker quietly mapping a network, before the breach? About 250,000 labelled flows. Readings soon."
+ },
+ {
   "name": "Loan Approval",
   "url": "https://github.com/shawsuraj/loan-approval-ml",
   "what": "Predicts declined loans and maximum loan size across 54,000 applications. A tuned decision tree caught 65% of declines at 90% precision.",

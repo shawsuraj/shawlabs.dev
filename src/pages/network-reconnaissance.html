@@ -1,0 +1,41 @@
+{"title":"Network Reconnaissance Detection with Neural Networks · Shaw Labs","desc":"Suraj Shaw's research on detecting the reconnaissance phase of a cyberattack in network traffic, using a neural network trained on about 250,000 labelled flows from UNSW-NB15.","nav":"index"}
+<header class="col art-head">
+  <p class="status">Research · in progress · 2026</p>
+  <h1>Network Reconnaissance Detection with Neural Networks</h1>
+  <p class="dek">Before most breaches there is a quiet phase. Someone maps the network, port by port, looking for a way in. Can a neural network learn what that looks like in the traffic, and tell it apart from everything normal?</p>
+  <p class="by">Suraj Shaw · <a href="https://www.shawsuraj.com/guardian">Security work</a> · <a href="index.html#projects">All projects</a></p>
+</header>
+
+<article class="col">
+  <div class="facts">
+    <div><b>~250k</b><span>labelled network flows</span></div>
+    <div><b>49</b><span>features per flow</span></div>
+    <div><b>9</b><span>attack categories</span></div>
+    <div><b>Recon</b><span>the class that matters most</span></div>
+  </div>
+
+  <h2>Why reconnaissance</h2>
+  <p>Attacks rarely start with the attack. They start with someone looking: which machines are up, which ports are open, which services answer. That scanning is quiet and easy to lose among normal traffic. Catch it, and you see the attacker before they find anything.</p>
+  <p>I have done this from the other side. My first live penetration test was in 2019, and reconnaissance is most of the job. This project asks whether a model can learn the shape of it.</p>
+
+  <h2>The data</h2>
+  <p>UNSW-NB15 is a public intrusion dataset built at the Cyber Range Lab of UNSW Canberra. Each row is one network flow, a single conversation between two machines, described by 49 features: duration, bytes and packets each way, load, protocol, service, connection state and more. Every flow is labelled normal or one of nine attack types, and Reconnaissance is one of them.</p>
+
+  <h2>The method</h2>
+  <ol>
+    <li>Clean the flows, one-hot encode protocol, service and state, and scale the numbers so bytes in millions do not drown out everything else.</li>
+    <li>Train a feedforward neural network, with dropout and early stopping so it does not memorise the training set.</li>
+    <li>Handle class imbalance head on. Normal traffic dwarfs reconnaissance, and a model that ignores that learns to say "normal" and look accurate.</li>
+  </ol>
+
+  <h2>How I will judge it</h2>
+  <p>Not on accuracy. When most traffic is normal, accuracy rewards a model for missing attacks. I will report precision, recall and F1 for every class, a confusion matrix, and ROC curves. The question is simple: of the reconnaissance in the test set, how much does it catch, and how often does it cry wolf?</p>
+
+  <h2>What I expect to go wrong</h2>
+  <p>The rarest attack types, like worms, have very few examples, so the model will likely do badly on them. I will not hide that. Where a model fails is usually where the interesting part is.</p>
+
+  <h2>Readings</h2>
+  <p>None yet. Results go here when they are real, failures included.</p>
+  <p style="font-size:16px;color:var(--ink-3)">Python, pandas, scikit-learn, TensorFlow and Keras.</p>
+  <p class="endnote">Working on intrusion detection or network security data? Email <a href="mailto:shaw@shawsuraj.com">shaw@shawsuraj.com</a>.</p>
+</article>

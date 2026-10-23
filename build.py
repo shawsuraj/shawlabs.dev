@@ -22,7 +22,7 @@ def shelf_html():
     out = []
     for e in SHELF:
         img = f'<img src="{e["img"]}" alt="" width="600" height="90" loading="lazy">' if e.get("img") else ""
-        out.append(f'<a class="el" href="{e["url"]}"><span class="n">{e["year"]}</span><b>{e["sym"]}</b>'
+        out.append(f'<a class="el{" now" if "in progress" in e["kind"] else ""}" href="{e["url"]}"><span class="n">{e["year"]}</span><b>{e["sym"]}</b>'
                    f'<span class="nm">{e["name"]}</span><span class="k">{e["kind"]}</span>{img}<p>{e["line"]}</p></a>')
     out.append('<div class="el next"><span class="n">soon</span><b>?</b><span class="nm">Next element</span>'
                '<p>Whatever I build next lands on the scale or on this shelf.</p></div>')
@@ -47,7 +47,7 @@ def projects_html():
             '<th scope="col">Built with</th><th scope="col">Status</th></tr></thead><tbody>' + "".join(rows) + '</tbody></table>'
             '<p class="pnone" hidden>Nothing matches that yet.</p></div>')
 
-PAGES = ["index", "world-chaos-map", "building-in-public"]
+PAGES = ["index", "world-chaos-map", "building-in-public", "network-reconnaissance"]
 
 def nav(cur):
     items = [("index.html", "Lab", cur == "index"), ("index.html#projects", "All projects", False), ("index.html#writing", "Writing", cur == "writing"),
@@ -92,7 +92,7 @@ def page(slug, full):
         content += f"\n<script>{BENCH_JS}</script>"
     if full:
         content = re.sub(r'href="index\.html(#[^"]*)?"', lambda m: f'href="/{m.group(1) or ""}"', content)
-        content = re.sub(r'href="(world-chaos-map|building-in-public)\.html(#[^"]*)?"', lambda m: f'href="/{m.group(1)}{m.group(2) or ""}"', content)
+        content = re.sub(r'href="(world-chaos-map|building-in-public|network-reconnaissance)\.html(#[^"]*)?"', lambda m: f'href="/{m.group(1)}{m.group(2) or ""}"', content)
         return (f'<!doctype html>\n<html lang="en-GB">\n<head>\n<meta charset="utf-8">\n'
                 f'<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n{head(meta, slug, True)}\n</head>\n'
                 f'<body>\n{content}\n</body>\n</html>\n')
