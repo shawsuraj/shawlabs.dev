@@ -1,0 +1,81 @@
+{"title":"Who gets the loan? · Shaw Labs","desc":"Suraj Shaw's machine learning study on 58,645 loan applications: predicting which loans get declined and the maximum loan for approved clients.","nav":"writing"}
+<header class="col art-head">
+  <p class="kicker">Loan Approval · machine learning · 2026</p>
+  <h1>Who gets the loan?</h1>
+  <p class="dek">Two questions from a bank. Can machine learning predict which clients get approved for a loan? And for those approved, can it predict the maximum loan amount?</p>
+  <p class="by">Suraj Shaw · <a href="https://github.com/shawsuraj/loan-approval-ml">Notebooks on GitHub</a></p>
+</header>
+
+<article class="col">
+  <div class="facts">
+    <div><b>58,645</b><span>applications</span></div>
+    <div><b>54,221</b><span>after cleaning</span></div>
+    <div><b>8,349</b><span>declined</span></div>
+    <div><b>6</b><span>models</span></div>
+  </div>
+
+  <h2>Cleaning the data</h2>
+  <p>The dataset needed work before any model could use it.</p>
+  <ul>
+    <li><b>Loan approval status</b>, the target, had inconsistent labels: Approved, APPROVED, Declined, DECLINED, Accept and Reject. I standardised them to Approved and Declined.</li>
+    <li><b>Sex</b> was 99.4% missing, so I dropped it.</li>
+    <li><b>Credit application acceptance</b> overlapped with the approval outcome and would leak the answer into the model, so I dropped it.</li>
+    <li><b>Age</b> ranged from minus 30 to 180. I filled missing values with the mean and removed outliers with the IQR method.</li>
+    <li><b>Payment default on file</b> mixed Y, N, YES and NO. I standardised and encoded it.</li>
+    <li><b>Loan amount</b> had 2,045 outliers, removed with IQR.</li>
+  </ul>
+
+  <h2>Part 1: approved or declined</h2>
+  <p>I trained three models on an 80/20 split, stratified so both sets kept the same approved to declined ratio, with a fixed random state so the results can be reproduced. Each model was tested on the same 10,845 unseen applications.</p>
+  <p>The bank wanted a model that catches as many declined applications as possible, and is right when it does. So accuracy was not the main measure. Recall, precision and F1 on the declined class were.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Model</th><th>Accuracy</th><th>Precision</th><th>Recall</th><th>F1</th><th>AUC</th></tr></thead>
+    <tbody>
+      <tr><td>Naive Bayes</td><td class="n">0.87</td><td class="n">0.95</td><td class="n">0.04</td><td class="n">0.07</td><td class="n">0.86</td></tr>
+      <tr><td>Logistic regression</td><td class="n">0.90</td><td class="n">0.72</td><td class="n">0.39</td><td class="n">0.51</td><td class="n">0.88</td></tr>
+      <tr><td><b>kNN, k = 13</b></td><td class="n">0.90</td><td class="n">0.69</td><td class="n"><b>0.49</b></td><td class="n"><b>0.57</b></td><td class="n">0.87</td></tr>
+    </tbody>
+  </table></div>
+  <p>kNN was the best model. It had the highest recall and F1 for declined loans, so it was better at catching rejections than the other two, even though it still misses some.</p>
+
+  <h2>Tuning kNN</h2>
+  <p>GridSearchCV picked k = 29 with Manhattan distance.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>kNN</th><th>Accuracy</th><th>Precision</th><th>Recall</th><th>F1</th></tr></thead>
+    <tbody>
+      <tr><td>Before, k = 13</td><td class="n">0.90</td><td class="n">0.69</td><td class="n">0.49</td><td class="n">0.57</td></tr>
+      <tr><td>After, k = 29</td><td class="n">0.90</td><td class="n">0.72</td><td class="n">0.44</td><td class="n">0.55</td></tr>
+    </tbody>
+  </table></div>
+  <p>Precision went up, but recall and F1 went down. For a bank that wants to catch declined loans, tuning did not improve the model.</p>
+
+  <h2>An ensemble</h2>
+  <p>I combined Naive Bayes and logistic regression in a soft voting ensemble, since both output probabilities. Precision rose to 0.88, but recall dropped to 0.16. It missed too many declined applications, and its F1 was worse than either model on its own. For the bank's goal, logistic regression is the better choice than the ensemble.</p>
+
+  <h2>Part 2: the maximum loan amount</h2>
+  <p>For approved clients I compared two decision tree regressors: a fully grown tree, and a tree pruned to four levels.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Model</th><th>MAE</th><th>MSE</th><th>R²</th></tr></thead>
+    <tbody>
+      <tr><td><b>DT-1, fully grown</b></td><td class="n">559.93</td><td class="n">1,641,015.56</td><td class="n">0.9985</td></tr>
+      <tr><td>DT-2, pruned to 4 levels</td><td class="n">8,116.98</td><td class="n">122,045,545.50</td><td class="n">0.8875</td></tr>
+    </tbody>
+  </table></div>
+  <p>DT-1 was better on every metric. The pruned tree was too simple and underfitted. But DT-1 is 24 levels deep, and an R² that close to 1 suggests it may be overfitting. A tuned tree, with depth 21 found by cross-validated grid search, scored almost the same (R² 0.9984) and is the safer choice in practice.</p>
+
+  <h2>One client</h2>
+  <p>Client 60256 was 56, earned 57,000 and asked for 25,700. The tuned tree predicted a maximum of 16,750. Several of this client's values were outside anything the model was trained on: their age, a 35 year credit history, and a 23% interest rate. For values out of range, the tree gave a lower amount.</p>
+
+  <h2>Limitations</h2>
+  <ul>
+    <li>The best classifier still misses about half of all declined applications.</li>
+    <li>kNN treats every feature as equally important, slows down as the data grows, and depends heavily on scaling.</li>
+    <li>Removing age outliers with IQR capped ages at around 40, so the model never saw older applicants. A simple filter for ages 18 to 100 would have been better.</li>
+  </ul>
+
+  <h2>Ethics</h2>
+  <p>Because older age groups were removed from the training data, the model can be biased against older applicants. Age should not decide whether someone gets a loan.</p>
+
+  <p style="font-size:16px;color:var(--ink-3)">Python, pandas, scikit-learn and Jupyter.</p>
+  <p class="endnote"><a href="https://github.com/shawsuraj/loan-approval-ml">The notebooks are on GitHub</a>. <a href="index.html#projects">All projects</a>.</p>
+</article>

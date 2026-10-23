@@ -47,7 +47,7 @@ def projects_html():
             '<th scope="col">Built with</th><th scope="col">Status</th></tr></thead><tbody>' + "".join(rows) + '</tbody></table>'
             '<p class="pnone" hidden>Nothing matches that yet.</p></div>')
 
-PAGES = ["index", "world-chaos-map", "building-in-public", "network-reconnaissance"]
+PAGES = ["index", "world-chaos-map", "building-in-public", "network-reconnaissance", "loan-approval"]
 
 def nav(cur):
     items = [("index.html", "Lab", cur == "index"), ("index.html#projects", "All projects", False), ("index.html#writing", "Writing", cur == "writing"),
@@ -92,7 +92,7 @@ def page(slug, full):
         content += f"\n<script>{BENCH_JS}</script>"
     if full:
         content = re.sub(r'href="index\.html(#[^"]*)?"', lambda m: f'href="/{m.group(1) or ""}"', content)
-        content = re.sub(r'href="(world-chaos-map|building-in-public|network-reconnaissance)\.html(#[^"]*)?"', lambda m: f'href="/{m.group(1)}{m.group(2) or ""}"', content)
+        content = re.sub(r'href="(world-chaos-map|building-in-public|network-reconnaissance|loan-approval)\.html(#[^"]*)?"', lambda m: f'href="/{m.group(1)}{m.group(2) or ""}"', content)
         return (f'<!doctype html>\n<html lang="en-GB">\n<head>\n<meta charset="utf-8">\n'
                 f'<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n{head(meta, slug, True)}\n</head>\n'
                 f'<body>\n{content}\n</body>\n</html>\n')

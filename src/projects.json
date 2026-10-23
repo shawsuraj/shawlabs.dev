@@ -85,15 +85,15 @@
  },
  {
   "name": "Loan Approval",
-  "url": "https://github.com/shawsuraj/loan-approval-ml",
-  "what": "Predicts declined loans and maximum loan size across 54,000 applications. A tuned decision tree caught 65% of declines at 90% precision.",
+  "url": "loan-approval.html",
+  "what": "Predicts which loan applications get declined, and the maximum loan for approved clients, across 58,645 applications. kNN caught the most declined loans.",
   "stack": "Python, pandas, scikit-learn, Jupyter",
   "status": "Coursework",
   "year": "2026",
   "shelf": true,
   "sym": "La",
   "kind": "machine learning",
-  "line": "Who gets declined, and how much can the rest borrow? Three notebooks, six models, and a regression score so good it made me suspicious.",
+  "line": "Which loans get declined, and how much can the rest borrow? Six models on 58,645 applications.",
   "tags": [
    "machine learning",
    "coursework"
