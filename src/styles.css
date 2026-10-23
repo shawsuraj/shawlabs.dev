@@ -421,3 +421,4 @@ a.el:hover{transform:translateY(-3px);box-shadow:0 6px 0 -1px var(--ink);color:v
 .plist tr[hidden]{display:none}
 @media (min-width:981px){.els{grid-template-columns:repeat(5,minmax(0,1fr))}}
 @media (max-width:760px){.psearch{flex:1 1 100%}.psearch input{width:100%}}
+.foot span a{text-decoration:underline;text-decoration-color:var(--accent);text-underline-offset:3px}

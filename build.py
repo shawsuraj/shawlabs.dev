@@ -56,7 +56,7 @@ def nav(cur):
     return ('<a class="skip" href="#main">Skip to content</a>\n<header class="top"><div class="wide">'
             f'<a class="mark" href="index.html"><i></i>Shaw Labs</a><nav class="nav" aria-label="Site">{links}</nav></div></header>')
 
-FOOT = ('<footer class="foot"><div class="wide"><span>Shaw Labs is the workshop of Suraj Shaw, London.</span>'
+FOOT = ('<footer class="foot"><div class="wide"><span>Shaw Labs is the workshop of <a href="https://www.shawsuraj.com" rel="me">Suraj Shaw</a>, London. Made with <a href="https://claude.ai">Claude</a>.</span>'
         '<nav aria-label="Elsewhere"><a href="https://www.shawsuraj.com" rel="me">shawsuraj.com</a><a href="https://github.com/shawsuraj" rel="me">GitHub</a>'
         '<a href="https://www.linkedin.com/in/shawsuraj/" rel="me">LinkedIn</a><a href="mailto:shaw@shawsuraj.com">Email</a></nav></div></footer>')
 
