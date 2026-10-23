@@ -794,6 +794,7 @@ a.el:hover{transform:translateY(-3px);box-shadow:0 6px 0 -1px var(--ink);color:v
   if(wcm){
     var NAMES={YE:"Yemen",SD:"Sudan",UA:"Ukraine",RU:"Russia",MM:"Myanmar",FR:"France",PS:"Palestine",IL:"Israel",SY:"Syria",HT:"Haiti",CD:"DR Congo",SO:"Somalia",AF:"Afghanistan",MU:"Mauritius",AL:"Albania",PK:"Pakistan",IN:"India",NG:"Nigeria",ML:"Mali",ET:"Ethiopia",LB:"Lebanon",IR:"Iran",IQ:"Iraq",VE:"Venezuela",MX:"Mexico",CO:"Colombia",BD:"Bangladesh",KE:"Kenya",BF:"Burkina Faso",NE:"Niger",TD:"Chad",CF:"Central African Republic",SS:"South Sudan",LY:"Libya",US:"United States",GB:"United Kingdom",DE:"Germany",TR:"Turkey",SA:"Saudi Arabia",EG:"Egypt"};
     var COL={stable:"var(--stable)",moderate:"var(--moderate)",unstable:"var(--unstable)",severe:"var(--severe)"};
+    function regionName(iso){try{return new Intl.DisplayNames(["en"],{type:"region"}).of(iso)||iso;}catch(e){return iso;}}
     function band(s){return s>=85?"severe":s>=60?"unstable":s>=30?"moderate":"stable";}
     // Fallback: real scores seen on the live map on 23 Oct 2026, shown only if the live feed cannot be reached.
     var FALLBACK={generated_at:"2026-10-23T10:00:00Z",fallback:true,counts:{stable:110,moderate:22,unstable:8,severe:7},
@@ -805,7 +806,7 @@ a.el:hover{transform:translateY(-3px);box-shadow:0 6px 0 -1px var(--ink);color:v
       $(".wcm-bands",wcm).innerHTML=["stable","moderate","unstable","severe"].map(function(b){return '<span style="width:'+(counts[b]/total*100)+'%;background:'+COL[b]+'"></span>';}).join("");
       $(".wcm-count",wcm).innerHTML=["stable","moderate","unstable","severe"].map(function(b){return '<div><b style="color:'+COL[b]+'">'+counts[b]+'</b>'+b[0].toUpperCase()+b.slice(1)+'</div>';}).join("");
       var top=list.slice().sort(function(a,b){return b.score-a.score;}).slice(0,5);
-      $(".wcm-top",wcm).innerHTML=top.map(function(c,i){var s=Math.round(c.score),bb=band(s),name=NAMES[c.country_iso]||c.country_iso;
+      $(".wcm-top",wcm).innerHTML=top.map(function(c,i){var s=Math.round(c.score),bb=band(s),name=NAMES[c.country_iso]||regionName(c.country_iso);
         return '<li><span>'+(i+1)+'</span><span>'+esc(name)+'<div class="bar"><i style="width:'+s+'%;background:'+COL[bb]+'"></i></div></span><b style="color:'+COL[bb]+'">'+s+'</b></li>';}).join("");
       var t=new Date(d.generated_at), h=Math.max(0,Math.round((Date.now()-t)/36e5));
       $(".wcm-now .lbl span",wcm).textContent=d.fallback?"Scores from 23 Oct 2026 · live feed not reachable here":(h<1?"Live · updated within the hour":"Live · updated "+h+"h ago");
