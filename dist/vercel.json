@@ -4,6 +4,15 @@
   "cleanUrls": true,
   "headers": [
     {
+      "source": "/live/wcm",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, s-maxage=300, stale-while-revalidate=600"
+        }
+      ]
+    },
+    {
       "source": "/assets/(.*)",
       "headers": [
         {
@@ -39,6 +48,12 @@
       "source": "/wcm",
       "destination": "/world-chaos-map",
       "permanent": false
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/live/wcm",
+      "destination": "https://www.worldchaosmap.app/api/map-snapshot"
     }
   ]
 }
