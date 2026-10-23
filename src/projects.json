@@ -88,31 +88,30 @@
   "url": "loan-approval.html",
   "what": "Predicts which loan applications get declined, and the maximum loan for approved clients, across 58,645 applications. kNN caught the most declined loans.",
   "stack": "Python, pandas, scikit-learn, Jupyter",
-  "status": "Coursework",
+  "status": "Done",
   "year": "2026",
   "shelf": true,
   "sym": "La",
   "kind": "machine learning",
   "line": "Which loans get declined, and how much can the rest borrow? Six models on 58,645 applications.",
   "tags": [
-   "machine learning",
-   "coursework"
+   "machine learning"
   ]
  },
  {
   "name": "Sky Portal",
-  "url": "https://github.com/shawsuraj/sky-portal",
-  "what": "Portal for an engineering org: teams, messages, meetings, and a network map of team dependencies.",
+  "url": "sky-portal.html",
+  "what": "A team directory for an engineering company, replacing a spreadsheet: search teams, see who depends on whom on a live network map, message and book meetings. Built by a team of five; I led the interface design and built the dashboard and organisation map.",
   "stack": "Python, Django, SQLite, vis.js",
-  "status": "Coursework",
+  "status": "Done",
   "year": "2026",
   "shelf": true,
   "sym": "Sp",
-  "kind": "coursework",
-  "line": "A Django portal for an engineering org, with a live network map of which teams depend on which.",
+  "kind": "web app",
+  "line": "A team directory for an engineering company, with a live network map of which teams depend on which.",
   "tags": [
-   "coursework",
-   "web"
+   "web",
+   "backend"
   ]
  },
  {
@@ -120,14 +119,14 @@
   "url": "https://github.com/shawsuraj/smart-campus-api",
   "what": "REST API for campus rooms, sensors and nested sensor readings.",
   "stack": "Java, JAX-RS, Jersey, Jetty",
-  "status": "Coursework",
+  "status": "Done",
   "year": "2026",
   "shelf": true,
   "sym": "Ca",
-  "kind": "coursework",
+  "kind": "API",
   "line": "A REST API for rooms, sensors and their readings. JAX-RS on embedded Jetty, nothing but memory.",
   "tags": [
-   "coursework"
+   "backend"
   ]
  },
  {
@@ -211,8 +210,7 @@
   "status": "Done",
   "year": "2021",
   "tags": [
-   "game",
-   "coursework"
+   "game"
   ],
   "shelf": true,
   "sym": "Bs",

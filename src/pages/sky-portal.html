@@ -1,0 +1,54 @@
+{"title":"Sky Portal · Shaw Labs","desc":"Sky Portal: a web app that replaces a spreadsheet with a team directory, an organisation map of team dependencies, messaging and meetings. Built in Django by a team of five; Suraj Shaw led the interface design.","nav":"writing"}
+<header class="col art-head">
+  <p class="kicker">Sky Portal · web app · 2026</p>
+  <h1>Sky Portal</h1>
+  <p class="dek">Sky's engineering teams were tracked in a spreadsheet. We built a web app to replace it: find any team, see who it depends on, message them and book a meeting.</p>
+  <p class="by">Built by a team of five · <a href="https://github.com/shawsuraj/sky-portal">Code on GitHub</a></p>
+</header>
+
+<article class="col">
+  <div class="facts">
+    <div><b>5</b><span>people</span></div>
+    <div><b>6</b><span>main pages</span></div>
+    <div><b>3</b><span>storyboarded journeys</span></div>
+    <div><b>1</b><span>spreadsheet replaced</span></div>
+  </div>
+
+  <h2>What it does</h2>
+  <ul>
+    <li><b>Dashboard.</b> Total teams, departments, unread messages, recently visited teams and recent activity.</li>
+    <li><b>Teams.</b> Search and filter every engineering team, then open one to see its mission, manager, members, code repositories and dependencies.</li>
+    <li><b>Organisation.</b> An interactive network map of how teams depend on each other, filterable by department and dependency type.</li>
+    <li><b>Messages.</b> Inbox, sent, drafts and compose, for messages between teams.</li>
+    <li><b>Schedule.</b> A calendar, upcoming meetings and a form to book one.</li>
+    <li><b>Accounts.</b> Register, log in, reset a password and update a profile.</li>
+  </ul>
+
+  <h2>My part</h2>
+  <p>I led the interface design. I drew the low fidelity wireframes in Figma, then three storyboards showing complete journeys: register and log in, search for a team and open it, and message or book a meeting with that team. Then the high fidelity designs, refined with feedback from the group and our tutor.</p>
+  <p>The design rules were simple, because the users are engineers, managers and non-technical staff:</p>
+  <ul>
+    <li>A fixed sidebar, with the current page highlighted.</li>
+    <li>Search at the top, because finding a team quickly was the main requirement.</li>
+    <li>Team cards, with tabs for overview, members, repositories and dependencies.</li>
+    <li>Blue for actions, green for active status, red for notifications, on a neutral background.</li>
+  </ul>
+  <p>In the build, I made the dashboard, the organisation map and the shared base template that every page sits on.</p>
+
+  <h2>The rest of the team</h2>
+  <p>Vinicius designed the ERD and built the teams pages. Muhammed designed the database. Hamdan built messaging and wrote the user test plans. Shqipdon built scheduling and wrote the admin test plans. I reviewed the ERD and database against the requirements, and pointed out repeated attributes that could be simplified, and a missing audit log use case for admins.</p>
+
+  <h2>Under the hood</h2>
+  <p>Django and SQLite. The database follows the ERD: an organisation has departments, departments have teams, and users join teams through a team member table. Skills, repositories and team dependencies hang off each team, with tables for messages, meetings and an audit log of changes. A script seeds it all from the original spreadsheet. The organisation map is drawn with vis.js from a JSON endpoint.</p>
+
+  <h2>What I would do differently</h2>
+  <ul>
+    <li>Understand the ERD and use cases before designing screens. Once I did, the screens got much easier.</li>
+    <li>Learn the tool first. I learned Figma while designing, which slowed the first weeks.</li>
+    <li>Leave the fine visual detail until the flows are right.</li>
+    <li>Set firm deadlines instead of extending them, especially for the database, which ran late.</li>
+  </ul>
+
+  <p style="font-size:16px;color:var(--ink-3)">Django, Python, SQLite, vis.js, Figma.</p>
+  <p class="endnote"><a href="https://github.com/shawsuraj/sky-portal">The code is on GitHub</a>. <a href="index.html#projects">All projects</a>.</p>
+</article>
