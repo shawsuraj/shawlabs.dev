@@ -9,7 +9,8 @@ CSS = open(os.path.join(SRC, "styles.css")).read()
 EXPLORER_HTML = open(os.path.join(SRC, "explorer.html")).read()
 EXPLORER_JS = open(os.path.join(SRC, "explorer.js")).read()
 BENCH_JS = open(os.path.join(SRC, "bench.js")).read() + "\n" + open(os.path.join(SRC, "lab.js")).read()
-SHELF = json.load(open(os.path.join(SRC, "shelf.json")))
+PROJECTS = json.load(open(os.path.join(SRC, "projects.json")))
+SHELF = [p for p in PROJECTS if p.get("shelf")]
 CHART = open(os.path.join(ROOT, "chart.svg")).read()
 HOST = "https://www.shawlabs.dev"
 FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com">\n<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n'
@@ -27,10 +28,19 @@ def shelf_html():
                '<p>Whatever I build next lands on the scale or on this shelf.</p></div>')
     return "\n".join(out)
 
+def projects_html():
+    rows = []
+    for p in PROJECTS:
+        name = f'<a href="{p["url"]}">{p["name"]}</a>' if p["url"] else p["name"]
+        rows.append(f'<tr><th scope="row">{name}<span class="yr">{p["year"]}</span></th><td>{p["what"]}</td>'
+                    f'<td class="stk">{p["stack"]}</td><td class="sts">{p["status"]}</td></tr>')
+    return ('<div class="plist"><table><thead><tr><th scope="col">Project</th><th scope="col">What it is</th>'
+            '<th scope="col">Built with</th><th scope="col">Status</th></tr></thead><tbody>' + "".join(rows) + '</tbody></table></div>')
+
 PAGES = ["index", "world-chaos-map", "building-in-public"]
 
 def nav(cur):
-    items = [("index.html", "Lab", cur == "index"), ("index.html#writing", "Writing", cur == "writing"),
+    items = [("index.html", "Lab", cur == "index"), ("index.html#projects", "All projects", False), ("index.html#writing", "Writing", cur == "writing"),
              ("https://www.shawsuraj.com", "About me", False)]
     links = "".join(f'<a href="{h}"{" aria-current=\"page\"" if c else ""}>{t}</a>' for h, t, c in items)
     return ('<a class="skip" href="#main">Skip to content</a>\n<header class="top"><div class="wide">'
@@ -52,6 +62,11 @@ def head(meta, slug, full):
               '<meta name="twitter:card" content="summary_large_image">', '<meta name="twitter:site" content="@shawsurajss">',
               '<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">',
               '<meta name="theme-color" content="#101114" media="(prefers-color-scheme: dark)">']
+        h += ['<link rel="me" href="https://www.shawsuraj.com">',
+              '<script type="application/ld+json">' + json.dumps({"@context": "https://schema.org", "@type": "WebSite", "name": "Shaw Labs", "url": HOST,
+                "author": {"@type": "Person", "name": "Suraj Shaw", "url": "https://www.shawsuraj.com",
+                           "sameAs": ["https://www.shawsuraj.com", "https://github.com/shawsuraj", "https://www.linkedin.com/in/shawsuraj/",
+                                      "https://orcid.org/0009-0002-4482-8013", "https://worldchaosmap.app"]}}) + '</script>']
     h.append(f"<style>{CSS}</style>")
     return "\n".join(h)
 
@@ -59,7 +74,7 @@ def page(slug, full):
     first, body = open(os.path.join(SRC, "pages", slug + ".html")).read().split("\n", 1)
     meta = json.loads(first)
     has_explorer = "{{EXPLORER}}" in body
-    body = body.replace("{{EXPLORER}}", EXPLORER_HTML).replace("{{CHART}}", CHART).replace("{{SHELF}}", shelf_html())
+    body = body.replace("{{EXPLORER}}", EXPLORER_HTML).replace("{{CHART}}", CHART).replace("{{SHELF}}", shelf_html()).replace("{{PROJECTS}}", projects_html())
     content = f'{nav(meta["nav"])}\n<main id="main">\n{body}\n</main>\n{FOOT}'
     if has_explorer:
         content += f"\n<script>{EXPLORER_JS}</script>"

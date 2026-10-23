@@ -1,7 +1,0 @@
-[
-  {"sym":"Sp","name":"Sky Portal","year":"2026","kind":"coursework","line":"A Django portal for an engineering org, with a live network map of which teams depend on which.","url":"https://github.com/shawsuraj/sky-portal"},
-  {"sym":"Ca","name":"Smart Campus API","year":"2026","kind":"coursework","line":"A REST API for rooms, sensors and their readings. JAX-RS on embedded Jetty, nothing but memory.","url":"https://github.com/shawsuraj/smart-campus-api"},
-  {"sym":"Nu","name":"Nuntius","year":"2024","kind":"security","line":"Explored email spoofing through a small web form. Retired once SPF, DKIM and DMARC bounced every message, which was the lesson.","url":"https://github.com/shawsuraj/nuntius"},
-  {"sym":"Mb","name":"Movie Barcode","year":"2020","kind":"media","line":"Turns any video into a barcode of its colours, one stripe per frame. Python, v1.5.","url":"https://github.com/shawsuraj/movie-barcode","img":"assets/movie-barcode.jpg"},
-  {"sym":"Wf","name":"ModSec WAF","year":"2019","kind":"security","line":"One script that turns a Linux VM into a web application firewall. Tested with a target, a WAF and an attacker on one network.","url":"https://github.com/shawsuraj/modsec-waf"}
-]

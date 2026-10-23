@@ -385,3 +385,28 @@ a.el:hover{transform:translateY(-3px);box-shadow:0 6px 0 -1px var(--ink);color:v
 .el.next b{color:var(--ink-3)}
 .els{grid-template-columns:repeat(6,minmax(0,1fr))}@media (max-width:980px){.els{grid-template-columns:repeat(3,minmax(0,1fr))}}@media (max-width:520px){.els{grid-template-columns:repeat(2,minmax(0,1fr))}.el p{font-size:14px}}
 @media (max-width:860px){.axis{height:34px}}
+/* Plain list for recruiters */
+.projects h2{font-size:clamp(28px,3.4vw,40px);letter-spacing:-.03em}
+.plist{margin-top:8px}
+.plist table{font-size:16px;border-collapse:collapse;width:100%}
+.plist thead th{font-family:var(--display);font-weight:600;font-size:13px;color:var(--ink-3);text-align:left;padding:10px 12px;border-bottom:1.5px solid var(--ink)}
+.plist tbody th,.plist td{padding:14px 12px;border-bottom:1px solid var(--line);vertical-align:top;text-align:left}
+.plist tbody th{font-family:var(--display);font-weight:700;font-size:17px;white-space:nowrap;width:1%}
+.plist tbody th a{text-decoration:none;box-shadow:inset 0 -2px 0 var(--accent-soft)}
+.plist tbody th a:hover{box-shadow:inset 0 -2px 0 var(--accent)}
+.plist .yr{display:block;font-family:var(--mono);font-weight:400;font-size:12px;color:var(--ink-3);margin-top:2px}
+.plist td{color:var(--ink-2);line-height:1.45}
+.plist .stk{font-family:var(--display);font-size:14px;width:24%}
+.plist .sts{font-family:var(--display);font-size:14px;white-space:nowrap;color:var(--ink)}
+@media (max-width:760px){
+  .plist thead{display:none}
+  .plist table,.plist tbody,.plist tr,.plist th,.plist td{display:block;width:auto}
+  .plist tr{padding:14px 0;border-bottom:1px solid var(--line)}
+  .plist tbody th,.plist td{border:0;padding:2px 0;white-space:normal}
+  .plist tbody th{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+  .plist .stk{width:auto;color:var(--ink-3)}
+}
+.plist tbody th{color:var(--ink)}
+@media (min-width:981px){.els{grid-template-columns:repeat(7,minmax(0,1fr))}.el p{font-size:14px}}
+@media (max-width:760px){.plist tbody th{display:block}.plist .yr{display:inline;margin-left:8px}}
+@media (max-width:760px){.plist tbody th{width:auto;white-space:normal}}
