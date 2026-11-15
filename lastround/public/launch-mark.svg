@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+<g transform="translate(512 512) scale(0.80) translate(-512 -500)">  <defs><linearGradient id="ledge" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7A4D2C"/><stop offset="0.45" stop-color="#4A2D18"/><stop offset="1" stop-color="#2A180C"/></linearGradient></defs>
+  <ellipse cx="512" cy="766" rx="150" ry="10" fill="#000" opacity="0.35"/>
+<g transform="translate(512 762) scale(1.24) translate(-512 -762)">  <!-- the pint: liquid, head, bubbles, then the cream rim on top -->
+  <defs>
+    <clipPath id="inside"><path d="M372 300 L652 300 L618 742 Q616 762 596 762 L428 762 Q408 762 406 742 Z"/></clipPath>
+    <linearGradient id="beer" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFC15E"/><stop offset="0.55" stop-color="#F5A73B"/><stop offset="1" stop-color="#D9822B"/>
+    </linearGradient>
+  </defs>
+  <g clip-path="url(#inside)">
+    <rect x="360" y="372" width="310" height="400" fill="url(#beer)"/>
+    <rect x="360" y="296" width="310" height="86" fill="#F4E8D2"/>
+    <path d="M360 382 Q420 396 470 384 T580 386 T670 380 L670 400 L360 400 Z" fill="#F4E8D2"/>
+    <circle cx="468" cy="660" r="9" fill="#FFE2A8" opacity="0.8"/>
+    <circle cx="540" cy="590" r="7" fill="#FFE2A8" opacity="0.8"/>
+    <circle cx="500" cy="520" r="6" fill="#FFE2A8" opacity="0.75"/>
+    <circle cx="566" cy="690" r="6" fill="#FFE2A8" opacity="0.7"/>
+    <rect x="392" y="400" width="26" height="330" rx="13" fill="#FFFFFF" opacity="0.22"/>
+  </g>
+  <path d="M372 300 L652 300 L618 742 Q616 762 596 762 L428 762 Q408 762 406 742 Z" fill="none" stroke="#F6EBD9" stroke-width="22" stroke-linejoin="round"/>
+</g></g></svg>

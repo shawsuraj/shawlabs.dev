@@ -83,26 +83,26 @@
     out.textContent=enc("meet me at nine","veil");
   }
 
-  /* ---------- Last Drink: pace the night ---------- */
+  /* ---------- Last Round: pace the night ----------
+     Mirrors the app's rules in spirit, never its numbers: no cap is ever shown,
+     and past one the points simply stop, with no banner (docs/website.md). */
   var ld=$("[data-ld]");
   if(ld){
-    var t=20*60, pts=0, drinks=[], lastWasDrink=false, scoreEl=$(".ld-score b",ld), clock=$(".ld-clock",ld), msgEl=$(".ld-msg",ld), log=$(".ld-log",ld);
-    var HOUR_CAP=2, NIGHT_CAP=6;
+    var t=20*60, pts=0, drinks=[], lastDrinkAt=null, waterSince=null, scoreEl=$(".ld-score b",ld), clock=$(".ld-clock",ld), msgEl=$(".ld-msg",ld), log=$(".ld-log",ld);
     function hhmm(m){var h=Math.floor(m/60)%24,mm=m%60;return (h<10?"0":"")+h+":"+(mm<10?"0":"")+mm;}
-    function upd(text){scoreEl.textContent=pts;clock.textContent="It is "+hhmm(t)+". Drinks tonight: "+drinks.length+".";if(text){msgEl.textContent=text;log.insertAdjacentHTML("afterbegin","<li>"+hhmm(t)+" · "+esc(text)+"</li>");}}
-    function lastHour(){return drinks.filter(function(d){return t-d<60;}).length;}
+    function upd(text){scoreEl.textContent=pts;clock.textContent="It is "+hhmm(t)+".";if(text){msgEl.textContent=text;log.insertAdjacentHTML("afterbegin","<li>"+hhmm(t)+" · "+esc(text)+"</li>");}}
+    function capped(){var hour=drinks.filter(function(d){return t-d<60;}).length;return hour>2||drinks.length>6;}
     ld.querySelectorAll(".ld-acts button").forEach(function(b){b.addEventListener("click",function(){
       var k=b.dataset.k;
-      if(k==="time"){t+=30;lastWasDrink=lastWasDrink;upd("Half an hour passes.");return;}
+      if(k==="time"){t+=30;upd("Half an hour passes.");return;}
       if(k==="water"){
-        if(lastWasDrink){pts+=5;lastWasDrink=false;upd("Water between rounds. +5");}
-        else upd("Water is great, but it only earns points between drinks. No farming.");
+        if(lastDrinkAt!==null&&t-lastDrinkAt>=10&&waterSince!==lastDrinkAt){pts+=5;waterSince=lastDrinkAt;upd("Water break logged. +5 points");}
+        else upd("Water break logged.");
         return;}
-      drinks.push(t); var h=lastHour();
-      lastWasDrink=true;
-      if(drinks.length>NIGHT_CAP){upd("Past tonight's cap. No more points, and that is the point.");}
-      else if(h>HOUR_CAP){upd(h>=4?"That is "+h+" in an hour. Slow down, have some water.":"Hourly cap reached. This one earns nothing.");}
-      else{pts+=10;upd((k==="pint"?"A pint":"A cocktail")+". +10");}
+      drinks.push(t); lastDrinkAt=t;
+      var name=k==="pint"?"Pint":"Cocktail";
+      if(capped()) upd(name+" logged.");
+      else {pts+=10;upd(name+" logged. +10 points");}
     });});
     upd();
   }

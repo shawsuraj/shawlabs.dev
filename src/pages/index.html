@@ -1,4 +1,4 @@
-{"title":"Shaw Labs","desc":"Shaw Labs: small experiments by Suraj Shaw on how people behave, from one person to eight billion. World Chaos Map, Public Opinion, One Sentence, MaetriXs, VerumVeil, Last Drink, LifeOS.","nav":"index"}
+{"title":"Shaw Labs","desc":"Shaw Labs: small experiments by Suraj Shaw on how people behave, from one person to eight billion. World Chaos Map, Public Opinion, One Sentence, MaetriXs, VerumVeil, Last Round, LifeOS.","nav":"index"}
 <div class="lab">
 <div class="lab-wide lab-head">
   <h1>Small experiments on how people behave.</h1>
@@ -8,7 +8,7 @@
 <div class="lab-wide scale" data-scale>
   <div class="tiles" role="tablist" aria-label="Experiments, ordered by how many people they involve">
     <button class="tile" role="tab" id="tab-lo" aria-controls="sp-lo" data-n="1" data-st="research"><span class="n">n = 1</span><b>Lo</b><span class="nm">LifeOS</span><span class="st">research</span></button>
-    <button class="tile" role="tab" id="tab-ld" aria-controls="sp-ld" data-n="1" data-st="design"><span class="n">n = 1</span><b>Ld</b><span class="nm">Last Drink</span><span class="st">in design</span></button>
+    <button class="tile" role="tab" id="tab-ld" aria-controls="sp-ld" data-n="1" data-st="proto"><span class="n">n = 1</span><b>Lr</b><span class="nm">Last Round</span><span class="st">in alpha</span></button>
     <button class="tile" role="tab" id="tab-vv" aria-controls="sp-vv" data-n="2" data-st="proto"><span class="n">n = 2</span><b>Vv</b><span class="nm">VerumVeil</span><span class="st">prototype</span></button>
     <button class="tile" role="tab" id="tab-mx" aria-controls="sp-mx" data-n="15" data-st="build"><span class="n">n ≈ 15</span><b>Mx</b><span class="nm">MaetriXs</span><span class="st">building</span></button>
     <button class="tile" role="tab" id="tab-os" aria-controls="sp-os" data-n="120" data-st="live"><span class="n">n ≈ 100s</span><b>Os</b><span class="nm">One Sentence</span><span class="st">live</span></button>
@@ -124,10 +124,11 @@
   </section>
 
   <section class="sp" id="sp-ld" role="tabpanel" aria-labelledby="tab-ld" hidden>
-    <header class="sp-head"><div class="sp-el"><span>1</span><b>Ld</b></div><div><p class="sp-name">Last Drink · in design, name not final</p><h2>Can a drinking app reward going slower instead of drinking more?</h2></div></header>
+    <header class="sp-head"><div class="sp-el"><span>1</span><b>Lr</b></div><div><p class="sp-name">Last Round · in alpha</p><h2>Can a drinking app reward going slower instead of drinking more?</h2></div></header>
     <div class="sp-body">
       <div class="sp-notes">
-        <div><h3>Method</h3><p>Points stop at hourly, nightly and weekly caps. Water between rounds earns points. There is no progress bar to chase, and alerts flag sudden spikes. Safeguards borrowed from gambling, from day one.</p></div>
+        <div><h3>Method</h3><p>Log any drink in two taps. Points for a good pace and for water between drinks. Caps by the hour, the night and the week, never shown as a number, bar or countdown: past one, points simply stop. Alerts wait for a pause. Everything stays on the phone.</p></div>
+        <div><h3>Readings</h3><p>Alpha with about fifteen friends on iPhone and Android. <a href="https://lastround.shawlabs.dev">lastround.shawlabs.dev ↗</a></p></div>
         <div><h3>Why me</h3><p>Five years behind London bars. I have watched the third drink turn into the sixth more times than I can count.</p></div>
       </div>
       <div class="inst skin-ld" data-ld>
@@ -135,12 +136,12 @@
         <div class="ld-score"><b>0</b><span>points tonight</span></div>
         <p class="ld-clock"></p>
         <div class="ld-acts">
-          <button type="button" data-k="pint">Pint<small>+10</small></button>
-          <button type="button" data-k="cocktail">Cocktail<small>+10</small></button>
-          <button type="button" data-k="water">Water<small>+5 between</small></button>
+          <button type="button" data-k="pint">Pint<small>a drink</small></button>
+          <button type="button" data-k="cocktail">Cocktail<small>a drink</small></button>
+          <button type="button" data-k="water">Water<small>a break</small></button>
           <button type="button" data-k="time">+30 min<small>wait</small></button>
         </div>
-        <p class="ld-msg" aria-live="polite">Start the night. Two an hour earn points. Water counts only between drinks.</p>
+        <p class="ld-msg" aria-live="polite">Start the night. Drinks and water breaks both score. Past a cap, the points simply stop.</p>
         <ul class="ld-log"></ul>
       </div>
     </div>

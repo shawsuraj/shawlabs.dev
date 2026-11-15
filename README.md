@@ -16,3 +16,9 @@ Add a new case study: copy `src/pages/world-chaos-map.html`, add it to `PAGES` i
 - **Not about people?** It goes on the shelf. Add one object to `src/shelf.json` and rebuild.
 
 Then run `python3 build.py`.
+
+## lastround.shawlabs.dev
+
+The `lastround/` folder is a separate site for the Last Round app: home, privacy policy, alpha terms, support and help. It has no JavaScript and makes no third-party requests; its fonts are served from the site.
+
+Deploy it as its own Vercel project from this repo with **Root Directory** set to `lastround`, then add the domain `lastround.shawlabs.dev`. Build locally with `python3 lastround/build.py`.

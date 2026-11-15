@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Privacy · Last Round</title>
+<meta name="description" content="What Last Round keeps, and where: everything stays on your phone, and nothing is sent to us or anyone else.">
+<link rel="canonical" href="https://lastround.shawlabs.dev/privacy">
+<meta name="theme-color" content="#2A1A10">
+<meta name="color-scheme" content="dark">
+<meta property="og:title" content="Privacy · Last Round">
+<meta property="og:description" content="What Last Round keeps, and where: everything stays on your phone, and nothing is sent to us or anyone else.">
+<meta property="og:url" content="https://lastround.shawlabs.dev/privacy">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://lastround.shawlabs.dev/og.png">
+<link rel="icon" href="/app-icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preload" href="/fonts/unbounded.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/instrument-sans.woff2" as="font" type="font/woff2" crossorigin>
+<style>/* Last Round · the bar shelf, on the web.
+   Tokens from docs/design-notes.md 1.7.0. Dark only, like the app: bars are dark.
+   Amber means drinks and actions. Teal means water and nothing else. No red, no green. */
+@font-face{font-family:"Unbounded";src:url(/fonts/unbounded.woff2) format("woff2");font-weight:200 900;font-display:swap}
+@font-face{font-family:"Instrument Sans";src:url(/fonts/instrument-sans.woff2) format("woff2");font-weight:400 700;font-stretch:75% 100%;font-display:swap}
+@font-face{font-family:"IBM Plex Mono";src:url(/fonts/plex-mono-regular.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"IBM Plex Mono";src:url(/fonts/plex-mono-semibold.woff2) format("woff2");font-weight:600;font-display:swap}
+:root{
+  --wood:#2A1A10;--ledge-top:#6B4326;--ledge-bot:#2E1B0E;
+  --amber:#F5A73B;--amber-shadow:#9A5A12;--amber-ink:#8F4E0A;
+  --paper:#F4E8D2;--paper-line:#CBB08A;--paper-ink:#2E1B0E;
+  --receipt:#F4EDE4;
+  --cream:#F6EBD9;--cream-muted:#DCC7A8;
+  --teal:#3FC7BA;
+  --display:"Unbounded",system-ui,sans-serif;
+  --text:"Instrument Sans",-apple-system,system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;min-height:100vh;color:var(--cream);font-family:var(--text);font-size:18px;line-height:1.55;
+  background-color:var(--wood);
+  background-image:
+    radial-gradient(ellipse at 50% 30%,transparent 40%,rgba(0,0,0,.55) 100%),
+    repeating-linear-gradient(90deg,rgba(255,214,160,.035) 0 3px,transparent 3px 21px,rgba(0,0,0,.08) 21px 23px,transparent 23px 44px),
+    linear-gradient(180deg,#3B2516,#160D07);
+  background-attachment:fixed;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:var(--amber);text-underline-offset:3px;text-decoration-thickness:1.5px}
+a:hover{color:#FFC067}
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px;border-radius:4px}
+h1,h2,h3{font-family:var(--display);font-weight:700;letter-spacing:-.01em;line-height:1.1;margin:0;text-wrap:balance}
+
+/* three slow lights behind everything: two amber, one faint teal */
+.bokeh{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.bokeh i{position:absolute;border-radius:50%;filter:blur(70px);opacity:.28;animation:drift 14s ease-in-out infinite alternate}
+.bokeh i:nth-child(1){width:420px;height:420px;background:var(--amber);top:-120px;left:8%}
+.bokeh i:nth-child(2){width:300px;height:300px;background:var(--amber);top:40%;right:-80px;animation-delay:-5s;opacity:.18}
+.bokeh i:nth-child(3){width:260px;height:260px;background:var(--teal);bottom:-80px;left:30%;animation-delay:-9s;opacity:.12}
+@keyframes drift{to{transform:translate(40px,30px) scale(1.08)}}
+@media (prefers-reduced-motion:reduce){.bokeh i{animation:none}}
+
+.top,main,.foot{position:relative;z-index:1}
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px 24px;flex-wrap:wrap;max-width:1080px;margin:0 auto;
+  padding-block:20px;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.mark{display:flex;align-items:center;gap:10px;color:var(--cream);text-decoration:none;font-family:var(--display);font-weight:700;font-size:19px;letter-spacing:-.01em}
+.mark img{display:block}
+.top nav{display:flex;flex-wrap:wrap;gap:4px}
+.top nav a{color:var(--cream-muted);text-decoration:none;font-weight:600;font-size:16px;padding:10px 14px;border-radius:999px;min-height:44px;display:inline-flex;align-items:center}
+.top nav a:hover{color:var(--cream);background:rgba(246,235,217,.08)}
+.top nav a[aria-current=page]{color:var(--paper-ink);background:var(--amber)}
+
+main{margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px));padding-block:12px 40px;display:grid;gap:56px}
+main.wide{max-width:1080px}
+main.col{max-width:760px}
+
+.chip{display:inline-block;margin:0 0 18px;font-weight:600;font-size:15px;color:var(--paper-ink);background:var(--amber);border-radius:999px;padding:6px 14px;box-shadow:0 3px 0 var(--amber-shadow)}
+.kicker{margin:0 0 8px;font-weight:700;font-size:14px;letter-spacing:.08em;text-transform:uppercase;color:var(--amber)}
+
+.hero{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:32px;padding-top:28px}
+.hero h1{font-size:clamp(44px,8vw,92px);font-weight:800;line-height:.98}
+.lede{font-size:clamp(20px,2.3vw,24px);color:var(--cream);max-width:30em;margin:22px 0 0}
+.sub{color:var(--cream-muted);margin:12px 0 0}
+.hero .icon{width:clamp(180px,24vw,260px);height:auto;border-radius:22%;box-shadow:0 30px 60px rgba(0,0,0,.5),0 0 0 1px rgba(255,214,160,.12)}
+
+/* paper: the printed menu */
+.paper{background:var(--paper);color:var(--paper-ink);border-radius:20px;padding:clamp(24px,4vw,40px);box-shadow:0 18px 40px rgba(0,0,0,.35)}
+.paper .kicker{color:var(--amber-ink)}
+.paper h2{font-size:clamp(24px,3vw,34px)}
+.rules ol{list-style:none;padding:0;margin:22px 0 0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;counter-reset:r}
+.rules li{border-top:2px dashed var(--paper-line);padding-top:14px;counter-increment:r}
+.rules li::before{content:counter(r);display:block;font-family:var(--display);font-weight:800;font-size:28px;color:var(--amber-ink);margin-bottom:6px}
+.rules li b{display:block;font-size:19px;margin-bottom:4px}
+.never ul{margin:16px 0 0;padding:0;list-style:none;display:grid;gap:10px}
+.never li{padding-left:28px;position:relative}
+.never li::before{content:"";position:absolute;left:0;top:.62em;width:14px;height:2px;background:var(--amber-ink)}
+
+.split{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:40px;align-items:start}
+.split h2,.status h2{font-size:clamp(26px,3.2vw,38px);margin-bottom:18px}
+.plain{list-style:none;padding:0;margin:0;display:grid;gap:16px}
+.plain li{color:var(--cream-muted)}
+.plain b{color:var(--cream)}
+
+/* the receipt: the only place mono appears */
+.receipt{margin:0;background:var(--receipt);color:var(--paper-ink);font-family:var(--mono);font-size:16px;line-height:1.5;padding:26px 24px 30px;border-radius:4px;transform:rotate(1.5deg);box-shadow:0 20px 40px rgba(0,0,0,.4);
+  -webkit-mask:radial-gradient(circle 7px at 50% 100%,transparent 6.5px,#000 7px) 0 0/18px 100% repeat-x;mask:radial-gradient(circle 7px at 50% 100%,transparent 6.5px,#000 7px) 0 0/18px 100% repeat-x;padding-bottom:36px}
+.receipt p{margin:0;display:flex;justify-content:space-between;gap:12px}
+.receipt .r-head{justify-content:center;font-weight:600;font-size:18px;letter-spacing:.12em}
+.receipt .r-sub{justify-content:center;color:#7a6650;font-size:14px}
+.receipt .r-rule{border-top:1.5px dashed #b9a586;margin:12px 0}
+.receipt .r-total{font-weight:600;font-size:18px}
+.receipt .r-note{justify-content:center;font-size:15px}
+
+.steps{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.steps>div{border:1.5px solid rgba(246,235,217,.18);border-radius:18px;padding:22px 24px;background:rgba(0,0,0,.18)}
+.steps>div.now{border-color:var(--amber)}
+.steps h3{font-size:22px;margin-bottom:8px}
+.steps p:last-child{margin:0;color:var(--cream-muted)}
+.ask{margin:20px 0 0;font-size:19px}
+.maker{border-top:1.5px solid rgba(246,235,217,.14);padding-top:22px;color:var(--cream-muted)}
+.maker p{margin:0}
+
+/* documents: privacy, terms, support, help, set on paper */
+.doc{background:var(--paper);color:var(--paper-ink);border-radius:20px;padding:clamp(24px,5vw,52px);box-shadow:0 18px 40px rgba(0,0,0,.35);margin-top:12px}
+.doc a{color:var(--amber-ink)}
+.doc .kicker{color:var(--amber-ink)}
+.doc h1{font-size:clamp(34px,6vw,54px);font-weight:800}
+.doc .lede{color:var(--paper-ink);font-size:20px}
+.doc h2{font-size:20px;margin:32px 0 8px;padding-top:20px;border-top:2px dashed var(--paper-line)}
+.doc p,.doc li{max-width:62ch}
+.doc ul{padding-left:22px;margin:10px 0}
+.doc li{margin-bottom:8px}
+.doc .note{font-size:16px;color:#5a4636;margin-top:20px}
+.help{list-style:none;padding:0!important;margin:24px 0 0!important;display:grid;gap:10px}
+.help li{max-width:none;margin:0;border:1.5px solid var(--paper-line);border-radius:14px;padding:14px 18px;display:grid;gap:2px}
+.help li.urgent{border:2px solid var(--paper-ink)}
+.help a{font-size:19px;text-decoration:none}
+.help a b{text-decoration:underline;text-underline-offset:3px}
+.help span{color:#5a4636}
+
+.foot{max-width:1080px;margin:0 auto;padding-block:28px 40px;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px));border-top:1.5px solid rgba(246,235,217,.14);color:var(--cream-muted);font-size:16px}
+.foot p{margin:0 0 10px}
+.foot .links{display:flex;flex-wrap:wrap;gap:6px 18px}
+.foot .links a{color:var(--cream)}
+
+@media (max-width:820px){
+  .hero{grid-template-columns:1fr}
+  .hero .icon{order:-1;width:120px}
+  .rules ol{grid-template-columns:1fr}
+  .split{grid-template-columns:1fr}
+  .receipt{max-width:340px;justify-self:center;width:100%}
+  .steps{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="bokeh" aria-hidden="true"><i></i><i></i><i></i></div>
+<header class="top">
+  <a class="mark" href="/" aria-label="Last Round home"><img src="/launch-mark.svg" alt="" width="40" height="40"><span>last round</span></a>
+  <nav aria-label="Main"><a href="/">Home</a><a href="/privacy" aria-current="page">Privacy</a><a href="/help">Help</a><a href="/support">Support</a></nav>
+</header>
+<main class="col">
+
+<article class="doc">
+<p class="kicker">Last updated 15 November 2026</p>
+<h1>Privacy</h1>
+<p class="lede">Everything you log in Last Round stays on your phone. Nothing is sent to us or anyone else. This page says exactly what is kept, and where.</p>
+
+<h2>Who we are</h2>
+<p>Last Round is made by Shaw Labs, run by Suraj Shaw in London. For any privacy question, email <a href="mailto:shaw@shawsuraj.com?subject=Last%20Round%20privacy">shaw@shawsuraj.com</a>.</p>
+
+<h2>What the app keeps, only on your phone</h2>
+<ul>
+  <li>Each drink and water break, with its time.</li>
+  <li>The place you type for a night, and your plan, such as the time you mean to be home.</li>
+  <li>Your name, if you set one. It is printed on your receipts and never on a picture you share.</li>
+  <li>Your weekly limit, which alerts you have seen, and how long you keep your nights.</li>
+  <li>For your age, a yes and when you tapped it. Never your date of birth.</li>
+</ul>
+
+<h2>What we never collect</h2>
+<p>No account, no analytics, no ads and no tracking. No location, no contacts and no health data. Nothing is sent to a server: the app has no internet permission.</p>
+
+<h2>Backups</h2>
+<p>On iPhone, the app's data is kept out of iCloud and Finder backups. On Android, app backup is turned off. So your nights are not copied to any cloud.</p>
+
+<h2>How long nights are kept</h2>
+<p>Whole nights older than the period you pick are deleted on the phone. You can choose 30 days, 3 months, 6 months or 12 months. It is 12 months unless you change it. Your most recent night stays until a newer one, or until you delete everything.</p>
+
+<h2>Your controls</h2>
+<ul>
+  <li><b>Delete everything</b> wipes the phone's copy at once. One thing stays for up to a day: a weekly limit you set yourself. That is on purpose, so deleting cannot be used to get around a limit you chose.</li>
+  <li><b>Export my nights</b> makes a JSON file, your name included, that you save wherever you choose. That copy is then yours to keep or delete.</li>
+</ul>
+
+<h2>Notifications</h2>
+<p>The plan reminder and the water nudge are both off until you turn them on. They are set on your phone, not sent from a server, and never name a drink.</p>
+
+<h2>Sharing a night</h2>
+<p>Share your night makes a picture on your phone, only when you tap it, and hands it to your phone's share sheet. Where it goes after that is up to you. It never shows your name, your points or a limit.</p>
+
+<h2>Links out</h2>
+<p>The Drinkaware, NHS, Drinkline and Samaritans links in the app open in your browser or phone app. Last Round sends nothing with them. Those services have their own privacy policies.</p>
+
+<h2>Age</h2>
+<p>Last Round is for adults aged 18 and over. It is not for children.</p>
+
+<h2>Our legal basis</h2>
+<p>Because nothing you log ever reaches us, we do not collect or process it, and we are not a controller of the data kept on your phone. If you email us, we use your email address and message only to reply, on the basis of our legitimate interest in answering you, and we delete them when the conversation is over.</p>
+
+<h2>This website</h2>
+<p>This site sets no cookies and runs no analytics or third-party scripts. Its fonts are served from this site. Our host, Vercel, keeps standard server logs, such as IP addresses, for a short time to run and secure the site.</p>
+
+<h2>Changes</h2>
+<p>If this policy changes, the date at the top changes with it, and testers hear about it in the alpha group before the build that needs it.</p>
+</article>
+
+</main>
+<footer class="foot">
+  <p>18+ only. Last Round is not medical advice. If you are worried about your drinking, <a href="/help">help is here</a>.</p>
+  <p class="links"><a href="/privacy">Privacy</a><a href="/alpha">Alpha terms</a><a href="/support">Support</a><a href="/help">Help</a><a href="https://www.shawlabs.dev">A Shaw Labs project</a></p>
+</footer>
+</body>
+</html>
