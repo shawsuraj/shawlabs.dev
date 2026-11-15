@@ -10,7 +10,7 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 SRC = os.path.join(ROOT, "src")
 OUT = os.path.join(ROOT, "public")
 HOST = "https://lastround.shawlabs.dev"
-EMAIL = "shaw@shawsuraj.com"
+EMAIL = "lastround@shawlabs.dev"
 UPDATED = "15 November 2026"
 
 CSS = open(os.path.join(SRC, "site.css")).read()
