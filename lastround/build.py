@@ -65,10 +65,11 @@ def page(slug, title, desc, body, wide=False):
 INDEX = f"""
 <section class="hero">
   <div class="hero-text">
-    <p class="chip">In alpha · invite only · iPhone and Android</p>
+    <p class="chip">Alpha testers wanted · iPhone and Android</p>
     <h1>Good nights,<br>well kept.</h1>
     <p class="lede">A drink tracker for nights out. Log any drink in two taps, earn points for a good pace and for water, and wake up to a receipt and a map of where the night went.</p>
     <p class="sub">Your nights stay on your phone. No account, no ads, nothing sent to us.</p>
+    <p><a class="cta" href="#join">Join the alpha</a></p>
   </div>
   <img class="icon" src="/app-icon.svg" alt="The Last Round app icon: a pint glass on a wooden bar under warm amber light" width="260" height="260">
 </section>
@@ -132,7 +133,7 @@ INDEX = f"""
 
 <section class="paper bench" aria-labelledby="bench">
   <p class="kicker">On the bench</p>
-  <h2 id="bench">Being built for the first invites.</h2>
+  <h2 id="bench">Being built during the alpha.</h2>
   <ul>
     <li><b>The night moves with you.</b> Tap Moved bar and the night becomes a route: every bar, in order, on the receipt and the map.</li>
     <li><b>Passport stamps.</b> A stamp for each new bar, city and country, and a globe that fills in amber where you have had a night out.</li>
@@ -173,7 +174,7 @@ INDEX = f"""
 <section class="status">
   <h2>Where it is</h2>
   <div class="steps three">
-    <div class="now"><p class="kicker">Now</p><h3>Alpha</h3><p>About fifteen friends, invited a few at a time, for four weeks of real nights out. iPhone through TestFlight, Android through Play testing, both from the same build.</p></div>
+    <div class="now"><p class="kicker">Now</p><h3>Alpha</h3><p>Recruiting now. A small group of testers, let in a few at a time, for four weeks of real nights out. iPhone through TestFlight, Android through Play testing, both from the same build.</p></div>
     <div><p class="kicker">Next</p><h3>Beta</h3>
       <ul class="beta">
         <li><b>Water you can prove.</b> Your camera checks the water break, on the phone itself, and the clip is deleted straight after.</li>
@@ -186,7 +187,7 @@ INDEX = f"""
     </div>
     <div><p class="kicker">Later</p><h3>With friends</h3><p>Whose round it is, a water break for the whole table, and a "home safe" for the group. Each one waits for its own privacy review first, because it means a server, and today there is none.</p></div>
   </div>
-  <p class="ask">Want in on the beta? Email <a href="mailto:{EMAIL}?subject=Last%20Round%20beta">{EMAIL}</a>. You must be 18 or over.</p>
+  <p class="ask" id="join">Want to test the alpha? Email <a href="mailto:{EMAIL}?subject=Last%20Round%20alpha">{EMAIL}</a> and say if you are on iPhone or Android. You must be 18 or over.</p>
 </section>
 
 <section class="maker">
@@ -260,6 +261,7 @@ ALPHA = f"""
 <p class="kicker">Last updated {UPDATED}</p>
 <h1>Alpha terms</h1>
 <p class="lede">Thank you for testing Last Round. By installing the alpha, you agree to the following.</p>
+<p>Not in yet? Email <a href="mailto:{EMAIL}?subject=Last%20Round%20alpha">{EMAIL}</a> and say if you are on iPhone or Android.</p>
 <ul>
   <li><b>You are 18 or over.</b> Last Round tracks drinking and is for adults only.</li>
   <li><b>This is a test build.</b> It may have bugs, and it may lose your data. Do not rely on it for anything that matters.</li>

@@ -178,6 +178,8 @@ main.col{max-width:760px}
   .phone{max-width:220px}
   .bench ul{grid-template-columns:1fr}
 }
+.cta{display:inline-flex;align-items:center;min-height:48px;margin-top:22px;padding:12px 26px;border-radius:999px;background:var(--amber);color:var(--paper-ink);font-weight:700;text-decoration:none;box-shadow:0 4px 0 var(--amber-shadow)}
+.cta:hover{color:var(--paper-ink);background:#FFB54F}
 </style>
 </head>
 <body>
@@ -190,10 +192,11 @@ main.col{max-width:760px}
 
 <section class="hero">
   <div class="hero-text">
-    <p class="chip">In alpha · invite only · iPhone and Android</p>
+    <p class="chip">Alpha testers wanted · iPhone and Android</p>
     <h1>Good nights,<br>well kept.</h1>
     <p class="lede">A drink tracker for nights out. Log any drink in two taps, earn points for a good pace and for water, and wake up to a receipt and a map of where the night went.</p>
     <p class="sub">Your nights stay on your phone. No account, no ads, nothing sent to us.</p>
+    <p><a class="cta" href="#join">Join the alpha</a></p>
   </div>
   <img class="icon" src="/app-icon.svg" alt="The Last Round app icon: a pint glass on a wooden bar under warm amber light" width="260" height="260">
 </section>
@@ -257,7 +260,7 @@ main.col{max-width:760px}
 
 <section class="paper bench" aria-labelledby="bench">
   <p class="kicker">On the bench</p>
-  <h2 id="bench">Being built for the first invites.</h2>
+  <h2 id="bench">Being built during the alpha.</h2>
   <ul>
     <li><b>The night moves with you.</b> Tap Moved bar and the night becomes a route: every bar, in order, on the receipt and the map.</li>
     <li><b>Passport stamps.</b> A stamp for each new bar, city and country, and a globe that fills in amber where you have had a night out.</li>
@@ -298,7 +301,7 @@ main.col{max-width:760px}
 <section class="status">
   <h2>Where it is</h2>
   <div class="steps three">
-    <div class="now"><p class="kicker">Now</p><h3>Alpha</h3><p>About fifteen friends, invited a few at a time, for four weeks of real nights out. iPhone through TestFlight, Android through Play testing, both from the same build.</p></div>
+    <div class="now"><p class="kicker">Now</p><h3>Alpha</h3><p>Recruiting now. A small group of testers, let in a few at a time, for four weeks of real nights out. iPhone through TestFlight, Android through Play testing, both from the same build.</p></div>
     <div><p class="kicker">Next</p><h3>Beta</h3>
       <ul class="beta">
         <li><b>Water you can prove.</b> Your camera checks the water break, on the phone itself, and the clip is deleted straight after.</li>
@@ -311,7 +314,7 @@ main.col{max-width:760px}
     </div>
     <div><p class="kicker">Later</p><h3>With friends</h3><p>Whose round it is, a water break for the whole table, and a "home safe" for the group. Each one waits for its own privacy review first, because it means a server, and today there is none.</p></div>
   </div>
-  <p class="ask">Want in on the beta? Email <a href="mailto:lastround@shawlabs.dev?subject=Last%20Round%20beta">lastround@shawlabs.dev</a>. You must be 18 or over.</p>
+  <p class="ask" id="join">Want to test the alpha? Email <a href="mailto:lastround@shawlabs.dev?subject=Last%20Round%20alpha">lastround@shawlabs.dev</a> and say if you are on iPhone or Android. You must be 18 or over.</p>
 </section>
 
 <section class="maker">
