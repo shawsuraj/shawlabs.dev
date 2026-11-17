@@ -116,21 +116,11 @@ INDEX = f"""
   <h2 id="inalpha">What you get on night one.</h2>
   <div class="feats">
     <div class="feat feat-map">
-      <svg viewBox="0 0 320 190" role="img" aria-label="A sketch of the Map tab: a soft amber glow over the streets you go out in, with badges for your bars">
-        <defs><radialGradient id="glow"><stop offset="0" stop-color="#F5A73B" stop-opacity=".55"/><stop offset="1" stop-color="#F5A73B" stop-opacity="0"/></radialGradient></defs>
-        <rect width="320" height="190" rx="14" fill="#1E130B"/>
-        <g stroke="#4A3220" stroke-width="7" fill="none" stroke-linecap="round"><path d="M-10 60 C80 70 140 40 330 70"/><path d="M60 -10 C70 80 50 140 80 200"/><path d="M-10 150 C100 130 200 160 330 130"/><path d="M220 -10 C210 60 240 120 230 200"/></g>
-        <g stroke="#3A2717" stroke-width="3" fill="none"><path d="M0 110 L320 100"/><path d="M150 0 L140 190"/><path d="M0 20 L320 30"/></g>
-        <ellipse cx="128" cy="92" rx="88" ry="60" fill="url(#glow)"/><ellipse cx="226" cy="140" rx="46" ry="34" fill="url(#glow)"/>
-        <g font-family="Instrument Sans,system-ui,sans-serif" font-weight="700" font-size="13" text-anchor="middle">
-          <g><rect x="94" y="66" width="38" height="24" rx="12" fill="#F5A73B"/><text x="113" y="83" fill="#2E1B0E">6</text></g>
-          <g><rect x="142" y="98" width="30" height="24" rx="12" fill="#F5A73B"/><text x="157" y="115" fill="#2E1B0E">2</text></g>
-          <g><rect x="214" y="128" width="26" height="24" rx="12" fill="#F5A73B"/><text x="227" y="145" fill="#2E1B0E">1</text></g>
-          <g><rect x="252" y="44" width="22" height="22" rx="11" fill="#6B4326"/><rect x="34" y="132" width="22" height="22" rx="11" fill="#6B4326"/><rect x="184" y="34" width="22" height="22" rx="11" fill="#6B4326"/></g>
-        </g>
-      </svg>
+      <img class="phone" src="/screen-map.webp" alt="The Map tab in Last Round: an amber glow over Covent Garden, amber badges for the bars you have been to, and wood badges for bars nearby" width="560" height="1131" loading="lazy">
+      <div>
       <h3>A map of your nights</h3>
       <p>Every bar you have had a night in, with how many nights. A soft amber glow spreads over the streets you go out in. Tap a bar for its receipts, or Drink here to start. iPhone first; Android gets a list of your places.</p>
+      </div>
     </div>
     <div class="feat"><h3>Pick the bar</h3><p>Start a night and the bars near you are already there, with the ones you have been to before at the top. Or just type the name.</p></div>
     <div class="feat"><h3>A calendar, not a streak</h3><p>Your weeks, months and year at a glance, shaded amber by the night, with a teal dot for water. No streak to keep alive.</p></div>
@@ -319,7 +309,7 @@ def main():
     if os.path.isdir(OUT):
         shutil.rmtree(OUT)
     os.makedirs(OUT)
-    for name in ("app-icon.svg", "launch-mark.svg", "og.png", "apple-touch-icon.png", "robots.txt"):
+    for name in ("screen-map.webp", "app-icon.svg", "launch-mark.svg", "og.png", "apple-touch-icon.png", "robots.txt"):
         p = os.path.join(SRC, name)
         if os.path.exists(p):
             shutil.copy(p, OUT)
