@@ -11,7 +11,7 @@ SRC = os.path.join(ROOT, "src")
 OUT = os.path.join(ROOT, "public")
 HOST = "https://lastround.shawlabs.dev"
 EMAIL = "lastround@shawlabs.dev"
-UPDATED = "15 November 2026"
+UPDATED = "17 November 2026"
 
 CSS = open(os.path.join(SRC, "site.css")).read()
 
@@ -67,8 +67,8 @@ INDEX = f"""
   <div class="hero-text">
     <p class="chip">In alpha · invite only · iPhone and Android</p>
     <h1>Good nights,<br>well kept.</h1>
-    <p class="lede">A drink tracker for nights out. Log any drink in two taps. Earn points for a good pace and for water.</p>
-    <p class="sub">Everything stays on your phone. No account, no ads, nothing uploaded.</p>
+    <p class="lede">A drink tracker for nights out. Log any drink in two taps, earn points for a good pace and for water, and wake up to a receipt and a map of where the night went.</p>
+    <p class="sub">Your nights stay on your phone. No account, no ads, nothing sent to us.</p>
   </div>
   <img class="icon" src="/app-icon.svg" alt="The Last Round app icon: a pint glass on a wooden bar under warm amber light" width="260" height="260">
 </section>
@@ -77,9 +77,9 @@ INDEX = f"""
   <p class="kicker">House rules</p>
   <h2 id="rules">Three, and they are short.</h2>
   <ol>
-    <li><b>It stays on your phone.</b> No account, no ads, nothing uploaded. The app has no internet permission at all.</li>
+    <li><b>It stays on your phone.</b> No account, no ads, nothing sent to us. On iPhone the map comes from Apple Maps; that is the only thing that ever goes online.</li>
     <li><b>Water earns points.</b> Have a water between drinks and tap Water. It scores from ten minutes after your last drink.</li>
-    <li><b>Two taps a drink.</b> Tap Drink, tap what you are having. That is it.</li>
+    <li><b>Two taps a drink.</b> Tap Drink, tap what you are having. Same again is one.</li>
   </ol>
 </section>
 
@@ -97,6 +97,7 @@ INDEX = f"""
   <figure class="receipt" aria-label="An example receipt">
     <p class="r-head">LAST ROUND</p>
     <p class="r-sub">Example receipt</p>
+    <p class="r-sub">Printed for Alex</p>
     <p class="r-rule"></p>
     <p><span>Fri 14 Nov</span><span>The Crown</span></p>
     <p><span>Home by</span><span>23:30</span></p>
@@ -110,12 +111,71 @@ INDEX = f"""
   </figure>
 </section>
 
+<section class="inalpha" aria-labelledby="inalpha">
+  <p class="kicker">In the alpha</p>
+  <h2 id="inalpha">What you get on night one.</h2>
+  <div class="feats">
+    <div class="feat feat-map">
+      <svg viewBox="0 0 320 190" role="img" aria-label="A sketch of the Map tab: a soft amber glow over the streets you go out in, with badges for your bars">
+        <defs><radialGradient id="glow"><stop offset="0" stop-color="#F5A73B" stop-opacity=".55"/><stop offset="1" stop-color="#F5A73B" stop-opacity="0"/></radialGradient></defs>
+        <rect width="320" height="190" rx="14" fill="#1E130B"/>
+        <g stroke="#4A3220" stroke-width="7" fill="none" stroke-linecap="round"><path d="M-10 60 C80 70 140 40 330 70"/><path d="M60 -10 C70 80 50 140 80 200"/><path d="M-10 150 C100 130 200 160 330 130"/><path d="M220 -10 C210 60 240 120 230 200"/></g>
+        <g stroke="#3A2717" stroke-width="3" fill="none"><path d="M0 110 L320 100"/><path d="M150 0 L140 190"/><path d="M0 20 L320 30"/></g>
+        <ellipse cx="128" cy="92" rx="88" ry="60" fill="url(#glow)"/><ellipse cx="226" cy="140" rx="46" ry="34" fill="url(#glow)"/>
+        <g font-family="Instrument Sans,system-ui,sans-serif" font-weight="700" font-size="13" text-anchor="middle">
+          <g><rect x="94" y="66" width="38" height="24" rx="12" fill="#F5A73B"/><text x="113" y="83" fill="#2E1B0E">6</text></g>
+          <g><rect x="142" y="98" width="30" height="24" rx="12" fill="#F5A73B"/><text x="157" y="115" fill="#2E1B0E">2</text></g>
+          <g><rect x="214" y="128" width="26" height="24" rx="12" fill="#F5A73B"/><text x="227" y="145" fill="#2E1B0E">1</text></g>
+          <g><rect x="252" y="44" width="22" height="22" rx="11" fill="#6B4326"/><rect x="34" y="132" width="22" height="22" rx="11" fill="#6B4326"/><rect x="184" y="34" width="22" height="22" rx="11" fill="#6B4326"/></g>
+        </g>
+      </svg>
+      <h3>A map of your nights</h3>
+      <p>Every bar you have had a night in, with how many nights. A soft amber glow spreads over the streets you go out in. Tap a bar for its receipts, or Drink here to start. iPhone first; Android gets a list of your places.</p>
+    </div>
+    <div class="feat"><h3>Pick the bar</h3><p>Start a night and the bars near you are already there, with the ones you have been to before at the top. Or just type the name.</p></div>
+    <div class="feat"><h3>A calendar, not a streak</h3><p>Your weeks, months and year at a glance, shaded amber by the night, with a teal dot for water. No streak to keep alive.</p></div>
+    <div class="feat"><h3>The receipt</h3><p>The morning after, a printed receipt with your name on it: where you went, how long you were out, water breaks and points.</p></div>
+    <div class="feat"><h3>Share a night</h3><p>Turn a night into a picture for your story. Place, time out, water breaks. Never how many drinks.</p></div>
+    <div class="feat"><h3>Care, not nagging</h3><p>A reminder of the plan you set and a water nudge, both off until you turn them on. Links to real help are always one tap away.</p></div>
+  </div>
+</section>
+
+<section class="paper bench" aria-labelledby="bench">
+  <p class="kicker">On the bench</p>
+  <h2 id="bench">Being built for the first invites.</h2>
+  <ul>
+    <li><b>The night moves with you.</b> Tap Moved bar and the night becomes a route: every bar, in order, on the receipt and the map.</li>
+    <li><b>Passport stamps.</b> A stamp for each new bar, city and country, and a globe that fills in amber where you have had a night out.</li>
+    <li><b>Coasters.</b> A coaster for every bar you visit, its design drawn from the bar's name, so no two are the same.</li>
+    <li><b>Behind the bar.</b> A short card on what is in your drink and where it comes from, written by someone who poured them for years.</li>
+    <li><b>The morning outlook.</b> One honest line on the receipt, like "A slow start likely. Water and breakfast first."</li>
+    <li><b>Never open the app.</b> Same again and water from the Lock Screen, a Live Activity with the bar and time out, and Siri: "add a Guinness".</li>
+  </ul>
+  <p class="small">Some of these may land a build or two into the alpha. Testers get every build as it ships.</p>
+</section>
+
+<section class="split asks">
+  <div>
+    <h2>What testers help answer</h2>
+    <ul class="plain">
+      <li><b>Do the caps feel fair?</b> Or do they get in the way of a good night?</li>
+      <li><b>Do points get people drinking water?</b> The whole idea rests on this one.</li>
+      <li><b>Do the alerts feel like care?</b> Or like being told off?</li>
+      <li><b>Is the receipt worth opening the morning after?</b></li>
+    </ul>
+  </div>
+  <div class="note-card">
+    <p>No analytics, so nothing is learned behind your back. Two short forms, after week one and week four, and a group chat for bugs. That is how the app gets better.</p>
+  </div>
+</section>
+
 <section class="paper never" aria-labelledby="never">
   <h2 id="never">What it will never do</h2>
   <ul>
     <li>Rank, reward or show off how much anyone drinks.</li>
     <li>Show a countdown, bar or ring towards a cap.</li>
     <li>Send your nights anywhere, or write them to Apple Health or Health Connect.</li>
+    <li>Put you on a map for anyone else. No friends on the map, no live location.</li>
     <li>Track you. No analytics, no ads, no account.</li>
   </ul>
 </section>
@@ -124,7 +184,7 @@ INDEX = f"""
   <h2>Where it is</h2>
   <div class="steps">
     <div class="now"><p class="kicker">Now</p><h3>Alpha</h3><p>About fifteen friends, invited a few at a time, for four weeks of real nights out. iPhone through TestFlight, Android through Play testing, both from the same build.</p></div>
-    <div><p class="kicker">Next</p><h3>Beta</h3><p>A wider test. Water breaks checked by your phone's camera, on the phone itself, with the clip deleted straight after.</p></div>
+    <div><p class="kicker">Next</p><h3>Beta</h3><p>A wider test. Water breaks checked by your phone's camera, on the phone itself, with the clip deleted straight after. A bar passport, and a year of nights wrapped up to share.</p></div>
   </div>
   <p class="ask">Want in on the beta? Email <a href="mailto:{EMAIL}?subject=Last%20Round%20beta">{EMAIL}</a>. You must be 18 or over.</p>
 </section>
@@ -138,7 +198,7 @@ PRIVACY = f"""
 <article class="doc">
 <p class="kicker">Last updated {UPDATED}</p>
 <h1>Privacy</h1>
-<p class="lede">Everything you log in Last Round stays on your phone. Nothing is sent to us or anyone else. This page says exactly what is kept, and where.</p>
+<p class="lede">Everything you log in Last Round stays on your phone. Nothing is sent to us. This page says exactly what is kept, where, and the one thing that talks to Apple Maps on iPhone.</p>
 
 <h2>Who we are</h2>
 <p>Last Round is made by Shaw Labs, run by Suraj Shaw in London. For any privacy question, email <a href="mailto:{EMAIL}?subject=Last%20Round%20privacy">{EMAIL}</a>.</p>
@@ -146,14 +206,19 @@ PRIVACY = f"""
 <h2>What the app keeps, only on your phone</h2>
 <ul>
   <li>Each drink and water break, with its time.</li>
-  <li>The place you type for a night, and your plan, such as the time you mean to be home.</li>
+  <li>The place you type for a night or, on iPhone, the bar you pick from the suggestions, with where that bar is (its map point and Apple Maps' id for it). And your plan, such as the time you mean to be home.</li>
   <li>Your name, if you set one. It is printed on your receipts and never on a picture you share.</li>
   <li>Your weekly limit, which alerts you have seen, and how long you keep your nights.</li>
   <li>For your age, a yes and when you tapped it. Never your date of birth.</li>
 </ul>
 
 <h2>What we never collect</h2>
-<p>No account, no analytics, no ads and no tracking. No location, no contacts and no health data. Nothing is sent to a server: the app has no internet permission.</p>
+<p>No account, no analytics, no ads and no tracking. No contacts and no health data. Nothing is sent to a server of ours, because there is none. Where you are is never stored. On Android the app has no internet or location permission.</p>
+
+<h2>Bar suggestions and the map (iPhone only)</h2>
+<p>On iPhone you can turn on <i>Suggest bars near me</i> in You, or by answering yes the first time you open the Map tab. It is off until you do. When it is on and you start a night or open the Map tab, the app asks iPhone for your location once and uses Apple Maps to list bars near you. If you search, what you type goes to Apple Maps too, and tapping one of Apple's bar labels or <i>Search this area</i> asks Apple about that place or that part of the map.</p>
+<p>Apple handles that request under Apple's own privacy policy. It does not come to us, and your location is never saved: only the bar you pick, and where that bar is, is kept with that night on your phone. Delete everything removes it, and the setting goes back to off. Android does not have this feature and asks for no location.</p>
+<p>How far each suggested bar is shows on screen only and is never saved. The map on iPhone (the Map tab, and the map from the Start sheet) is drawn by Apple Maps, so the area you are looking at is sent to Apple to draw it, even with suggestions off. With suggestions on, opening the map reads your location once and marks where you were. The map never follows you, and the mark goes when you leave the map. Your map is drawn from the bars you picked, kept on your phone.</p>
 
 <h2>Backups</h2>
 <p>On iPhone, the app's data is kept out of iCloud and Finder backups. On Android, app backup is turned off. So your nights are not copied to any cloud.</p>
@@ -242,8 +307,8 @@ HELP = """
 """
 
 PAGES = [
-    ("index", "Last Round · Good nights, well kept", "A drink tracker for nights out. Log any drink in two taps, earn points for a good pace and for water, and keep everything on your phone. In alpha.", INDEX, True),
-    ("privacy", "Privacy · Last Round", "What Last Round keeps, and where: everything stays on your phone, and nothing is sent to us or anyone else.", PRIVACY, False),
+    ("index", "Last Round · Good nights, well kept", "A drink tracker for nights out. Two taps a drink, points for a good pace and for water, a receipt and a map of your nights, and everything kept on your phone. In alpha.", INDEX, True),
+    ("privacy", "Privacy · Last Round", "What Last Round keeps, and where: everything stays on your phone and nothing is sent to us. On iPhone, bar suggestions and the map use Apple Maps.", PRIVACY, False),
     ("alpha", "Alpha terms · Last Round", "The terms for Last Round alpha testers: 18+, a test build, drink responsibly, no guarantees.", ALPHA, False),
     ("support", "Support · Last Round", "Get help with the Last Round app, report a bug, or ask about your data.", SUPPORT, False),
     ("help", "Help and advice · Last Round", "Free and confidential alcohol advice and support: 999, NHS, Drinkline, Samaritans and Drinkaware.", HELP, False),

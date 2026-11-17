@@ -132,3 +132,24 @@ main.col{max-width:760px}
   .receipt{max-width:340px;justify-self:center;width:100%}
   .steps{grid-template-columns:1fr}
 }
+
+/* the alpha: what you get, what is on the bench */
+.inalpha h2,.asks h2{font-size:clamp(26px,3.2vw,38px);margin-bottom:22px}
+.feats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.feat{border:1.5px solid rgba(246,235,217,.18);border-radius:18px;padding:22px 24px;background:rgba(0,0,0,.18)}
+.feat h3{font-size:20px;margin-bottom:8px;color:var(--cream)}
+.feat p{margin:0;color:var(--cream-muted)}
+.feat-map{grid-column:span 2;grid-row:span 2;border-color:var(--amber);display:flex;flex-direction:column}
+.feat-map svg{display:block;width:100%;height:auto;margin-bottom:18px;border-radius:14px}
+.feat-map h3{font-size:24px}
+.bench ul{list-style:none;padding:0;margin:22px 0 0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 28px}
+.bench li{border-top:2px dashed var(--paper-line);padding-top:14px}
+.bench li b{display:block;font-size:19px;margin-bottom:4px}
+.bench .small{margin:22px 0 0;font-size:16px;color:#5a4636}
+.note-card{border:1.5px dashed rgba(246,235,217,.3);border-radius:18px;padding:22px 24px;background:rgba(0,0,0,.18);color:var(--cream-muted)}
+.note-card p{margin:0}
+@media (max-width:820px){
+  .feats{grid-template-columns:1fr}
+  .feat-map{grid-column:auto;grid-row:auto}
+  .bench ul{grid-template-columns:1fr}
+}

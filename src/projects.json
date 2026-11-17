@@ -46,8 +46,8 @@
  {
   "name": "Last Round",
   "url": "https://lastround.shawlabs.dev",
-  "what": "A drink tracker for nights out that rewards pace, not volume. Points for water between drinks, caps that are never shown as a number, and everything kept on the phone.",
-  "stack": "Kotlin Multiplatform, Compose, SQLDelight",
+  "what": "A drink tracker for nights out that rewards pace, not volume. Points for water between drinks, caps that are never shown as a number, a receipt and a map of your nights, and everything kept on the phone.",
+  "stack": "Kotlin Multiplatform, Compose, SQLDelight, MapKit",
   "status": "Alpha",
   "year": "2026",
   "tags": [

@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Privacy · Last Round</title>
-<meta name="description" content="What Last Round keeps, and where: everything stays on your phone, and nothing is sent to us or anyone else.">
+<meta name="description" content="What Last Round keeps, and where: everything stays on your phone and nothing is sent to us. On iPhone, bar suggestions and the map use Apple Maps.">
 <link rel="canonical" href="https://lastround.shawlabs.dev/privacy">
 <meta name="theme-color" content="#2A1A10">
 <meta name="color-scheme" content="dark">
 <meta property="og:title" content="Privacy · Last Round">
-<meta property="og:description" content="What Last Round keeps, and where: everything stays on your phone, and nothing is sent to us or anyone else.">
+<meta property="og:description" content="What Last Round keeps, and where: everything stays on your phone and nothing is sent to us. On iPhone, bar suggestions and the map use Apple Maps.">
 <meta property="og:url" content="https://lastround.shawlabs.dev/privacy">
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://lastround.shawlabs.dev/og.png">
@@ -151,6 +151,27 @@ main.col{max-width:760px}
   .receipt{max-width:340px;justify-self:center;width:100%}
   .steps{grid-template-columns:1fr}
 }
+
+/* the alpha: what you get, what is on the bench */
+.inalpha h2,.asks h2{font-size:clamp(26px,3.2vw,38px);margin-bottom:22px}
+.feats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.feat{border:1.5px solid rgba(246,235,217,.18);border-radius:18px;padding:22px 24px;background:rgba(0,0,0,.18)}
+.feat h3{font-size:20px;margin-bottom:8px;color:var(--cream)}
+.feat p{margin:0;color:var(--cream-muted)}
+.feat-map{grid-column:span 2;grid-row:span 2;border-color:var(--amber);display:flex;flex-direction:column}
+.feat-map svg{display:block;width:100%;height:auto;margin-bottom:18px;border-radius:14px}
+.feat-map h3{font-size:24px}
+.bench ul{list-style:none;padding:0;margin:22px 0 0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 28px}
+.bench li{border-top:2px dashed var(--paper-line);padding-top:14px}
+.bench li b{display:block;font-size:19px;margin-bottom:4px}
+.bench .small{margin:22px 0 0;font-size:16px;color:#5a4636}
+.note-card{border:1.5px dashed rgba(246,235,217,.3);border-radius:18px;padding:22px 24px;background:rgba(0,0,0,.18);color:var(--cream-muted)}
+.note-card p{margin:0}
+@media (max-width:820px){
+  .feats{grid-template-columns:1fr}
+  .feat-map{grid-column:auto;grid-row:auto}
+  .bench ul{grid-template-columns:1fr}
+}
 </style>
 </head>
 <body>
@@ -162,9 +183,9 @@ main.col{max-width:760px}
 <main class="col">
 
 <article class="doc">
-<p class="kicker">Last updated 15 November 2026</p>
+<p class="kicker">Last updated 17 November 2026</p>
 <h1>Privacy</h1>
-<p class="lede">Everything you log in Last Round stays on your phone. Nothing is sent to us or anyone else. This page says exactly what is kept, and where.</p>
+<p class="lede">Everything you log in Last Round stays on your phone. Nothing is sent to us. This page says exactly what is kept, where, and the one thing that talks to Apple Maps on iPhone.</p>
 
 <h2>Who we are</h2>
 <p>Last Round is made by Shaw Labs, run by Suraj Shaw in London. For any privacy question, email <a href="mailto:lastround@shawlabs.dev?subject=Last%20Round%20privacy">lastround@shawlabs.dev</a>.</p>
@@ -172,14 +193,19 @@ main.col{max-width:760px}
 <h2>What the app keeps, only on your phone</h2>
 <ul>
   <li>Each drink and water break, with its time.</li>
-  <li>The place you type for a night, and your plan, such as the time you mean to be home.</li>
+  <li>The place you type for a night or, on iPhone, the bar you pick from the suggestions, with where that bar is (its map point and Apple Maps' id for it). And your plan, such as the time you mean to be home.</li>
   <li>Your name, if you set one. It is printed on your receipts and never on a picture you share.</li>
   <li>Your weekly limit, which alerts you have seen, and how long you keep your nights.</li>
   <li>For your age, a yes and when you tapped it. Never your date of birth.</li>
 </ul>
 
 <h2>What we never collect</h2>
-<p>No account, no analytics, no ads and no tracking. No location, no contacts and no health data. Nothing is sent to a server: the app has no internet permission.</p>
+<p>No account, no analytics, no ads and no tracking. No contacts and no health data. Nothing is sent to a server of ours, because there is none. Where you are is never stored. On Android the app has no internet or location permission.</p>
+
+<h2>Bar suggestions and the map (iPhone only)</h2>
+<p>On iPhone you can turn on <i>Suggest bars near me</i> in You, or by answering yes the first time you open the Map tab. It is off until you do. When it is on and you start a night or open the Map tab, the app asks iPhone for your location once and uses Apple Maps to list bars near you. If you search, what you type goes to Apple Maps too, and tapping one of Apple's bar labels or <i>Search this area</i> asks Apple about that place or that part of the map.</p>
+<p>Apple handles that request under Apple's own privacy policy. It does not come to us, and your location is never saved: only the bar you pick, and where that bar is, is kept with that night on your phone. Delete everything removes it, and the setting goes back to off. Android does not have this feature and asks for no location.</p>
+<p>How far each suggested bar is shows on screen only and is never saved. The map on iPhone (the Map tab, and the map from the Start sheet) is drawn by Apple Maps, so the area you are looking at is sent to Apple to draw it, even with suggestions off. With suggestions on, opening the map reads your location once and marks where you were. The map never follows you, and the mark goes when you leave the map. Your map is drawn from the bars you picked, kept on your phone.</p>
 
 <h2>Backups</h2>
 <p>On iPhone, the app's data is kept out of iCloud and Finder backups. On Android, app backup is turned off. So your nights are not copied to any cloud.</p>
