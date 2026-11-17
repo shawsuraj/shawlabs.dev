@@ -115,6 +115,11 @@ main.col{max-width:760px}
 .steps>div{border:1.5px solid rgba(246,235,217,.18);border-radius:18px;padding:22px 24px;background:rgba(0,0,0,.18)}
 .steps>div.now{border-color:var(--amber)}
 .steps h3{font-size:22px;margin-bottom:8px}
+.steps.three{grid-template-columns:minmax(0,.8fr) minmax(0,1.4fr) minmax(0,.8fr);align-items:start}
+.beta{list-style:none;padding:0;margin:8px 0 0;display:grid;gap:12px}
+.beta li{color:var(--cream-muted);padding-left:18px;position:relative}
+.beta li::before{content:"";position:absolute;left:0;top:.6em;width:8px;height:8px;border-radius:50%;background:var(--amber)}
+.beta b{color:var(--cream)}
 .steps p:last-child{margin:0;color:var(--cream-muted)}
 .ask{margin:20px 0 0;font-size:19px}
 .maker{border-top:1.5px solid rgba(246,235,217,.14);padding-top:22px;color:var(--cream-muted)}
@@ -149,7 +154,7 @@ main.col{max-width:760px}
   .rules ol{grid-template-columns:1fr}
   .split{grid-template-columns:1fr}
   .receipt{max-width:340px;justify-self:center;width:100%}
-  .steps{grid-template-columns:1fr}
+  .steps,.steps.three{grid-template-columns:1fr}
 }
 
 /* the alpha: what you get, what is on the bench */
@@ -292,9 +297,19 @@ main.col{max-width:760px}
 
 <section class="status">
   <h2>Where it is</h2>
-  <div class="steps">
+  <div class="steps three">
     <div class="now"><p class="kicker">Now</p><h3>Alpha</h3><p>About fifteen friends, invited a few at a time, for four weeks of real nights out. iPhone through TestFlight, Android through Play testing, both from the same build.</p></div>
-    <div><p class="kicker">Next</p><h3>Beta</h3><p>A wider test. Water breaks checked by your phone's camera, on the phone itself, with the clip deleted straight after. A bar passport, and a year of nights wrapped up to share.</p></div>
+    <div><p class="kicker">Next</p><h3>Beta</h3>
+      <ul class="beta">
+        <li><b>Water you can prove.</b> Your camera checks the water break, on the phone itself, and the clip is deleted straight after.</li>
+        <li><b>A bar passport.</b> A stamp for every bar, with your first visit and how many nights you have spent there.</li>
+        <li><b>Split the G.</b> Rate the pour, and see how close you get to the G. A bit of fun for Guinness drinkers.</li>
+        <li><b>Wrapped.</b> Your year of nights out, the places and the water breaks, made to share.</li>
+        <li><b>Smarter nights.</b> "Still at The Crown?" when you open the app somewhere new, and maybe, if you switch it on, a nudge when you leave a bar to log the next one or get home well.</li>
+        <li><b>Little extras.</b> What the night cost, if you want to know, and badges for a good night: three water breaks, home by the plan, a new place.</li>
+      </ul>
+    </div>
+    <div><p class="kicker">Later</p><h3>With friends</h3><p>Whose round it is, a water break for the whole table, and a "home safe" for the group. Each one waits for its own privacy review first, because it means a server, and today there is none.</p></div>
   </div>
   <p class="ask">Want in on the beta? Email <a href="mailto:lastround@shawlabs.dev?subject=Last%20Round%20beta">lastround@shawlabs.dev</a>. You must be 18 or over.</p>
 </section>

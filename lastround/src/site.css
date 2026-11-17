@@ -96,6 +96,11 @@ main.col{max-width:760px}
 .steps>div{border:1.5px solid rgba(246,235,217,.18);border-radius:18px;padding:22px 24px;background:rgba(0,0,0,.18)}
 .steps>div.now{border-color:var(--amber)}
 .steps h3{font-size:22px;margin-bottom:8px}
+.steps.three{grid-template-columns:minmax(0,.8fr) minmax(0,1.4fr) minmax(0,.8fr);align-items:start}
+.beta{list-style:none;padding:0;margin:8px 0 0;display:grid;gap:12px}
+.beta li{color:var(--cream-muted);padding-left:18px;position:relative}
+.beta li::before{content:"";position:absolute;left:0;top:.6em;width:8px;height:8px;border-radius:50%;background:var(--amber)}
+.beta b{color:var(--cream)}
 .steps p:last-child{margin:0;color:var(--cream-muted)}
 .ask{margin:20px 0 0;font-size:19px}
 .maker{border-top:1.5px solid rgba(246,235,217,.14);padding-top:22px;color:var(--cream-muted)}
@@ -130,7 +135,7 @@ main.col{max-width:760px}
   .rules ol{grid-template-columns:1fr}
   .split{grid-template-columns:1fr}
   .receipt{max-width:340px;justify-self:center;width:100%}
-  .steps{grid-template-columns:1fr}
+  .steps,.steps.three{grid-template-columns:1fr}
 }
 
 /* the alpha: what you get, what is on the bench */

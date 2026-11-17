@@ -172,9 +172,19 @@ INDEX = f"""
 
 <section class="status">
   <h2>Where it is</h2>
-  <div class="steps">
+  <div class="steps three">
     <div class="now"><p class="kicker">Now</p><h3>Alpha</h3><p>About fifteen friends, invited a few at a time, for four weeks of real nights out. iPhone through TestFlight, Android through Play testing, both from the same build.</p></div>
-    <div><p class="kicker">Next</p><h3>Beta</h3><p>A wider test. Water breaks checked by your phone's camera, on the phone itself, with the clip deleted straight after. A bar passport, and a year of nights wrapped up to share.</p></div>
+    <div><p class="kicker">Next</p><h3>Beta</h3>
+      <ul class="beta">
+        <li><b>Water you can prove.</b> Your camera checks the water break, on the phone itself, and the clip is deleted straight after.</li>
+        <li><b>A bar passport.</b> A stamp for every bar, with your first visit and how many nights you have spent there.</li>
+        <li><b>Split the G.</b> Rate the pour, and see how close you get to the G. A bit of fun for Guinness drinkers.</li>
+        <li><b>Wrapped.</b> Your year of nights out, the places and the water breaks, made to share.</li>
+        <li><b>Smarter nights.</b> "Still at The Crown?" when you open the app somewhere new, and maybe, if you switch it on, a nudge when you leave a bar to log the next one or get home well.</li>
+        <li><b>Little extras.</b> What the night cost, if you want to know, and badges for a good night: three water breaks, home by the plan, a new place.</li>
+      </ul>
+    </div>
+    <div><p class="kicker">Later</p><h3>With friends</h3><p>Whose round it is, a water break for the whole table, and a "home safe" for the group. Each one waits for its own privacy review first, because it means a server, and today there is none.</p></div>
   </div>
   <p class="ask">Want in on the beta? Email <a href="mailto:{EMAIL}?subject=Last%20Round%20beta">{EMAIL}</a>. You must be 18 or over.</p>
 </section>
