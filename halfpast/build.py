@@ -55,9 +55,9 @@ def page(slug, title, desc, body, wide=False):
 <div class="bokeh" aria-hidden="true"><i></i><i></i><i></i></div>
 <header class="top">
   <a class="mark" href="/" aria-label="Half Past home"><img src="/launch-mark.svg" alt="" width="40" height="40"><span>half past</span></a>
-  <nav aria-label="Main">{nav}</nav>
+  <nav aria-label="Main">{nav}<a class="pill" href="/join">Join the alpha</a></nav>
 </header>
-<main class="{'wide' if wide else 'col'}">
+<main class="{'story' if slug == 'index' else ('wide' if wide else 'col')}">
 {body}
 </main>
 <footer class="foot">
@@ -69,127 +69,171 @@ def page(slug, title, desc, body, wide=False):
 """
 
 
+def clock(hhmm):
+    """A small bar clock showing the time of each beat of the night."""
+    h, m = (int(x) for x in hhmm.split(":"))
+    ha, ma = (h % 12 + m / 60) * 30, m * 6
+    return (f'<svg class="clock" viewBox="0 0 40 40" width="40" height="40" aria-hidden="true">'
+            f'<circle cx="20" cy="20" r="17"/>'
+            f'<line x1="20" y1="20" x2="20" y2="10" transform="rotate({ha:.1f} 20 20)"/>'
+            f'<line class="min" x1="20" y1="20" x2="20" y2="6" transform="rotate({ma:.1f} 20 20)"/>'
+            f'<circle class="pin" cx="20" cy="20" r="2"/></svg>')
+
+
+def when(hhmm, label):
+    return f'<p class="when">{clock(hhmm)}<span>{label}</span></p>'
+
+
+def shot(name, alt, cls="", eager=False):
+    """A real screenshot from the app, in a phone."""
+    load = 'fetchpriority="high"' if eager else 'loading="lazy" decoding="async"'
+    return (f'<img class="phone {cls}" src="/shots/{name}-480.webp" '
+            f'srcset="/shots/{name}-480.webp 480w, /shots/{name}-860.webp 860w" '
+            f'sizes="(min-width: 900px) 320px, 62vw" width="1320" height="2868" alt="{html.escape(alt)}" {load}>')
+
+
 INDEX = f"""
 <section class="hero">
-  <div class="hero-text">
-    <p class="chip">Alpha testers wanted · iPhone and Android</p>
-    <h1>Good nights,<br>well kept.</h1>
-    <p class="lede">A drink tracker for nights out. Log any drink in two taps, earn points for a good pace and for water, and wake up to a receipt and a map of where the night went.</p>
-    <p class="sub">Your nights stay on your phone. No account, no ads, nothing sent to us.</p>
-    <p><a class="cta" href="#join">Join the alpha</a></p>
-  </div>
-  <img class="icon" src="/app-icon.svg" alt="The Half Past app icon: a pint glass on a wooden bar under warm amber light" width="260" height="260">
-</section>
-
-<section class="paper rules" aria-labelledby="rules">
-  <p class="kicker">House rules</p>
-  <h2 id="rules">Three, and they are short.</h2>
-  <ol>
-    <li><b>It stays on your phone.</b> No account, no ads, nothing sent to us. The map and bar search come from Apple on iPhone and Google on Android. None of it comes to us.</li>
-    <li><b>Water earns points.</b> Have a water between drinks and tap Water. It scores from ten minutes after your last drink.</li>
-    <li><b>Two taps a drink.</b> Tap Drink, tap what you are having. Same again is one.</li>
-  </ol>
-</section>
-
-<section class="split">
-  <div>
-    <h2>How the points work</h2>
-    <ul class="plain">
-      <li><b>A good pace scores.</b> Each drink earns points, and so does each water break in between.</li>
-      <li><b>There are caps, by the hour, the night and the week.</b> Past one, points simply stop. You will never see a number, a bar or a countdown to a cap, because a visible ceiling becomes a target.</li>
-      <li><b>You can set your own weekly limit.</b> It caps your points too, and it cannot be switched off on a whim mid-night.</li>
-      <li><b>Alerts wait for a pause.</b> At most one an hour, each at most once a night. They read as care, never as a telling-off.</li>
-      <li><b>The morning after, you get a receipt.</b> Where you went, how long you were out, your water breaks and your points.</li>
-    </ul>
-  </div>
-  <figure class="receipt" aria-label="An example receipt">
-    <p class="r-head">HALF PAST</p>
-    <p class="r-sub">Example receipt</p>
-    <p class="r-sub">Printed for Alex</p>
-    <p class="r-rule"></p>
-    <p><span>Fri 14 Nov</span><span>The Crown</span></p>
-    <p><span>Home by</span><span>23:30</span></p>
-    <p><span>Out</span><span>3h 10m</span></p>
-    <p><span>Water breaks</span><span>3</span></p>
-    <p class="r-rule"></p>
-    <p class="r-total"><span>Points</span><span>42</span></p>
-    <p class="r-rule"></p>
-    <p class="r-note">Kept the pace.</p>
-    <p class="r-note">Thank you, come again.</p>
-  </figure>
-</section>
-
-<section class="inalpha" aria-labelledby="inalpha">
-  <p class="kicker">In the alpha</p>
-  <h2 id="inalpha">What you get.</h2>
-  <div class="feats">
-    <div class="feat feat-map">
-      <img class="phone" src="/screen-map.webp" alt="The Map tab in Half Past: an amber glow over Covent Garden, amber badges for the bars you have been to, and wood badges for bars nearby" width="560" height="1131" loading="lazy">
-      <div>
-      <h3>A map of your nights</h3>
-      <p>Every bar you have had a night in, with how many nights. A soft amber glow spreads over the streets you go out in. Zoom out and a globe fills in amber where you have had a night out. Tap a bar for its receipts, or Drink here to start.</p>
-      </div>
+  <div class="wrap hero-in">
+    <div class="hero-text">
+      {when("19:30", "Friday. Getting ready.")}
+      <h1>Good nights,<br><span>well kept.</span></h1>
+      <p class="lede">A drinks tracker for nights out. Two taps a drink, points for a good pace, a receipt in the morning.</p>
+      <p class="actions"><a class="cta" href="/join">Join the alpha</a><span class="fine">Free · iPhone and Android · 18+</span></p>
     </div>
-    <div class="feat"><h3>Pick the bar</h3><p>Start a night and the bars near you are already there, with the ones you have been to before at the top. Or just type the name.</p></div>
-    <div class="feat"><h3>The night moves with you</h3><p>Tap Moved bar and the night becomes a route: every bar, in order, on the receipt and the map.</p></div>
-    <div class="feat"><h3>Stamps and coasters</h3><p>A stamp for each new bar, city and country. A coaster for every bar, its design drawn from the bar's name, so no two are the same.</p></div>
-    <div class="feat"><h3>Behind the bar</h3><p>A short card on what is in your drink and where it comes from. Over seventy drinks so far.</p></div>
-    <div class="feat"><h3>The receipt</h3><p>The morning after, a printed receipt with your name on it, and one honest line on how the morning might go, like "A slow start likely. Water and breakfast first."</p></div>
-    <div class="feat"><h3>Never open the app</h3><p>Same again and water from a widget, the Lock Screen, a Live Activity or Quick Settings. Or ask Siri: "Add a drink in Half Past".</p></div>
-    <div class="feat"><h3>A calendar, not a streak</h3><p>Your weeks, months and year at a glance, shaded amber by the night, with a teal dot for water. No streak to keep alive.</p></div>
-    <div class="feat"><h3>Share a night</h3><p>Turn a night into a picture for your story. Place, time out, water breaks. Never how many drinks.</p></div>
-    <div class="feat feat-wide"><h3>Care, not nagging</h3><p>A plan reminder, a water nudge, and, if you switch it on, a nudge when you leave a bar to log the next one or end the night. Links to real help are one tap away.</p></div>
-  </div>
-</section>
-
-<section class="split asks">
-  <div>
-    <h2>What testers help answer</h2>
-    <ul class="plain">
-      <li><b>Do the caps feel fair?</b> Or do they get in the way of a good night?</li>
-      <li><b>Do points get people drinking water?</b> The whole idea rests on this one.</li>
-      <li><b>Do the alerts feel like care?</b> Or like being told off?</li>
-      <li><b>Is the receipt worth opening the morning after?</b></li>
-    </ul>
-  </div>
-  <div class="note-card">
-    <p>No analytics, so nothing is learned behind your back. Two short forms, after week one and week four, and a group chat for bugs. That is how the app gets better.</p>
-  </div>
-</section>
-
-<section class="paper never" aria-labelledby="never">
-  <h2 id="never">What it will never do</h2>
-  <ul>
-    <li>Rank, reward or show off how much anyone drinks.</li>
-    <li>Show a countdown, bar or ring towards a cap.</li>
-    <li>Send your nights anywhere, or write them to Apple Health or Health Connect.</li>
-    <li>Put you on a map for anyone else. No friends on the map, no live location.</li>
-    <li>Track you. No analytics, no ads, no account.</li>
-  </ul>
-</section>
-
-<section class="status">
-  <h2>Where it is</h2>
-  <div class="steps three">
-    <div class="now"><p class="kicker">Now</p><h3>Alpha</h3><p>Recruiting now. A small group of testers, let in a few at a time, for four weeks of real nights out. iPhone through TestFlight, Android through Play testing, both from the same build. Updates during the alpha bring your city and your year in places.</p></div>
-    <div><p class="kicker">Next</p><h3>Beta</h3>
-      <ul class="beta">
-        <li><b>Water you can prove.</b> Your camera checks the water break, on the phone itself, and the clip is deleted straight after.</li>
-        <li><b>Split the G.</b> Rate the pour, and see how close you get to the G. A bit of fun for Guinness drinkers.</li>
-        <li><b>Wrapped.</b> Your year of nights out, the places and the water breaks, made to share.</li>
-        <li><b>Little extras.</b> What the night cost, if you want to know, and badges for a good night: three water breaks, home by the plan, a new place.</li>
-      </ul>
+    <div class="fan" aria-label="Three screens from the app">
+      {shot("receipt", "The morning-after receipt for a night at Panda and Sons: 79 points", "f1", True)}
+      {shot("welcome", "The Half Past welcome screen: three glasses on a wooden shelf and the words Good nights, well kept", "f2", True)}
+      {shot("live", "A night in progress: 41 points, an Edinburgh Gin just logged, Drink and Water buttons", "f3", True)}
     </div>
-    <div><p class="kicker">Later</p><h3>With friends</h3><p>Whose round it is, a water break for the whole table, and a "home safe" for the group. Each one waits for its own privacy review first, because it means a server, and today there is none.</p></div>
   </div>
-  <p class="ask" id="join">Want to test the alpha? Sign-up takes a minute. You must be 18 or over.</p>
-  <p><a class="cta" href="/join">Sign up for the alpha</a></p>
+  <div class="ledge" aria-hidden="true"></div>
 </section>
 
-<section class="maker">
-  <p>Made by <a href="https://www.shawsuraj.com">Suraj Shaw</a> at <a href="https://www.shawlabs.dev">Shaw Labs</a>, after five years behind London bars.</p>
+<section class="beat">
+  <div class="wrap beat-in">
+    <div class="copy rise">
+      {when("19:45", "Out the door")}
+      <h2>Out tonight?</h2>
+      <p>One tap starts the night. Your last night out is right there to beat.</p>
+    </div>
+    <div class="phones">{shot("home", "The Tonight tab: Out tonight? with last night's 79 points and a Start the night button", "rise")}</div>
+  </div>
+</section>
+
+<section class="beat flip">
+  <div class="wrap beat-in">
+    <div class="copy rise">
+      {when("20:16", "First round")}
+      <h2>Two taps<br>a drink.</h2>
+      <p>The whole menu, from a pint to a Passion fruit martini. Same again is one tap.</p>
+    </div>
+    <div class="phones pair">
+      {shot("live", "Points tonight: 41, with the Edinburgh Gin just logged", "rise back")}
+      {shot("menu", "The drink menu: cocktails with their strength and units, Same again at the top", "rise front")}
+    </div>
+  </div>
+</section>
+
+<section class="beat water">
+  <div class="wrap beat-in">
+    <div class="copy rise">
+      {when("20:41", "Between rounds")}
+      <h2>Water scores too.</h2>
+      <p>A glass between rounds earns points. Pace is the game, and the best nights win it.</p>
+    </div>
+    <div class="phones pair">
+      {shot("water", "The water break screen: a teal ring and Tap to log it", "rise back")}
+      {shot("water-logged", "Water logged, plus 7 points, 48 points tonight", "rise front")}
+    </div>
+  </div>
+</section>
+
+<section class="interval">
+  <div class="wrap">
+    {when("23:25", "Last orders")}
+    <p class="big rise">Tap End night.<br><span>Go home.</span></p>
+  </div>
+</section>
+
+<section class="beat morning">
+  <div class="wrap beat-in">
+    <div class="copy rise">
+      {when("09:10", "The morning after")}
+      <h2>Here is<br>your night.</h2>
+      <p>A printed receipt: where you went, how long you were out, how you paced it. Share it to your story, with the drinks hidden if you like.</p>
+    </div>
+    <div class="phones pair">
+      {shot("receipt", "The receipt: Panda and Sons, 19:45 to 23:25, 79 points, Thanks for keeping it good", "rise back")}
+      {shot("share", "Share your night, with switches to show the drinks and the place", "rise front")}
+    </div>
+  </div>
+</section>
+
+<section class="beat flip">
+  <div class="wrap beat-in">
+    <div class="copy rise">
+      {when("12:00", "Sunday")}
+      <h2>Every night,<br>kept.</h2>
+      <p>Your nights in one list, and a calendar shaded by the night. No streaks to keep alive.</p>
+    </div>
+    <div class="phones pair">
+      {shot("nights", "Your nights: 936 points, 14 nights, 31 water breaks, with a list of nights out", "rise back")}
+      {shot("calendar", "The calendar for November, each night shaded by units", "rise front")}
+    </div>
+  </div>
+</section>
+
+<section class="atlas">
+  <div class="wrap">
+    <div class="copy rise">
+      {when("00:00", "Every night so far")}
+      <h2>Everywhere you<br>have had a round.</h2>
+      <p>A map of your bars and a passport of the countries you have had a night out in. It is yours alone. Nobody else is on it, and nobody sees it.</p>
+    </div>
+    <div class="phones trio">
+      {shot("map", "The map: amber pins for bars in India", "rise back")}
+      {shot("passport", "Your passport: India, Japan, the United Kingdom, Germany and Portugal, with the bar and date of each first night", "rise front")}
+    </div>
+    <p class="fine center">Map and passport arrive on iPhone first. Android follows.</p>
+  </div>
+</section>
+
+<section class="promise">
+  <div class="wrap">
+    <p class="kicker">House rules</p>
+    <h2 class="rise">Yours, not ours.</h2>
+    <ol class="vows">
+      <li class="rise"><b>It stays on your phone.</b> Your nights never leave it.</li>
+      <li class="rise"><b>No account.</b> No sign-in, no email, no password.</li>
+      <li class="rise"><b>No ads. No tracking.</b> Nothing is sent to us. <a href="/privacy">The full privacy policy</a>.</li>
+    </ol>
+  </div>
+</section>
+
+<section class="board" aria-labelledby="road">
+  <div class="wrap">
+    <div class="chalk rise">
+      <h2 id="road">Coming up</h2>
+      <ol class="road">
+        <li class="on"><span class="tag">Now</span><b>Alpha</b><span>Invite only. Friends first, a few at a time, for four weeks of real nights out. iPhone and Android.</span></li>
+        <li><span class="tag">Next</span><b>Beta</b><span>Details soon.</span></li>
+        <li><span class="tag">Then</span><b>App Store and Google Play</b><span>For everyone over 18.</span></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section class="last" id="join">
+  <div class="wrap">
+    <h2 class="rise">Pull up a stool.</h2>
+    <p>Test the alpha. Sign-up takes a minute.</p>
+    <p><a class="cta big" href="/join">Join the alpha</a></p>
+    <p class="maker">Made by <a href="https://www.shawsuraj.com">Suraj Shaw</a> at <a href="https://www.shawlabs.dev">Shaw Labs</a>, after five years behind London bars.</p>
+  </div>
 </section>
 """
+
 
 PRIVACY = f"""
 <article class="doc">
@@ -407,6 +451,7 @@ def main():
         if os.path.exists(p):
             shutil.copy(p, OUT)
     shutil.copytree(os.path.join(SRC, "fonts"), os.path.join(OUT, "fonts"))
+    shutil.copytree(os.path.join(SRC, "shots"), os.path.join(OUT, "shots"))
     for slug, title, desc, body, wide in PAGES:
         with open(os.path.join(OUT, slug + ".html"), "w") as f:
             f.write(page(slug, title, desc, body, wide))

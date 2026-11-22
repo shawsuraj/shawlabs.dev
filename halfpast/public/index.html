@@ -68,62 +68,13 @@ h1,h2,h3{font-family:var(--display);font-weight:700;letter-spacing:-.01em;line-h
 .top nav{display:flex;flex-wrap:wrap;gap:4px}
 .top nav a{color:var(--cream-muted);text-decoration:none;font-weight:600;font-size:16px;padding:10px 14px;border-radius:999px;min-height:44px;display:inline-flex;align-items:center}
 .top nav a:hover{color:var(--cream);background:rgba(246,235,217,.08)}
-.top nav a[aria-current=page]{color:var(--paper-ink);background:var(--amber)}
+.top nav a[aria-current=page]{color:var(--cream);background:rgba(246,235,217,.12)}
 
 main{margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px));padding-block:12px 40px;display:grid;gap:56px}
 main.wide{max-width:1080px}
 main.col{max-width:760px}
 
-.chip{display:inline-block;margin:0 0 18px;font-weight:600;font-size:15px;color:var(--paper-ink);background:var(--amber);border-radius:999px;padding:6px 14px;box-shadow:0 3px 0 var(--amber-shadow)}
 .kicker{margin:0 0 8px;font-weight:700;font-size:14px;letter-spacing:.08em;text-transform:uppercase;color:var(--amber)}
-
-.hero{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:32px;padding-top:28px}
-.hero h1{font-size:clamp(44px,8vw,92px);font-weight:800;line-height:.98}
-.lede{font-size:clamp(20px,2.3vw,24px);color:var(--cream);max-width:30em;margin:22px 0 0}
-.sub{color:var(--cream-muted);margin:12px 0 0}
-.hero .icon{width:clamp(180px,24vw,260px);height:auto;border-radius:22%;box-shadow:0 30px 60px rgba(0,0,0,.5),0 0 0 1px rgba(255,214,160,.12)}
-
-/* paper: the printed menu */
-.paper{background:var(--paper);color:var(--paper-ink);border-radius:20px;padding:clamp(24px,4vw,40px);box-shadow:0 18px 40px rgba(0,0,0,.35)}
-.paper .kicker{color:var(--amber-ink)}
-.paper h2{font-size:clamp(24px,3vw,34px)}
-.rules ol{list-style:none;padding:0;margin:22px 0 0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;counter-reset:r}
-.rules li{border-top:2px dashed var(--paper-line);padding-top:14px;counter-increment:r}
-.rules li::before{content:counter(r);display:block;font-family:var(--display);font-weight:800;font-size:28px;color:var(--amber-ink);margin-bottom:6px}
-.rules li b{display:block;font-size:19px;margin-bottom:4px}
-.never ul{margin:16px 0 0;padding:0;list-style:none;display:grid;gap:10px}
-.never li{padding-left:28px;position:relative}
-.never li::before{content:"";position:absolute;left:0;top:.62em;width:14px;height:2px;background:var(--amber-ink)}
-
-.split{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:40px;align-items:start}
-.split h2,.status h2{font-size:clamp(26px,3.2vw,38px);margin-bottom:18px}
-.plain{list-style:none;padding:0;margin:0;display:grid;gap:16px}
-.plain li{color:var(--cream-muted)}
-.plain b{color:var(--cream)}
-
-/* the receipt: the only place mono appears */
-.receipt{margin:0;background:var(--receipt);color:var(--paper-ink);font-family:var(--mono);font-size:16px;line-height:1.5;padding:26px 24px 30px;border-radius:4px;transform:rotate(1.5deg);box-shadow:0 20px 40px rgba(0,0,0,.4);
-  -webkit-mask:radial-gradient(circle 7px at 50% 100%,transparent 6.5px,#000 7px) 0 0/18px 100% repeat-x;mask:radial-gradient(circle 7px at 50% 100%,transparent 6.5px,#000 7px) 0 0/18px 100% repeat-x;padding-bottom:36px}
-.receipt p{margin:0;display:flex;justify-content:space-between;gap:12px}
-.receipt .r-head{justify-content:center;font-weight:600;font-size:18px;letter-spacing:.12em}
-.receipt .r-sub{justify-content:center;color:#7a6650;font-size:14px}
-.receipt .r-rule{border-top:1.5px dashed #b9a586;margin:12px 0}
-.receipt .r-total{font-weight:600;font-size:18px}
-.receipt .r-note{justify-content:center;font-size:15px}
-
-.steps{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.steps>div{border:1.5px solid rgba(246,235,217,.18);border-radius:18px;padding:22px 24px;background:rgba(0,0,0,.18)}
-.steps>div.now{border-color:var(--amber)}
-.steps h3{font-size:22px;margin-bottom:8px}
-.steps.three{grid-template-columns:minmax(0,.8fr) minmax(0,1.4fr) minmax(0,.8fr);align-items:start}
-.beta{list-style:none;padding:0;margin:8px 0 0;display:grid;gap:12px}
-.beta li{color:var(--cream-muted);padding-left:18px;position:relative}
-.beta li::before{content:"";position:absolute;left:0;top:.6em;width:8px;height:8px;border-radius:50%;background:var(--amber)}
-.beta b{color:var(--cream)}
-.steps p:last-child{margin:0;color:var(--cream-muted)}
-.ask{margin:20px 0 0;font-size:19px}
-.maker{border-top:1.5px solid rgba(246,235,217,.14);padding-top:22px;color:var(--cream-muted)}
-.maker p{margin:0}
 
 /* documents: privacy, terms, support, help, set on paper */
 .doc{background:var(--paper);color:var(--paper-ink);border-radius:20px;padding:clamp(24px,5vw,52px);box-shadow:0 18px 40px rgba(0,0,0,.35);margin-top:12px}
@@ -148,37 +99,6 @@ main.col{max-width:760px}
 .foot .links{display:flex;flex-wrap:wrap;gap:6px 18px}
 .foot .links a{color:var(--cream)}
 
-@media (max-width:820px){
-  .hero{grid-template-columns:1fr}
-  .hero .icon{order:-1;width:120px}
-  .rules ol{grid-template-columns:1fr}
-  .split{grid-template-columns:1fr}
-  .receipt{max-width:340px;justify-self:center;width:100%}
-  .steps,.steps.three{grid-template-columns:1fr}
-}
-
-/* the alpha: what you get, what is on the bench */
-.inalpha h2,.asks h2{font-size:clamp(26px,3.2vw,38px);margin-bottom:22px}
-.feats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
-.feat{border:1.5px solid rgba(246,235,217,.18);border-radius:18px;padding:22px 24px;background:rgba(0,0,0,.18)}
-.feat h3{font-size:20px;margin-bottom:8px;color:var(--cream)}
-.feat p{margin:0;color:var(--cream-muted)}
-.feat-wide{grid-column:1/-1}
-.feat-map{grid-column:span 2;grid-row:span 2;border-color:var(--amber);display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:24px;align-items:center}
-.phone{display:block;width:100%;max-width:240px;height:auto;margin:0 auto;border-radius:30px;border:6px solid #120B06;box-shadow:0 24px 50px rgba(0,0,0,.5),0 0 0 1px rgba(255,214,160,.12)}
-.feat-map h3{font-size:24px}
-.bench ul{list-style:none;padding:0;margin:22px 0 0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 28px}
-.bench li{border-top:2px dashed var(--paper-line);padding-top:14px}
-.bench li b{display:block;font-size:19px;margin-bottom:4px}
-.bench .small{margin:22px 0 0;font-size:16px;color:#5a4636}
-.note-card{border:1.5px dashed rgba(246,235,217,.3);border-radius:18px;padding:22px 24px;background:rgba(0,0,0,.18);color:var(--cream-muted)}
-.note-card p{margin:0}
-@media (max-width:820px){
-  .feats{grid-template-columns:1fr}
-  .feat-map{grid-column:auto;grid-row:auto;grid-template-columns:1fr}
-  .phone{max-width:220px}
-  .bench ul{grid-template-columns:1fr}
-}
 .cta{display:inline-flex;align-items:center;min-height:48px;margin-top:22px;padding:12px 26px;border-radius:999px;background:var(--amber);color:var(--paper-ink);font-weight:700;text-decoration:none;box-shadow:0 4px 0 var(--amber-shadow)}
 .cta:hover{color:var(--paper-ink);background:#FFB54F}
 
@@ -207,134 +127,310 @@ main.col{max-width:760px}
 .notice{margin:20px 0 0;padding:14px 18px;border:2px solid var(--paper-ink);border-radius:14px;font-weight:700}
 .howto{padding-left:22px;margin:10px 0}
 .howto li{margin-bottom:12px}
+
+/* ---------- the floating bar ---------- */
+.top{position:sticky;top:10px;z-index:10;width:calc(100% - 24px);max-width:1140px;margin:10px auto 0;padding:8px 8px 8px 16px;border-radius:999px;
+  background:rgba(30,18,10,.74);-webkit-backdrop-filter:blur(14px) saturate(1.3);backdrop-filter:blur(14px) saturate(1.3);border:1px solid rgba(255,214,160,.12)}
+.top nav{align-items:center}
+.top nav a.pill{color:var(--paper-ink);background:var(--amber);margin-left:6px;box-shadow:0 3px 0 var(--amber-shadow)}
+.top nav a.pill:hover{background:#FFB54F;color:var(--paper-ink)}
+@media (max-width:700px){.top nav a:not(.pill){display:none}.mark span{font-size:17px}}
+
+/* ---------- the home page: one night out, top to bottom ---------- */
+main.story{max-width:none;padding:0;display:block}
+main.story>section{overflow-x:clip}
+html{overflow-x:clip}
+.wrap{max-width:1140px;margin:0 auto;padding-left:max(22px,env(safe-area-inset-left,0px));padding-right:max(22px,env(safe-area-inset-right,0px))}
+.story h2{font-size:clamp(42px,6.2vw,80px);font-weight:800;line-height:.98;letter-spacing:-.02em}
+.story .copy p{font-size:clamp(19px,1.8vw,22px);color:var(--cream-muted);max-width:24em;margin:22px 0 0}
+
+/* the time of night, on a little bar clock */
+.when{display:inline-flex;align-items:center;gap:12px;margin:0 0 20px;font-family:var(--mono);font-weight:600;font-size:14px;letter-spacing:.12em;text-transform:uppercase;color:var(--amber)}
+.clock{flex:none;width:40px;height:40px}
+.clock circle{fill:rgba(0,0,0,.25);stroke:currentColor;stroke-width:2}
+.clock line{stroke:var(--cream);stroke-width:3;stroke-linecap:round}
+.clock line.min{stroke-width:2}
+.clock .pin{fill:currentColor;stroke:none}
+
+/* real screens, in a phone */
+.phone{display:block;width:100%;height:auto;border-radius:13% / 6%;border:7px solid #0E0805;background:#0E0805;
+  box-shadow:0 34px 70px rgba(0,0,0,.6),0 0 0 1px rgba(255,214,160,.16)}
+
+/* hero: three phones standing on the shelf */
+.hero{position:relative;padding-top:clamp(40px,7vw,90px)}
+.hero-in{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:40px;align-items:end}
+.hero-text{align-self:center;padding-bottom:60px}
+.hero h1{font-size:clamp(54px,8.6vw,116px);font-weight:800;line-height:.94;letter-spacing:-.03em}
+.hero h1 span{color:var(--amber)}
+.hero .lede{font-size:clamp(20px,2vw,24px);color:var(--cream-muted);max-width:22em;margin:26px 0 0}
+.actions{display:flex;flex-wrap:wrap;align-items:center;gap:8px 20px;margin:8px 0 0}
+.fine{font-family:var(--mono);font-size:14px;color:var(--cream-muted);letter-spacing:.02em}
+.center{text-align:center}
+.fan{--w:clamp(150px,19vw,250px);position:relative;height:calc(var(--w) * 2.25);max-width:calc(var(--w) * 2.5);width:100%;margin:0 auto}
+.fan .phone{position:absolute;bottom:0;width:var(--w);transform-origin:50% 100%}
+.fan .f1{left:0;rotate:-12deg;z-index:1}
+.fan .f2{left:calc(50% - var(--w) / 2);z-index:3;bottom:14px}
+.fan .f3{right:0;rotate:12deg;z-index:2}
+.ledge{position:relative;z-index:4;height:22px;background:linear-gradient(180deg,var(--ledge-top),var(--ledge-bot));box-shadow:0 18px 40px rgba(0,0,0,.6),inset 0 2px 0 rgba(255,214,160,.18)}
+
+/* each beat of the night */
+.beat{padding-block:clamp(90px,13vw,170px)}
+.beat-in{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(32px,6vw,80px);align-items:center}
+.flip .copy{order:2}
+.phones{display:flex;justify-content:center}
+.phones>.phone{width:min(300px,64vw)}
+.pair{--w:min(270px,46vw);position:relative;height:calc(var(--w) * 2.173 + 90px);width:calc(var(--w) * 1.72);margin:0 auto}
+.pair .phone{position:absolute;width:var(--w)}
+.pair .back{left:0;top:0;rotate:-5deg}
+.pair .front{right:0;top:90px;rotate:4deg;z-index:1}
+
+/* water: the only teal on the page */
+.water{background:radial-gradient(ellipse 55% 60% at 72% 50%,rgba(63,199,186,.18),transparent 70%)}
+.water .when{color:var(--teal)}
+.water h2{color:var(--teal)}
+
+/* last orders: a breath between the night and the morning */
+.interval{padding-block:clamp(110px,16vw,210px);text-align:center}
+.interval .when{justify-content:center}
+.big{margin:0;font-family:var(--display);font-weight:800;font-size:clamp(46px,8.4vw,116px);line-height:.98;letter-spacing:-.03em}
+.big span{color:var(--amber)}
+
+/* the morning after: the page turns to paper */
+.morning{color:var(--paper-ink);
+  background:radial-gradient(circle at 88% 22%,rgba(245,167,59,.45),transparent 26%),
+    linear-gradient(180deg,#160D07 0,var(--paper) 160px,var(--paper) calc(100% - 160px),#160D07 100%)}
+.morning .when{color:var(--amber-ink)}
+.morning .clock line{stroke:var(--paper-ink)}
+.morning .clock circle{fill:rgba(255,255,255,.4)}
+.story .morning .copy p{color:#5a4636}
+.morning .phone{box-shadow:0 30px 60px rgba(46,27,14,.35),0 0 0 1px rgba(46,27,14,.15)}
+
+/* every bar, everywhere: the night sky of the map */
+.atlas{padding-block:clamp(100px,14vw,180px);background:radial-gradient(ellipse 80% 60% at 50% 55%,#13201F 0%,#0B0F0E 60%,#160D07 100%)}
+.atlas .copy{text-align:center;max-width:820px;margin:0 auto 56px}
+.atlas .copy p{margin-left:auto;margin-right:auto}
+.atlas .when{justify-content:center}
+.trio{gap:clamp(16px,4vw,48px)}
+.trio>.phone{width:min(300px,42vw)}
+.trio .back{rotate:-4deg}.trio .front{rotate:4deg;translate:0 60px}
+.atlas .fine{margin:40px 0 0}
+
+/* house rules */
+.promise{padding-block:clamp(90px,12vw,150px)}
+.promise h2{margin-bottom:44px}
+.vows{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;counter-reset:v}
+.vows li{counter-increment:v;border-top:2px dashed rgba(246,235,217,.25);padding-top:18px;color:var(--cream-muted);font-size:19px}
+.vows li::before{content:"0" counter(v);display:block;font-family:var(--display);font-weight:800;font-size:56px;line-height:1;color:var(--amber);margin-bottom:14px}
+.vows b{display:block;color:var(--cream);font-family:var(--display);font-size:24px;font-weight:700;margin-bottom:6px}
+
+/* coming up: the board behind the bar */
+.board{padding-block:clamp(40px,6vw,80px)}
+.chalk{background:#1C211E;background-image:radial-gradient(ellipse at 30% 20%,rgba(255,255,255,.06),transparent 60%);border:14px solid #5A3A22;border-radius:10px;
+  box-shadow:inset 0 0 0 2px rgba(0,0,0,.4),0 30px 60px rgba(0,0,0,.5);padding:clamp(28px,5vw,56px)}
+.chalk h2{font-size:clamp(32px,4.4vw,54px);color:#EFEDE6;margin-bottom:30px}
+.road{list-style:none;padding:0;margin:0;display:grid;gap:0}
+.road li{display:grid;grid-template-columns:96px minmax(0,1fr);column-gap:24px;align-items:baseline;padding:20px 0;border-top:2px dashed rgba(239,237,230,.2)}
+.road li span:last-child{grid-column:2;color:rgba(239,237,230,.7)}
+.road b{font-family:var(--display);font-size:clamp(22px,2.6vw,30px);color:#EFEDE6}
+.tag{grid-row:span 2;align-self:start;justify-self:start;font-family:var(--mono);font-weight:600;font-size:13px;letter-spacing:.12em;text-transform:uppercase;padding:6px 12px;border-radius:999px;border:1.5px solid rgba(239,237,230,.4);color:rgba(239,237,230,.8)}
+.road li.on .tag{background:var(--amber);border-color:var(--amber);color:var(--paper-ink)}
+.road li.on b{color:var(--amber)}
+
+/* last call */
+.last{padding-block:clamp(100px,14vw,180px) 60px;text-align:center}
+.last h2{font-size:clamp(52px,9vw,124px)}
+.last p{color:var(--cream-muted);font-size:21px;margin:18px 0 0}
+.cta.big{font-size:21px;min-height:64px;padding:16px 38px;margin-top:20px}
+.last .maker{font-size:16px;margin-top:80px}
+
+/* motion: phones deal onto the shelf, and each beat rises in as you scroll */
+@media (prefers-reduced-motion:no-preference){
+  .fan .phone{animation:deal .9s cubic-bezier(.2,.8,.2,1) both}
+  .fan .f2{animation-delay:.12s}.fan .f3{animation-delay:.24s}
+  @keyframes deal{from{opacity:0;translate:0 120px}}
+  @supports (animation-timeline:view()){
+    .rise{animation:rise linear both;animation-timeline:view();animation-range:entry 0% cover 32%}
+    @keyframes rise{from{opacity:0;translate:0 80px}}
+  }
+}
+
+@media (max-width:860px){
+  .hero-in,.beat-in{grid-template-columns:1fr}
+  .hero-text{padding-bottom:0}
+  .flip .copy{order:0}
+  .vows{grid-template-columns:1fr}
+  .road li{grid-template-columns:1fr}
+  .tag{grid-row:auto;margin-bottom:10px}
+  .road li span:last-child{grid-column:1}
+}
+
+/* phones: most people will read this on one */
+@media (max-width:600px){
+  .hero{padding-top:28px}
+  .hero-in{gap:28px}
+  .fan{--w:31vw;max-width:94vw}
+  .beat{padding-block:72px}
+  .beat-in{gap:36px}
+  .interval{padding-block:96px}
+  .atlas,.promise{padding-block:80px}
+  .atlas .copy{margin-bottom:36px}
+  .last{padding-block:90px 40px}
+  .last .maker{margin-top:48px}
+  .phones>.phone{width:min(280px,60vw)}
+  .pair{--w:44vw}
+  .story .copy p{margin-top:16px}
+  .when{margin-bottom:14px}
+  .chalk{border-width:10px}
+  .bokeh i{animation:none;filter:blur(50px)}
+}
 </style>
 </head>
 <body>
 <div class="bokeh" aria-hidden="true"><i></i><i></i><i></i></div>
 <header class="top">
   <a class="mark" href="/" aria-label="Half Past home"><img src="/launch-mark.svg" alt="" width="40" height="40"><span>half past</span></a>
-  <nav aria-label="Main"><a href="/" aria-current="page">Home</a><a href="/privacy">Privacy</a><a href="/help">Help</a><a href="/support">Support</a></nav>
+  <nav aria-label="Main"><a href="/" aria-current="page">Home</a><a href="/privacy">Privacy</a><a href="/help">Help</a><a href="/support">Support</a><a class="pill" href="/join">Join the alpha</a></nav>
 </header>
-<main class="wide">
+<main class="story">
 
 <section class="hero">
-  <div class="hero-text">
-    <p class="chip">Alpha testers wanted · iPhone and Android</p>
-    <h1>Good nights,<br>well kept.</h1>
-    <p class="lede">A drink tracker for nights out. Log any drink in two taps, earn points for a good pace and for water, and wake up to a receipt and a map of where the night went.</p>
-    <p class="sub">Your nights stay on your phone. No account, no ads, nothing sent to us.</p>
-    <p><a class="cta" href="#join">Join the alpha</a></p>
-  </div>
-  <img class="icon" src="/app-icon.svg" alt="The Half Past app icon: a pint glass on a wooden bar under warm amber light" width="260" height="260">
-</section>
-
-<section class="paper rules" aria-labelledby="rules">
-  <p class="kicker">House rules</p>
-  <h2 id="rules">Three, and they are short.</h2>
-  <ol>
-    <li><b>It stays on your phone.</b> No account, no ads, nothing sent to us. The map and bar search come from Apple on iPhone and Google on Android. None of it comes to us.</li>
-    <li><b>Water earns points.</b> Have a water between drinks and tap Water. It scores from ten minutes after your last drink.</li>
-    <li><b>Two taps a drink.</b> Tap Drink, tap what you are having. Same again is one.</li>
-  </ol>
-</section>
-
-<section class="split">
-  <div>
-    <h2>How the points work</h2>
-    <ul class="plain">
-      <li><b>A good pace scores.</b> Each drink earns points, and so does each water break in between.</li>
-      <li><b>There are caps, by the hour, the night and the week.</b> Past one, points simply stop. You will never see a number, a bar or a countdown to a cap, because a visible ceiling becomes a target.</li>
-      <li><b>You can set your own weekly limit.</b> It caps your points too, and it cannot be switched off on a whim mid-night.</li>
-      <li><b>Alerts wait for a pause.</b> At most one an hour, each at most once a night. They read as care, never as a telling-off.</li>
-      <li><b>The morning after, you get a receipt.</b> Where you went, how long you were out, your water breaks and your points.</li>
-    </ul>
-  </div>
-  <figure class="receipt" aria-label="An example receipt">
-    <p class="r-head">HALF PAST</p>
-    <p class="r-sub">Example receipt</p>
-    <p class="r-sub">Printed for Alex</p>
-    <p class="r-rule"></p>
-    <p><span>Fri 14 Nov</span><span>The Crown</span></p>
-    <p><span>Home by</span><span>23:30</span></p>
-    <p><span>Out</span><span>3h 10m</span></p>
-    <p><span>Water breaks</span><span>3</span></p>
-    <p class="r-rule"></p>
-    <p class="r-total"><span>Points</span><span>42</span></p>
-    <p class="r-rule"></p>
-    <p class="r-note">Kept the pace.</p>
-    <p class="r-note">Thank you, come again.</p>
-  </figure>
-</section>
-
-<section class="inalpha" aria-labelledby="inalpha">
-  <p class="kicker">In the alpha</p>
-  <h2 id="inalpha">What you get.</h2>
-  <div class="feats">
-    <div class="feat feat-map">
-      <img class="phone" src="/screen-map.webp" alt="The Map tab in Half Past: an amber glow over Covent Garden, amber badges for the bars you have been to, and wood badges for bars nearby" width="560" height="1131" loading="lazy">
-      <div>
-      <h3>A map of your nights</h3>
-      <p>Every bar you have had a night in, with how many nights. A soft amber glow spreads over the streets you go out in. Zoom out and a globe fills in amber where you have had a night out. Tap a bar for its receipts, or Drink here to start.</p>
-      </div>
+  <div class="wrap hero-in">
+    <div class="hero-text">
+      <p class="when"><svg class="clock" viewBox="0 0 40 40" width="40" height="40" aria-hidden="true"><circle cx="20" cy="20" r="17"/><line x1="20" y1="20" x2="20" y2="10" transform="rotate(225.0 20 20)"/><line class="min" x1="20" y1="20" x2="20" y2="6" transform="rotate(180.0 20 20)"/><circle class="pin" cx="20" cy="20" r="2"/></svg><span>Friday. Getting ready.</span></p>
+      <h1>Good nights,<br><span>well kept.</span></h1>
+      <p class="lede">A drinks tracker for nights out. Two taps a drink, points for a good pace, a receipt in the morning.</p>
+      <p class="actions"><a class="cta" href="/join">Join the alpha</a><span class="fine">Free · iPhone and Android · 18+</span></p>
     </div>
-    <div class="feat"><h3>Pick the bar</h3><p>Start a night and the bars near you are already there, with the ones you have been to before at the top. Or just type the name.</p></div>
-    <div class="feat"><h3>The night moves with you</h3><p>Tap Moved bar and the night becomes a route: every bar, in order, on the receipt and the map.</p></div>
-    <div class="feat"><h3>Stamps and coasters</h3><p>A stamp for each new bar, city and country. A coaster for every bar, its design drawn from the bar's name, so no two are the same.</p></div>
-    <div class="feat"><h3>Behind the bar</h3><p>A short card on what is in your drink and where it comes from. Over seventy drinks so far.</p></div>
-    <div class="feat"><h3>The receipt</h3><p>The morning after, a printed receipt with your name on it, and one honest line on how the morning might go, like "A slow start likely. Water and breakfast first."</p></div>
-    <div class="feat"><h3>Never open the app</h3><p>Same again and water from a widget, the Lock Screen, a Live Activity or Quick Settings. Or ask Siri: "Add a drink in Half Past".</p></div>
-    <div class="feat"><h3>A calendar, not a streak</h3><p>Your weeks, months and year at a glance, shaded amber by the night, with a teal dot for water. No streak to keep alive.</p></div>
-    <div class="feat"><h3>Share a night</h3><p>Turn a night into a picture for your story. Place, time out, water breaks. Never how many drinks.</p></div>
-    <div class="feat feat-wide"><h3>Care, not nagging</h3><p>A plan reminder, a water nudge, and, if you switch it on, a nudge when you leave a bar to log the next one or end the night. Links to real help are one tap away.</p></div>
-  </div>
-</section>
-
-<section class="split asks">
-  <div>
-    <h2>What testers help answer</h2>
-    <ul class="plain">
-      <li><b>Do the caps feel fair?</b> Or do they get in the way of a good night?</li>
-      <li><b>Do points get people drinking water?</b> The whole idea rests on this one.</li>
-      <li><b>Do the alerts feel like care?</b> Or like being told off?</li>
-      <li><b>Is the receipt worth opening the morning after?</b></li>
-    </ul>
-  </div>
-  <div class="note-card">
-    <p>No analytics, so nothing is learned behind your back. Two short forms, after week one and week four, and a group chat for bugs. That is how the app gets better.</p>
-  </div>
-</section>
-
-<section class="paper never" aria-labelledby="never">
-  <h2 id="never">What it will never do</h2>
-  <ul>
-    <li>Rank, reward or show off how much anyone drinks.</li>
-    <li>Show a countdown, bar or ring towards a cap.</li>
-    <li>Send your nights anywhere, or write them to Apple Health or Health Connect.</li>
-    <li>Put you on a map for anyone else. No friends on the map, no live location.</li>
-    <li>Track you. No analytics, no ads, no account.</li>
-  </ul>
-</section>
-
-<section class="status">
-  <h2>Where it is</h2>
-  <div class="steps three">
-    <div class="now"><p class="kicker">Now</p><h3>Alpha</h3><p>Recruiting now. A small group of testers, let in a few at a time, for four weeks of real nights out. iPhone through TestFlight, Android through Play testing, both from the same build. Updates during the alpha bring your city and your year in places.</p></div>
-    <div><p class="kicker">Next</p><h3>Beta</h3>
-      <ul class="beta">
-        <li><b>Water you can prove.</b> Your camera checks the water break, on the phone itself, and the clip is deleted straight after.</li>
-        <li><b>Split the G.</b> Rate the pour, and see how close you get to the G. A bit of fun for Guinness drinkers.</li>
-        <li><b>Wrapped.</b> Your year of nights out, the places and the water breaks, made to share.</li>
-        <li><b>Little extras.</b> What the night cost, if you want to know, and badges for a good night: three water breaks, home by the plan, a new place.</li>
-      </ul>
+    <div class="fan" aria-label="Three screens from the app">
+      <img class="phone f1" src="/shots/receipt-480.webp" srcset="/shots/receipt-480.webp 480w, /shots/receipt-860.webp 860w" sizes="(min-width: 900px) 320px, 62vw" width="1320" height="2868" alt="The morning-after receipt for a night at Panda and Sons: 79 points" fetchpriority="high">
+      <img class="phone f2" src="/shots/welcome-480.webp" srcset="/shots/welcome-480.webp 480w, /shots/welcome-860.webp 860w" sizes="(min-width: 900px) 320px, 62vw" width="1320" height="2868" alt="The Half Past welcome screen: three glasses on a wooden shelf and the words Good nights, well kept" fetchpriority="high">
+      <img class="phone f3" src="/shots/live-480.webp" srcset="/shots/live-480.webp 480w, /shots/live-860.webp 860w" sizes="(min-width: 900px) 320px, 62vw" width="1320" height="2868" alt="A night in progress: 41 points, an Edinburgh Gin just logged, Drink and Water buttons" fetchpriority="high">
     </div>
-    <div><p class="kicker">Later</p><h3>With friends</h3><p>Whose round it is, a water break for the whole table, and a "home safe" for the group. Each one waits for its own privacy review first, because it means a server, and today there is none.</p></div>
   </div>
-  <p class="ask" id="join">Want to test the alpha? Sign-up takes a minute. You must be 18 or over.</p>
-  <p><a class="cta" href="/join">Sign up for the alpha</a></p>
+  <div class="ledge" aria-hidden="true"></div>
 </section>
 
-<section class="maker">
-  <p>Made by <a href="https://www.shawsuraj.com">Suraj Shaw</a> at <a href="https://www.shawlabs.dev">Shaw Labs</a>, after five years behind London bars.</p>
+<section class="beat">
+  <div class="wrap beat-in">
+    <div class="copy rise">
+      <p class="when"><svg class="clock" viewBox="0 0 40 40" width="40" height="40" aria-hidden="true"><circle cx="20" cy="20" r="17"/><line x1="20" y1="20" x2="20" y2="10" transform="rotate(232.5 20 20)"/><line class="min" x1="20" y1="20" x2="20" y2="6" transform="rotate(270.0 20 20)"/><circle class="pin" cx="20" cy="20" r="2"/></svg><span>Out the door</span></p>
+      <h2>Out tonight?</h2>
+      <p>One tap starts the night. Your last night out is right there to beat.</p>
+    </div>
+    <div class="phones"><img class="phone rise" src="/shots/home-480.webp" srcset="/shots/home-480.webp 480w, /shots/home-860.webp 860w" sizes="(min-width: 900px) 320px, 62vw" width="1320" height="2868" alt="The Tonight tab: Out tonight? with last night&#x27;s 79 points and a Start the night button" loading="lazy" decoding="async"></div>
+  </div>
+</section>
+
+<section class="beat flip">
+  <div class="wrap beat-in">
+    <div class="copy rise">
+      <p class="when"><svg class="clock" viewBox="0 0 40 40" width="40" height="40" aria-hidden="true"><circle cx="20" cy="20" r="17"/><line x1="20" y1="20" x2="20" y2="10" transform="rotate(248.0 20 20)"/><line class="min" x1="20" y1="20" x2="20" y2="6" transform="rotate(96.0 20 20)"/><circle class="pin" cx="20" cy="20" r="2"/></svg><span>First round</span></p>
+      <h2>Two taps<br>a drink.</h2>
+      <p>The whole menu, from a pint to a Passion fruit martini. Same again is one tap.</p>
+    </div>
+    <div class="phones pair">
+      <img class="phone rise back" src="/shots/live-480.webp" srcset="/shots/live-480.webp 480w, /shots/live-860.webp 860w" sizes="(min-width: 900px) 320px, 62vw" width="1320" height="2868" alt="Points tonight: 41, with the Edinburgh Gin just logged" loading="lazy" decoding="async">
+      <img class="phone rise front" src="/shots/menu-480.webp" srcset="/shots/menu-480.webp 480w, /shots/menu-860.webp 860w" sizes="(min-width: 900px) 320px, 62vw" width="1320" height="2868" alt="The drink menu: cocktails with their strength and units, Same again at the top" loading="lazy" decoding="async">
+    </div>
+  </div>
+</section>
+
+<section class="beat water">
+  <div class="wrap beat-in">
+    <div class="copy rise">
+      <p class="when"><svg class="clock" viewBox="0 0 40 40" width="40" height="40" aria-hidden="true"><circle cx="20" cy="20" r="17"/><line x1="20" y1="20" x2="20" y2="10" transform="rotate(260.5 20 20)"/><line class="min" x1="20" y1="20" x2="20" y2="6" transform="rotate(246.0 20 20)"/><circle class="pin" cx="20" cy="20" r="2"/></svg><span>Between rounds</span></p>
+      <h2>Water scores too.</h2>
+      <p>A glass between rounds earns points. Pace is the game, and the best nights win it.</p>
+    </div>
+    <div class="phones pair">
+      <img class="phone rise back" src="/shots/water-480.webp" srcset="/shots/water-480.webp 480w, /shots/water-860.webp 860w" sizes="(min-width: 900px) 320px, 62vw" width="1320" height="2868" alt="The water break screen: a teal ring and Tap to log it" loading="lazy" decoding="async">
+      <img class="phone rise front" src="/shots/water-logged-480.webp" srcset="/shots/water-logged-480.webp 480w, /shots/water-logged-860.webp 860w" sizes="(min-width: 900px) 320px, 62vw" width="1320" height="2868" alt="Water logged, plus 7 points, 48 points tonight" loading="lazy" decoding="async">
+    </div>
+  </div>
+</section>
+
+<section class="interval">
+  <div class="wrap">
+    <p class="when"><svg class="clock" viewBox="0 0 40 40" width="40" height="40" aria-hidden="true"><circle cx="20" cy="20" r="17"/><line x1="20" y1="20" x2="20" y2="10" transform="rotate(342.5 20 20)"/><line class="min" x1="20" y1="20" x2="20" y2="6" transform="rotate(150.0 20 20)"/><circle class="pin" cx="20" cy="20" r="2"/></svg><span>Last orders</span></p>
+    <p class="big rise">Tap End night.<br><span>Go home.</span></p>
+  </div>
+</section>
+
+<section class="beat morning">
+  <div class="wrap beat-in">
+    <div class="copy rise">
+      <p class="when"><svg class="clock" viewBox="0 0 40 40" width="40" height="40" aria-hidden="true"><circle cx="20" cy="20" r="17"/><line x1="20" y1="20" x2="20" y2="10" transform="rotate(275.0 20 20)"/><line class="min" x1="20" y1="20" x2="20" y2="6" transform="rotate(60.0 20 20)"/><circle class="pin" cx="20" cy="20" r="2"/></svg><span>The morning after</span></p>
+      <h2>Here is<br>your night.</h2>
+      <p>A printed receipt: where you went, how long you were out, how you paced it. Share it to your story, with the drinks hidden if you like.</p>
+    </div>
+    <div class="phones pair">
+      <img class="phone rise back" src="/shots/receipt-480.webp" srcset="/shots/receipt-480.webp 480w, /shots/receipt-860.webp 860w" sizes="(min-width: 900px) 320px, 62vw" width="1320" height="2868" alt="The receipt: Panda and Sons, 19:45 to 23:25, 79 points, Thanks for keeping it good" loading="lazy" decoding="async">
+      <img class="phone rise front" src="/shots/share-480.webp" srcset="/shots/share-480.webp 480w, /shots/share-860.webp 860w" sizes="(min-width: 900px) 320px, 62vw" width="1320" height="2868" alt="Share your night, with switches to show the drinks and the place" loading="lazy" decoding="async">
+    </div>
+  </div>
+</section>
+
+<section class="beat flip">
+  <div class="wrap beat-in">
+    <div class="copy rise">
+      <p class="when"><svg class="clock" viewBox="0 0 40 40" width="40" height="40" aria-hidden="true"><circle cx="20" cy="20" r="17"/><line x1="20" y1="20" x2="20" y2="10" transform="rotate(0.0 20 20)"/><line class="min" x1="20" y1="20" x2="20" y2="6" transform="rotate(0.0 20 20)"/><circle class="pin" cx="20" cy="20" r="2"/></svg><span>Sunday</span></p>
+      <h2>Every night,<br>kept.</h2>
+      <p>Your nights in one list, and a calendar shaded by the night. No streaks to keep alive.</p>
+    </div>
+    <div class="phones pair">
+      <img class="phone rise back" src="/shots/nights-480.webp" srcset="/shots/nights-480.webp 480w, /shots/nights-860.webp 860w" sizes="(min-width: 900px) 320px, 62vw" width="1320" height="2868" alt="Your nights: 936 points, 14 nights, 31 water breaks, with a list of nights out" loading="lazy" decoding="async">
+      <img class="phone rise front" src="/shots/calendar-480.webp" srcset="/shots/calendar-480.webp 480w, /shots/calendar-860.webp 860w" sizes="(min-width: 900px) 320px, 62vw" width="1320" height="2868" alt="The calendar for November, each night shaded by units" loading="lazy" decoding="async">
+    </div>
+  </div>
+</section>
+
+<section class="atlas">
+  <div class="wrap">
+    <div class="copy rise">
+      <p class="when"><svg class="clock" viewBox="0 0 40 40" width="40" height="40" aria-hidden="true"><circle cx="20" cy="20" r="17"/><line x1="20" y1="20" x2="20" y2="10" transform="rotate(0.0 20 20)"/><line class="min" x1="20" y1="20" x2="20" y2="6" transform="rotate(0.0 20 20)"/><circle class="pin" cx="20" cy="20" r="2"/></svg><span>Every night so far</span></p>
+      <h2>Everywhere you<br>have had a round.</h2>
+      <p>A map of your bars and a passport of the countries you have had a night out in. It is yours alone. Nobody else is on it, and nobody sees it.</p>
+    </div>
+    <div class="phones trio">
+      <img class="phone rise back" src="/shots/map-480.webp" srcset="/shots/map-480.webp 480w, /shots/map-860.webp 860w" sizes="(min-width: 900px) 320px, 62vw" width="1320" height="2868" alt="The map: amber pins for bars in India" loading="lazy" decoding="async">
+      <img class="phone rise front" src="/shots/passport-480.webp" srcset="/shots/passport-480.webp 480w, /shots/passport-860.webp 860w" sizes="(min-width: 900px) 320px, 62vw" width="1320" height="2868" alt="Your passport: India, Japan, the United Kingdom, Germany and Portugal, with the bar and date of each first night" loading="lazy" decoding="async">
+    </div>
+    <p class="fine center">Map and passport arrive on iPhone first. Android follows.</p>
+  </div>
+</section>
+
+<section class="promise">
+  <div class="wrap">
+    <p class="kicker">House rules</p>
+    <h2 class="rise">Yours, not ours.</h2>
+    <ol class="vows">
+      <li class="rise"><b>It stays on your phone.</b> Your nights never leave it.</li>
+      <li class="rise"><b>No account.</b> No sign-in, no email, no password.</li>
+      <li class="rise"><b>No ads. No tracking.</b> Nothing is sent to us. <a href="/privacy">The full privacy policy</a>.</li>
+    </ol>
+  </div>
+</section>
+
+<section class="board" aria-labelledby="road">
+  <div class="wrap">
+    <div class="chalk rise">
+      <h2 id="road">Coming up</h2>
+      <ol class="road">
+        <li class="on"><span class="tag">Now</span><b>Alpha</b><span>Invite only. Friends first, a few at a time, for four weeks of real nights out. iPhone and Android.</span></li>
+        <li><span class="tag">Next</span><b>Beta</b><span>Details soon.</span></li>
+        <li><span class="tag">Then</span><b>App Store and Google Play</b><span>For everyone over 18.</span></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section class="last" id="join">
+  <div class="wrap">
+    <h2 class="rise">Pull up a stool.</h2>
+    <p>Test the alpha. Sign-up takes a minute.</p>
+    <p><a class="cta big" href="/join">Join the alpha</a></p>
+    <p class="maker">Made by <a href="https://www.shawsuraj.com">Suraj Shaw</a> at <a href="https://www.shawlabs.dev">Shaw Labs</a>, after five years behind London bars.</p>
+  </div>
 </section>
 
 </main>
