@@ -1,10 +1,13 @@
 # Alpha sign-ups: setup
 
 The form at halfpast.shawlabs.dev/join is plain HTML. It sends nothing until
-someone presses Sign up. Then it posts to a Google Apps Script web app, which
-checks the answers, adds a row to the sign-up sheet, emails a note to
-halfpast@shawlabs.dev, and sends the person to /thanks (or /join-check if
-something was missing).
+someone presses Sign up. Then it posts to the site's own `/api/join`
+(`halfpast/api/join.js`, a Vercel function). That passes the answers to a
+Google Apps Script web app, which checks them, adds a row to the sign-up
+sheet, emails a note to halfpast@shawlabs.dev and answers "ok", "check" or
+"error". The function then sends the person to /thanks, /join-check or
+/join-error. Nobody sees a Google page: Instagram's in-app browser shows
+Google's own page as blank, which is why it works this way.
 
 ## One-time setup (about 5 minutes)
 
@@ -20,9 +23,9 @@ something was missing).
    - Who has access: Anyone
    Press Deploy and copy the Web app URL (it ends in `/exec`).
 5. Open that URL in a browser. It should say "Half Past sign-ups are open."
-6. Put the URL in `SIGNUP_URL` at the top of `halfpast/build.py`, run
-   `python3 halfpast/build.py`, commit and push. Until then, /join shows the
-   email route instead of the form.
+6. Put the URL in `SCRIPT_URL` at the top of `halfpast/api/join.js`, commit
+   and push. `SIGNUP_OPEN` in `halfpast/build.py` turns the form on or off
+   (off shows the email route instead).
 7. Sign up once yourself on the live site. Check the row appears and the
    email arrives, then delete your test row.
 

@@ -1,9 +1,9 @@
 /**
  * Half Past alpha sign-ups.
  *
- * Receives the plain HTML form on halfpast.shawlabs.dev/join, checks it,
- * adds one row to this sheet, emails a note to NOTIFY_EMAIL and sends the
- * person back to halfpast.shawlabs.dev/thanks.
+ * The form on halfpast.shawlabs.dev/join posts to the site's /api/join,
+ * which passes it on to here. This checks it, adds one row to this sheet,
+ * emails a note to NOTIFY_EMAIL and answers with one word.
  *
  * Setup: see halfpast/signups/SETUP.md in the shawlabs.dev repo.
  *
@@ -12,7 +12,6 @@
  */
 
 const NOTIFY_EMAIL = 'halfpast@shawlabs.dev';
-const SITE = 'https://halfpast.shawlabs.dev';
 const SHEET_NAME = 'Sign-ups';
 const HEADERS = [
   'Signed up', 'Name', 'Email', 'Phone', 'Instagram',
@@ -160,45 +159,26 @@ function summary(book) {
 }
 
 /**
- * The form posts here. A good entry goes to /thanks. A bad one goes back to
- * /join-check, except spam, which also sees /thanks so bots learn nothing.
+ * The site's /api/join passes the form on to here and reads the answer:
+ * "ok" (saved, or already on the list), "check" (something missing or wrong)
+ * or "error". Spam also gets "ok", so bots learn nothing.
  */
 function doPost(e) {
-  let next = SITE + '/thanks';
   try {
     const p = (e && e.parameter) || {};
-    if (clean(p.website, 200) !== '') return back(next); // spam trap
+    if (clean(p.website, 200) !== '') return reply('ok'); // spam trap
     const entry = check(p);
-    if (entry) save(entry);
-    else next = SITE + '/join-check';
+    if (!entry) return reply('check');
+    save(entry);
+    return reply('ok');
   } catch (err) {
     console.error(err);
-    next = SITE + '/join-check';
+    return reply('error');
   }
-  return back(next);
 }
 
-/**
- * Sends the browser back to the site. Apps Script shows its pages in a frame,
- * so the link targets the top window, and the button works even where the
- * automatic move is blocked.
- */
-function back(url) {
-  const safeUrl = url.replace(/"/g, '');
-  const html =
-    '<!doctype html><html><head><meta charset="utf-8">' +
-    '<meta name="viewport" content="width=device-width, initial-scale=1">' +
-    '<base target="_top"><title>Half Past</title></head>' +
-    '<body style="margin:0;background:#2A1A10;color:#F6EBD9;font:18px/1.5 system-ui,sans-serif">' +
-    '<div style="max-width:480px;margin:48px auto;padding:0 20px">' +
-    '<p style="font-weight:700;font-size:22px">Thanks. Taking you back to Half Past…</p>' +
-    '<p><a href="' + safeUrl + '" style="display:inline-block;background:#F5A73B;color:#2E1B0E;' +
-    'font-weight:700;text-decoration:none;padding:16px 24px;border-radius:14px">Back to Half Past</a></p>' +
-    '</div><script>try{window.top.location.replace("' + safeUrl + '")}catch(e){}</script>' +
-    '</body></html>';
-  return HtmlService.createHtmlOutput(html)
-    .setTitle('Half Past')
-    .addMetaTag('viewport', 'width=device-width, initial-scale=1');
+function reply(word) {
+  return ContentService.createTextOutput(word).setMimeType(ContentService.MimeType.TEXT);
 }
 
 /** A visit in a browser shows this, so you can test the URL is live. */
