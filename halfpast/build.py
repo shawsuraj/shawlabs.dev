@@ -15,7 +15,7 @@ UPDATED = "22 November 2026"
 
 # The Apps Script web app that receives the /join form (signups/SETUP.md).
 # While it is empty, /join shows the email route instead of the form.
-SIGNUP_URL = ""
+SIGNUP_URL = "https://script.google.com/macros/s/AKfycbzoxROz9ClZnRHltlf3ayOOsTMCDVWMfjTzgoLwqnZFXb9D_wGFoIjd-_Lda_Voi-6TZA/exec"
 # vercel.json lets /join and /join-check post only to script.google.com and
 # script.googleusercontent.com, where Apps Script redirects the post.
 
