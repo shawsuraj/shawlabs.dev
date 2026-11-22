@@ -1,23 +1,4 @@
-<!doctype html>
-<html lang="en-GB">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Help and advice · Last Round</title>
-<meta name="description" content="Free and confidential alcohol advice and support: 999, NHS, Drinkline, Samaritans and Drinkaware.">
-<link rel="canonical" href="https://lastround.shawlabs.dev/help">
-<meta name="theme-color" content="#2A1A10">
-<meta name="color-scheme" content="dark">
-<meta property="og:title" content="Help and advice · Last Round">
-<meta property="og:description" content="Free and confidential alcohol advice and support: 999, NHS, Drinkline, Samaritans and Drinkaware.">
-<meta property="og:url" content="https://lastround.shawlabs.dev/help">
-<meta property="og:type" content="website">
-<meta property="og:image" content="https://lastround.shawlabs.dev/og.png">
-<link rel="icon" href="/app-icon.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="preload" href="/fonts/unbounded.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="/fonts/instrument-sans.woff2" as="font" type="font/woff2" crossorigin>
-<style>/* Last Round · the bar shelf, on the web.
+/* Half Past · the bar shelf, on the web.
    Tokens from docs/design-notes.md 1.7.0. Dark only, like the app: bars are dark.
    Amber means drinks and actions. Teal means water and nothing else. No red, no green. */
 @font-face{font-family:"Unbounded";src:url(/fonts/unbounded.woff2) format("woff2");font-weight:200 900;font-display:swap}
@@ -163,6 +144,7 @@ main.col{max-width:760px}
 .feat{border:1.5px solid rgba(246,235,217,.18);border-radius:18px;padding:22px 24px;background:rgba(0,0,0,.18)}
 .feat h3{font-size:20px;margin-bottom:8px;color:var(--cream)}
 .feat p{margin:0;color:var(--cream-muted)}
+.feat-wide{grid-column:1/-1}
 .feat-map{grid-column:span 2;grid-row:span 2;border-color:var(--amber);display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:24px;align-items:center}
 .phone{display:block;width:100%;max-width:240px;height:auto;margin:0 auto;border-radius:30px;border:6px solid #120B06;box-shadow:0 24px 50px rgba(0,0,0,.5),0 0 0 1px rgba(255,214,160,.12)}
 .feat-map h3{font-size:24px}
@@ -180,36 +162,3 @@ main.col{max-width:760px}
 }
 .cta{display:inline-flex;align-items:center;min-height:48px;margin-top:22px;padding:12px 26px;border-radius:999px;background:var(--amber);color:var(--paper-ink);font-weight:700;text-decoration:none;box-shadow:0 4px 0 var(--amber-shadow)}
 .cta:hover{color:var(--paper-ink);background:#FFB54F}
-</style>
-</head>
-<body>
-<div class="bokeh" aria-hidden="true"><i></i><i></i><i></i></div>
-<header class="top">
-  <a class="mark" href="/" aria-label="Last Round home"><img src="/launch-mark.svg" alt="" width="40" height="40"><span>last round</span></a>
-  <nav aria-label="Main"><a href="/">Home</a><a href="/privacy">Privacy</a><a href="/help" aria-current="page">Help</a><a href="/support">Support</a></nav>
-</header>
-<main class="col">
-
-<article class="doc">
-<h1>Help and advice</h1>
-<p class="lede">Free and confidential. You do not need to use Last Round for any of these.</p>
-<ul class="help">
-  <li class="urgent"><a href="tel:999"><b>Call 999</b></a><span>If someone cannot be woken, or is breathing slowly or oddly. Stay with them.</span></li>
-  <li><a href="https://www.nhs.uk/conditions/alcohol-poisoning/"><b>Signs of alcohol poisoning</b></a><span>NHS: what to look for and what to do.</span></li>
-  <li><a href="tel:03001231110"><b>Drinkline 0300 123 1110</b></a><span>Free and confidential. Weekdays 9am to 8pm, weekends 11am to 4pm.</span></li>
-  <li><a href="tel:116123"><b>Samaritans 116 123</b></a><span>Free, any time, day or night.</span></li>
-  <li><a href="https://www.nhs.uk/live-well/alcohol-advice/"><b>NHS alcohol advice</b></a><span>The low-risk guideline and ways to cut down.</span></li>
-  <li><a href="https://www.drinkaware.co.uk/"><b>Drinkaware</b></a><span>Independent advice on alcohol.</span></li>
-  <li><a href="https://www.drinkaware.co.uk/facts/information-about-alcohol/alcoholic-drinks-and-units/what-is-an-alcohol-unit"><b>What a unit is</b></a><span>Drinkaware: the units in your drinks.</span></li>
-  <li><a href="https://www.drinkaware.co.uk/advice-and-support/alcohol-support-services"><b>Support services</b></a><span>Drinkaware's list, for you or someone close.</span></li>
-</ul>
-<p class="note">These links leave this site. Last Round and this site send nothing with them.</p>
-</article>
-
-</main>
-<footer class="foot">
-  <p>18+ only. Last Round is not medical advice. If you are worried about your drinking, <a href="/help">help is here</a>.</p>
-  <p class="links"><a href="/privacy">Privacy</a><a href="/alpha">Alpha terms</a><a href="/support">Support</a><a href="/help">Help</a><a href="https://www.shawlabs.dev">A Shaw Labs project</a></p>
-</footer>
-</body>
-</html>

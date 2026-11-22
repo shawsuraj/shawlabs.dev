@@ -83,7 +83,7 @@
     out.textContent=enc("meet me at nine","veil");
   }
 
-  /* ---------- Last Round: pace the night ----------
+  /* ---------- Half Past: pace the night ----------
      Mirrors the app's rules in spirit, never its numbers: no cap is ever shown,
      and past one the points simply stop, with no banner (docs/website.md). */
   var ld=$("[data-ld]");

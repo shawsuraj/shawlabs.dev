@@ -3,21 +3,21 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Privacy · Last Round</title>
-<meta name="description" content="What Last Round keeps, and where: everything stays on your phone and nothing is sent to us. On iPhone, bar suggestions and the map use Apple Maps.">
-<link rel="canonical" href="https://lastround.shawlabs.dev/privacy">
+<title>Privacy · Half Past</title>
+<meta name="description" content="What Half Past keeps, and where: everything stays on your phone and nothing is sent to us. Bar suggestions and the map use Apple Maps on iPhone and Google on Android.">
+<link rel="canonical" href="https://halfpast.shawlabs.dev/privacy">
 <meta name="theme-color" content="#2A1A10">
 <meta name="color-scheme" content="dark">
-<meta property="og:title" content="Privacy · Last Round">
-<meta property="og:description" content="What Last Round keeps, and where: everything stays on your phone and nothing is sent to us. On iPhone, bar suggestions and the map use Apple Maps.">
-<meta property="og:url" content="https://lastround.shawlabs.dev/privacy">
+<meta property="og:title" content="Privacy · Half Past">
+<meta property="og:description" content="What Half Past keeps, and where: everything stays on your phone and nothing is sent to us. Bar suggestions and the map use Apple Maps on iPhone and Google on Android.">
+<meta property="og:url" content="https://halfpast.shawlabs.dev/privacy">
 <meta property="og:type" content="website">
-<meta property="og:image" content="https://lastround.shawlabs.dev/og.png">
+<meta property="og:image" content="https://halfpast.shawlabs.dev/og-halfpast.png">
 <link rel="icon" href="/app-icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preload" href="/fonts/unbounded.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/instrument-sans.woff2" as="font" type="font/woff2" crossorigin>
-<style>/* Last Round · the bar shelf, on the web.
+<style>/* Half Past · the bar shelf, on the web.
    Tokens from docs/design-notes.md 1.7.0. Dark only, like the app: bars are dark.
    Amber means drinks and actions. Teal means water and nothing else. No red, no green. */
 @font-face{font-family:"Unbounded";src:url(/fonts/unbounded.woff2) format("woff2");font-weight:200 900;font-display:swap}
@@ -163,6 +163,7 @@ main.col{max-width:760px}
 .feat{border:1.5px solid rgba(246,235,217,.18);border-radius:18px;padding:22px 24px;background:rgba(0,0,0,.18)}
 .feat h3{font-size:20px;margin-bottom:8px;color:var(--cream)}
 .feat p{margin:0;color:var(--cream-muted)}
+.feat-wide{grid-column:1/-1}
 .feat-map{grid-column:span 2;grid-row:span 2;border-color:var(--amber);display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:24px;align-items:center}
 .phone{display:block;width:100%;max-width:240px;height:auto;margin:0 auto;border-radius:30px;border:6px solid #120B06;box-shadow:0 24px 50px rgba(0,0,0,.5),0 0 0 1px rgba(255,214,160,.12)}
 .feat-map h3{font-size:24px}
@@ -185,35 +186,44 @@ main.col{max-width:760px}
 <body>
 <div class="bokeh" aria-hidden="true"><i></i><i></i><i></i></div>
 <header class="top">
-  <a class="mark" href="/" aria-label="Last Round home"><img src="/launch-mark.svg" alt="" width="40" height="40"><span>last round</span></a>
+  <a class="mark" href="/" aria-label="Half Past home"><img src="/launch-mark.svg" alt="" width="40" height="40"><span>half past</span></a>
   <nav aria-label="Main"><a href="/">Home</a><a href="/privacy" aria-current="page">Privacy</a><a href="/help">Help</a><a href="/support">Support</a></nav>
 </header>
 <main class="col">
 
 <article class="doc">
-<p class="kicker">Last updated 17 November 2026</p>
+<p class="kicker">Last updated 22 November 2026</p>
 <h1>Privacy</h1>
-<p class="lede">Everything you log in Last Round stays on your phone. Nothing is sent to us. This page says exactly what is kept, where, and the one thing that talks to Apple Maps on iPhone.</p>
+<p class="lede">Everything you log in Half Past stays on your phone. Nothing is sent to us. This page says exactly what is kept, where, and what the map and bar search send to Apple or Google.</p>
 
 <h2>Who we are</h2>
-<p>Last Round is made by Shaw Labs, run by Suraj Shaw in London. For any privacy question, email <a href="mailto:lastround@shawlabs.dev?subject=Last%20Round%20privacy">lastround@shawlabs.dev</a>.</p>
+<p>Half Past is made by Shaw Labs, run by Suraj Shaw in London. For any privacy question, email <a href="mailto:halfpast@shawlabs.dev?subject=Half%20Past%20privacy">halfpast@shawlabs.dev</a>.</p>
 
 <h2>What the app keeps, only on your phone</h2>
 <ul>
   <li>Each drink and water break, with its time.</li>
-  <li>The place you type for a night or, on iPhone, the bar you pick from the suggestions, with where that bar is (its map point and Apple Maps' id for it). And your plan, such as the time you mean to be home.</li>
+  <li>The place you type for a night, or the bar you pick from the suggestions, with where that bar is: its map point and the map service's id for it (Apple Maps' on iPhone, Google's on Android). And your plan, such as the time you mean to be home.</li>
   <li>Your name, if you set one. It is printed on your receipts and never on a picture you share.</li>
   <li>Your weekly limit, which alerts you have seen, and how long you keep your nights.</li>
   <li>For your age, a yes and when you tapped it. Never your date of birth.</li>
 </ul>
 
 <h2>What we never collect</h2>
-<p>No account, no analytics, no ads and no tracking. No contacts and no health data. Nothing is sent to a server of ours, because there is none. Where you are is never stored. On Android the app has no internet or location permission.</p>
+<p>No account, no analytics, no ads and no tracking. No contacts and no health data. Nothing is sent to a server of ours, because there is none. Where you are is never stored.</p>
 
-<h2>Bar suggestions and the map (iPhone only)</h2>
-<p>On iPhone you can turn on <i>Suggest bars near me</i> in You, or by answering yes the first time you open the Map tab. It is off until you do. When it is on and you start a night or open the Map tab, the app asks iPhone for your location once and uses Apple Maps to list bars near you. If you search, what you type goes to Apple Maps too, and tapping one of Apple's bar labels or <i>Search this area</i> asks Apple about that place or that part of the map.</p>
-<p>Apple handles that request under Apple's own privacy policy. It does not come to us, and your location is never saved: only the bar you pick, and where that bar is, is kept with that night on your phone. Delete everything removes it, and the setting goes back to off. Android does not have this feature and asks for no location.</p>
-<p>How far each suggested bar is shows on screen only and is never saved. The map on iPhone (the Map tab, and the map from the Start sheet) is drawn by Apple Maps, so the area you are looking at is sent to Apple to draw it, even with suggestions off. With suggestions on, opening the map reads your location once and marks where you were. The map never follows you, and the mark goes when you leave the map. Your map is drawn from the bars you picked, kept on your phone.</p>
+<h2>Bar suggestions and the map on iPhone</h2>
+<p>You can turn on <i>Suggest bars near me</i> in You, or by answering yes the first time you open the Map tab. It is off until you do. When it is on and you start a night or open the Map tab, the app asks iPhone for your location once and uses Apple Maps to list bars near you. During a night, coming back to the app checks your location once more to ask if you have moved on to a new bar. That check stays on your phone and is sent to no one.</p>
+<p>If you search, what you type goes to Apple Maps too, and <i>Search this area</i> asks Apple about that part of the map. Apple handles those requests under Apple's own privacy policy. They do not come to us, and your location is never saved: only the bar you pick, and where that bar is, is kept with that night on your phone. Delete everything removes it, and the setting goes back to off.</p>
+<p>How far each suggested bar is shows on screen only and is never saved. The map (the Map tab, and the map from the Start sheet) is drawn by Apple Maps, so the area you are looking at is sent to Apple to draw it, even with suggestions off. With suggestions on, opening the map reads your location once and marks where you were. The map never follows you, and the mark goes when you leave the map. Your map is drawn from the bars you picked, kept on your phone.</p>
+
+<h2>Bar suggestions and the map on Android</h2>
+<p>It works the same way, with Google in Apple's place. The first time a search needs your location, Android asks whether Half Past may use it while the app is open, and you can choose approximate. Your location and anything you type to search go to Google's Places API to find bars. The map is drawn by Google Maps through Google Play services, so the area you are looking at is sent to Google, even with suggestions off. Google handles those requests under Google's own privacy policy, and Google Play services works under Google's own terms. None of it comes to us.</p>
+
+<h2>Notice when I leave a bar</h2>
+<p>This is off until you turn it on, and it needs notifications and location set to Always. While a night is open, your phone keeps one circle round tonight's bar and wakes Half Past only when you walk out of it, to send one notification that names no place, drink or number. On iPhone the circle is kept by iOS. On Android it is kept by Google Play services, under a plain name with no time or place in it. The circle is removed when the night ends. A night that closes itself while the app is away sends nothing, and its circle goes the next time you open the app or walk out. Where you go is never kept.</p>
+
+<h2>Siri and Shortcuts</h2>
+<p>If you use Siri, what you say is handled by Apple under Apple's own privacy policy, and Apple keeps its own history of it. Half Past cannot reach that history. The app keeps no record of a drink you named to Siri beyond the drink itself in your night.</p>
 
 <h2>Backups</h2>
 <p>On iPhone, the app's data is kept out of iCloud and Finder backups. On Android, app backup is turned off. So your nights are not copied to any cloud.</p>
@@ -234,10 +244,10 @@ main.col{max-width:760px}
 <p>Share your night makes a picture on your phone, only when you tap it, and hands it to your phone's share sheet. Where it goes after that is up to you. It never shows your name, your points or a limit.</p>
 
 <h2>Links out</h2>
-<p>The Drinkaware, NHS, Drinkline and Samaritans links in the app open in your browser or phone app. Last Round sends nothing with them. Those services have their own privacy policies.</p>
+<p>The Drinkaware, NHS, Drinkline and Samaritans links in the app open in your browser or phone app. Half Past sends nothing with them. Those services have their own privacy policies.</p>
 
 <h2>Age</h2>
-<p>Last Round is for adults aged 18 and over. It is not for children.</p>
+<p>Half Past is for adults aged 18 and over. It is not for children.</p>
 
 <h2>Our legal basis</h2>
 <p>Because nothing you log ever reaches us, we do not collect or process it, and we are not a controller of the data kept on your phone. If you email us, we use your email address and message only to reply, on the basis of our legitimate interest in answering you, and we delete them when the conversation is over.</p>
@@ -251,7 +261,7 @@ main.col{max-width:760px}
 
 </main>
 <footer class="foot">
-  <p>18+ only. Last Round is not medical advice. If you are worried about your drinking, <a href="/help">help is here</a>.</p>
+  <p>18+ only. Half Past is not medical advice. If you are worried about your drinking, <a href="/help">help is here</a>.</p>
   <p class="links"><a href="/privacy">Privacy</a><a href="/alpha">Alpha terms</a><a href="/support">Support</a><a href="/help">Help</a><a href="https://www.shawlabs.dev">A Shaw Labs project</a></p>
 </footer>
 </body>

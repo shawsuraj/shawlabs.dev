@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Builds lastround.shawlabs.dev into public/.
+"""Builds halfpast.shawlabs.dev into public/.
 
 Plain static pages. No JavaScript, no third-party requests, fonts served from
 this site (docs/website.md: a privacy page that tracks its readers undoes itself).
@@ -9,9 +9,9 @@ import os, shutil, html
 ROOT = os.path.dirname(os.path.abspath(__file__))
 SRC = os.path.join(ROOT, "src")
 OUT = os.path.join(ROOT, "public")
-HOST = "https://lastround.shawlabs.dev"
-EMAIL = "lastround@shawlabs.dev"
-UPDATED = "17 November 2026"
+HOST = "https://halfpast.shawlabs.dev"
+EMAIL = "halfpast@shawlabs.dev"
+UPDATED = "22 November 2026"
 
 CSS = open(os.path.join(SRC, "site.css")).read()
 
@@ -37,7 +37,7 @@ def page(slug, title, desc, body, wide=False):
 <meta property="og:description" content="{html.escape(desc)}">
 <meta property="og:url" content="{HOST}{path}">
 <meta property="og:type" content="website">
-<meta property="og:image" content="{HOST}/og.png">
+<meta property="og:image" content="{HOST}/og-halfpast.png">
 <link rel="icon" href="/app-icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preload" href="/fonts/unbounded.woff2" as="font" type="font/woff2" crossorigin>
@@ -47,14 +47,14 @@ def page(slug, title, desc, body, wide=False):
 <body>
 <div class="bokeh" aria-hidden="true"><i></i><i></i><i></i></div>
 <header class="top">
-  <a class="mark" href="/" aria-label="Last Round home"><img src="/launch-mark.svg" alt="" width="40" height="40"><span>last round</span></a>
+  <a class="mark" href="/" aria-label="Half Past home"><img src="/launch-mark.svg" alt="" width="40" height="40"><span>half past</span></a>
   <nav aria-label="Main">{nav}</nav>
 </header>
 <main class="{'wide' if wide else 'col'}">
 {body}
 </main>
 <footer class="foot">
-  <p>18+ only. Last Round is not medical advice. If you are worried about your drinking, <a href="/help">help is here</a>.</p>
+  <p>18+ only. Half Past is not medical advice. If you are worried about your drinking, <a href="/help">help is here</a>.</p>
   <p class="links"><a href="/privacy">Privacy</a><a href="/alpha">Alpha terms</a><a href="/support">Support</a><a href="/help">Help</a><a href="https://www.shawlabs.dev">A Shaw Labs project</a></p>
 </footer>
 </body>
@@ -71,14 +71,14 @@ INDEX = f"""
     <p class="sub">Your nights stay on your phone. No account, no ads, nothing sent to us.</p>
     <p><a class="cta" href="#join">Join the alpha</a></p>
   </div>
-  <img class="icon" src="/app-icon.svg" alt="The Last Round app icon: a pint glass on a wooden bar under warm amber light" width="260" height="260">
+  <img class="icon" src="/app-icon.svg" alt="The Half Past app icon: a pint glass on a wooden bar under warm amber light" width="260" height="260">
 </section>
 
 <section class="paper rules" aria-labelledby="rules">
   <p class="kicker">House rules</p>
   <h2 id="rules">Three, and they are short.</h2>
   <ol>
-    <li><b>It stays on your phone.</b> No account, no ads, nothing sent to us. On iPhone the map comes from Apple Maps; that is the only thing that ever goes online.</li>
+    <li><b>It stays on your phone.</b> No account, no ads, nothing sent to us. The map and bar search come from Apple on iPhone and Google on Android. None of it comes to us.</li>
     <li><b>Water earns points.</b> Have a water between drinks and tap Water. It scores from ten minutes after your last drink.</li>
     <li><b>Two taps a drink.</b> Tap Drink, tap what you are having. Same again is one.</li>
   </ol>
@@ -96,7 +96,7 @@ INDEX = f"""
     </ul>
   </div>
   <figure class="receipt" aria-label="An example receipt">
-    <p class="r-head">LAST ROUND</p>
+    <p class="r-head">HALF PAST</p>
     <p class="r-sub">Example receipt</p>
     <p class="r-sub">Printed for Alex</p>
     <p class="r-rule"></p>
@@ -114,35 +114,25 @@ INDEX = f"""
 
 <section class="inalpha" aria-labelledby="inalpha">
   <p class="kicker">In the alpha</p>
-  <h2 id="inalpha">What you get on night one.</h2>
+  <h2 id="inalpha">What you get.</h2>
   <div class="feats">
     <div class="feat feat-map">
-      <img class="phone" src="/screen-map.webp" alt="The Map tab in Last Round: an amber glow over Covent Garden, amber badges for the bars you have been to, and wood badges for bars nearby" width="560" height="1131" loading="lazy">
+      <img class="phone" src="/screen-map.webp" alt="The Map tab in Half Past: an amber glow over Covent Garden, amber badges for the bars you have been to, and wood badges for bars nearby" width="560" height="1131" loading="lazy">
       <div>
       <h3>A map of your nights</h3>
-      <p>Every bar you have had a night in, with how many nights. A soft amber glow spreads over the streets you go out in. Tap a bar for its receipts, or Drink here to start. iPhone first; Android gets a list of your places.</p>
+      <p>Every bar you have had a night in, with how many nights. A soft amber glow spreads over the streets you go out in. Zoom out and a globe fills in amber where you have had a night out. Tap a bar for its receipts, or Drink here to start.</p>
       </div>
     </div>
     <div class="feat"><h3>Pick the bar</h3><p>Start a night and the bars near you are already there, with the ones you have been to before at the top. Or just type the name.</p></div>
+    <div class="feat"><h3>The night moves with you</h3><p>Tap Moved bar and the night becomes a route: every bar, in order, on the receipt and the map.</p></div>
+    <div class="feat"><h3>Stamps and coasters</h3><p>A stamp for each new bar, city and country. A coaster for every bar, its design drawn from the bar's name, so no two are the same.</p></div>
+    <div class="feat"><h3>Behind the bar</h3><p>A short card on what is in your drink and where it comes from. Over seventy drinks so far.</p></div>
+    <div class="feat"><h3>The receipt</h3><p>The morning after, a printed receipt with your name on it, and one honest line on how the morning might go, like "A slow start likely. Water and breakfast first."</p></div>
+    <div class="feat"><h3>Never open the app</h3><p>Same again and water from a widget, the Lock Screen, a Live Activity or Quick Settings. Or ask Siri: "Add a drink in Half Past".</p></div>
     <div class="feat"><h3>A calendar, not a streak</h3><p>Your weeks, months and year at a glance, shaded amber by the night, with a teal dot for water. No streak to keep alive.</p></div>
-    <div class="feat"><h3>The receipt</h3><p>The morning after, a printed receipt with your name on it: where you went, how long you were out, water breaks and points.</p></div>
     <div class="feat"><h3>Share a night</h3><p>Turn a night into a picture for your story. Place, time out, water breaks. Never how many drinks.</p></div>
-    <div class="feat"><h3>Care, not nagging</h3><p>A reminder of the plan you set and a water nudge, both off until you turn them on. Links to real help are always one tap away.</p></div>
+    <div class="feat feat-wide"><h3>Care, not nagging</h3><p>A plan reminder, a water nudge, and, if you switch it on, a nudge when you leave a bar to log the next one or end the night. Links to real help are one tap away.</p></div>
   </div>
-</section>
-
-<section class="paper bench" aria-labelledby="bench">
-  <p class="kicker">On the bench</p>
-  <h2 id="bench">Being built during the alpha.</h2>
-  <ul>
-    <li><b>The night moves with you.</b> Tap Moved bar and the night becomes a route: every bar, in order, on the receipt and the map.</li>
-    <li><b>Passport stamps.</b> A stamp for each new bar, city and country, and a globe that fills in amber where you have had a night out.</li>
-    <li><b>Coasters.</b> A coaster for every bar you visit, its design drawn from the bar's name, so no two are the same.</li>
-    <li><b>Behind the bar.</b> A short card on what is in your drink and where it comes from, written by someone who poured them for years.</li>
-    <li><b>The morning outlook.</b> One honest line on the receipt, like "A slow start likely. Water and breakfast first."</li>
-    <li><b>Never open the app.</b> Same again and water from the Lock Screen, a Live Activity with the bar and time out, and Siri: "add a Guinness".</li>
-  </ul>
-  <p class="small">Some of these may land a build or two into the alpha. Testers get every build as it ships.</p>
 </section>
 
 <section class="split asks">
@@ -174,20 +164,18 @@ INDEX = f"""
 <section class="status">
   <h2>Where it is</h2>
   <div class="steps three">
-    <div class="now"><p class="kicker">Now</p><h3>Alpha</h3><p>Recruiting now. A small group of testers, let in a few at a time, for four weeks of real nights out. iPhone through TestFlight, Android through Play testing, both from the same build.</p></div>
+    <div class="now"><p class="kicker">Now</p><h3>Alpha</h3><p>Recruiting now. A small group of testers, let in a few at a time, for four weeks of real nights out. iPhone through TestFlight, Android through Play testing, both from the same build. Updates during the alpha bring your city and your year in places.</p></div>
     <div><p class="kicker">Next</p><h3>Beta</h3>
       <ul class="beta">
         <li><b>Water you can prove.</b> Your camera checks the water break, on the phone itself, and the clip is deleted straight after.</li>
-        <li><b>A bar passport.</b> A stamp for every bar, with your first visit and how many nights you have spent there.</li>
         <li><b>Split the G.</b> Rate the pour, and see how close you get to the G. A bit of fun for Guinness drinkers.</li>
         <li><b>Wrapped.</b> Your year of nights out, the places and the water breaks, made to share.</li>
-        <li><b>Smarter nights.</b> "Still at The Crown?" when you open the app somewhere new, and maybe, if you switch it on, a nudge when you leave a bar to log the next one or get home well.</li>
         <li><b>Little extras.</b> What the night cost, if you want to know, and badges for a good night: three water breaks, home by the plan, a new place.</li>
       </ul>
     </div>
     <div><p class="kicker">Later</p><h3>With friends</h3><p>Whose round it is, a water break for the whole table, and a "home safe" for the group. Each one waits for its own privacy review first, because it means a server, and today there is none.</p></div>
   </div>
-  <p class="ask" id="join">Want to test the alpha? Email <a href="mailto:{EMAIL}?subject=Last%20Round%20alpha">{EMAIL}</a> and say if you are on iPhone or Android. You must be 18 or over.</p>
+  <p class="ask" id="join">Want to test the alpha? Email <a href="mailto:{EMAIL}?subject=Half%20Past%20alpha">{EMAIL}</a> and say if you are on iPhone or Android. You must be 18 or over.</p>
 </section>
 
 <section class="maker">
@@ -199,27 +187,36 @@ PRIVACY = f"""
 <article class="doc">
 <p class="kicker">Last updated {UPDATED}</p>
 <h1>Privacy</h1>
-<p class="lede">Everything you log in Last Round stays on your phone. Nothing is sent to us. This page says exactly what is kept, where, and the one thing that talks to Apple Maps on iPhone.</p>
+<p class="lede">Everything you log in Half Past stays on your phone. Nothing is sent to us. This page says exactly what is kept, where, and what the map and bar search send to Apple or Google.</p>
 
 <h2>Who we are</h2>
-<p>Last Round is made by Shaw Labs, run by Suraj Shaw in London. For any privacy question, email <a href="mailto:{EMAIL}?subject=Last%20Round%20privacy">{EMAIL}</a>.</p>
+<p>Half Past is made by Shaw Labs, run by Suraj Shaw in London. For any privacy question, email <a href="mailto:{EMAIL}?subject=Half%20Past%20privacy">{EMAIL}</a>.</p>
 
 <h2>What the app keeps, only on your phone</h2>
 <ul>
   <li>Each drink and water break, with its time.</li>
-  <li>The place you type for a night or, on iPhone, the bar you pick from the suggestions, with where that bar is (its map point and Apple Maps' id for it). And your plan, such as the time you mean to be home.</li>
+  <li>The place you type for a night, or the bar you pick from the suggestions, with where that bar is: its map point and the map service's id for it (Apple Maps' on iPhone, Google's on Android). And your plan, such as the time you mean to be home.</li>
   <li>Your name, if you set one. It is printed on your receipts and never on a picture you share.</li>
   <li>Your weekly limit, which alerts you have seen, and how long you keep your nights.</li>
   <li>For your age, a yes and when you tapped it. Never your date of birth.</li>
 </ul>
 
 <h2>What we never collect</h2>
-<p>No account, no analytics, no ads and no tracking. No contacts and no health data. Nothing is sent to a server of ours, because there is none. Where you are is never stored. On Android the app has no internet or location permission.</p>
+<p>No account, no analytics, no ads and no tracking. No contacts and no health data. Nothing is sent to a server of ours, because there is none. Where you are is never stored.</p>
 
-<h2>Bar suggestions and the map (iPhone only)</h2>
-<p>On iPhone you can turn on <i>Suggest bars near me</i> in You, or by answering yes the first time you open the Map tab. It is off until you do. When it is on and you start a night or open the Map tab, the app asks iPhone for your location once and uses Apple Maps to list bars near you. If you search, what you type goes to Apple Maps too, and tapping one of Apple's bar labels or <i>Search this area</i> asks Apple about that place or that part of the map.</p>
-<p>Apple handles that request under Apple's own privacy policy. It does not come to us, and your location is never saved: only the bar you pick, and where that bar is, is kept with that night on your phone. Delete everything removes it, and the setting goes back to off. Android does not have this feature and asks for no location.</p>
-<p>How far each suggested bar is shows on screen only and is never saved. The map on iPhone (the Map tab, and the map from the Start sheet) is drawn by Apple Maps, so the area you are looking at is sent to Apple to draw it, even with suggestions off. With suggestions on, opening the map reads your location once and marks where you were. The map never follows you, and the mark goes when you leave the map. Your map is drawn from the bars you picked, kept on your phone.</p>
+<h2>Bar suggestions and the map on iPhone</h2>
+<p>You can turn on <i>Suggest bars near me</i> in You, or by answering yes the first time you open the Map tab. It is off until you do. When it is on and you start a night or open the Map tab, the app asks iPhone for your location once and uses Apple Maps to list bars near you. During a night, coming back to the app checks your location once more to ask if you have moved on to a new bar. That check stays on your phone and is sent to no one.</p>
+<p>If you search, what you type goes to Apple Maps too, and <i>Search this area</i> asks Apple about that part of the map. Apple handles those requests under Apple's own privacy policy. They do not come to us, and your location is never saved: only the bar you pick, and where that bar is, is kept with that night on your phone. Delete everything removes it, and the setting goes back to off.</p>
+<p>How far each suggested bar is shows on screen only and is never saved. The map (the Map tab, and the map from the Start sheet) is drawn by Apple Maps, so the area you are looking at is sent to Apple to draw it, even with suggestions off. With suggestions on, opening the map reads your location once and marks where you were. The map never follows you, and the mark goes when you leave the map. Your map is drawn from the bars you picked, kept on your phone.</p>
+
+<h2>Bar suggestions and the map on Android</h2>
+<p>It works the same way, with Google in Apple's place. The first time a search needs your location, Android asks whether Half Past may use it while the app is open, and you can choose approximate. Your location and anything you type to search go to Google's Places API to find bars. The map is drawn by Google Maps through Google Play services, so the area you are looking at is sent to Google, even with suggestions off. Google handles those requests under Google's own privacy policy, and Google Play services works under Google's own terms. None of it comes to us.</p>
+
+<h2>Notice when I leave a bar</h2>
+<p>This is off until you turn it on, and it needs notifications and location set to Always. While a night is open, your phone keeps one circle round tonight's bar and wakes Half Past only when you walk out of it, to send one notification that names no place, drink or number. On iPhone the circle is kept by iOS. On Android it is kept by Google Play services, under a plain name with no time or place in it. The circle is removed when the night ends. A night that closes itself while the app is away sends nothing, and its circle goes the next time you open the app or walk out. Where you go is never kept.</p>
+
+<h2>Siri and Shortcuts</h2>
+<p>If you use Siri, what you say is handled by Apple under Apple's own privacy policy, and Apple keeps its own history of it. Half Past cannot reach that history. The app keeps no record of a drink you named to Siri beyond the drink itself in your night.</p>
 
 <h2>Backups</h2>
 <p>On iPhone, the app's data is kept out of iCloud and Finder backups. On Android, app backup is turned off. So your nights are not copied to any cloud.</p>
@@ -240,10 +237,10 @@ PRIVACY = f"""
 <p>Share your night makes a picture on your phone, only when you tap it, and hands it to your phone's share sheet. Where it goes after that is up to you. It never shows your name, your points or a limit.</p>
 
 <h2>Links out</h2>
-<p>The Drinkaware, NHS, Drinkline and Samaritans links in the app open in your browser or phone app. Last Round sends nothing with them. Those services have their own privacy policies.</p>
+<p>The Drinkaware, NHS, Drinkline and Samaritans links in the app open in your browser or phone app. Half Past sends nothing with them. Those services have their own privacy policies.</p>
 
 <h2>Age</h2>
-<p>Last Round is for adults aged 18 and over. It is not for children.</p>
+<p>Half Past is for adults aged 18 and over. It is not for children.</p>
 
 <h2>Our legal basis</h2>
 <p>Because nothing you log ever reaches us, we do not collect or process it, and we are not a controller of the data kept on your phone. If you email us, we use your email address and message only to reply, on the basis of our legitimate interest in answering you, and we delete them when the conversation is over.</p>
@@ -260,10 +257,10 @@ ALPHA = f"""
 <article class="doc">
 <p class="kicker">Last updated {UPDATED}</p>
 <h1>Alpha terms</h1>
-<p class="lede">Thank you for testing Last Round. By installing the alpha, you agree to the following.</p>
-<p>Not in yet? Email <a href="mailto:{EMAIL}?subject=Last%20Round%20alpha">{EMAIL}</a> and say if you are on iPhone or Android.</p>
+<p class="lede">Thank you for testing Half Past. By installing the alpha, you agree to the following.</p>
+<p>Not in yet? Email <a href="mailto:{EMAIL}?subject=Half%20Past%20alpha">{EMAIL}</a> and say if you are on iPhone or Android.</p>
 <ul>
-  <li><b>You are 18 or over.</b> Last Round tracks drinking and is for adults only.</li>
+  <li><b>You are 18 or over.</b> Half Past tracks drinking and is for adults only.</li>
   <li><b>This is a test build.</b> It may have bugs, and it may lose your data. Do not rely on it for anything that matters.</li>
   <li><b>Drink responsibly.</b> Points are a game, not a goal. Never drink more to score, and never drive after drinking.</li>
   <li><b>No guarantees.</b> The alpha is given as it is, and it is not medical advice. If you are worried about your drinking, see <a href="/help">Help</a>.</li>
@@ -271,14 +268,14 @@ ALPHA = f"""
   <li><b>You can stop at any time.</b> Use Delete everything, then remove the app.</li>
 </ul>
 <h2>Reporting a bug</h2>
-<p>Send a screenshot and what you tapped in the alpha WhatsApp group, or email <a href="mailto:{EMAIL}?subject=Last%20Round%20bug">{EMAIL}</a>. Every bug becomes a test before it is fixed.</p>
+<p>Send a screenshot and what you tapped in the alpha WhatsApp group, or email <a href="mailto:{EMAIL}?subject=Half%20Past%20bug">{EMAIL}</a>. Every bug becomes a test before it is fixed.</p>
 </article>
 """
 
 SUPPORT = f"""
 <article class="doc">
 <h1>Support</h1>
-<p class="lede">Something not working, or a question about the app? Email <a href="mailto:{EMAIL}?subject=Last%20Round%20support">{EMAIL}</a>. A person reads every message.</p>
+<p class="lede">Something not working, or a question about the app? Email <a href="mailto:{EMAIL}?subject=Half%20Past%20support">{EMAIL}</a>. A person reads every message.</p>
 <h2>Reporting a bug</h2>
 <p>A screenshot plus what you tapped is perfect. Alpha testers can also post it in the alpha WhatsApp group.</p>
 <h2>Your data</h2>
@@ -293,7 +290,7 @@ SUPPORT = f"""
 HELP = """
 <article class="doc">
 <h1>Help and advice</h1>
-<p class="lede">Free and confidential. You do not need to use Last Round for any of these.</p>
+<p class="lede">Free and confidential. You do not need to use Half Past for any of these.</p>
 <ul class="help">
   <li class="urgent"><a href="tel:999"><b>Call 999</b></a><span>If someone cannot be woken, or is breathing slowly or oddly. Stay with them.</span></li>
   <li><a href="https://www.nhs.uk/conditions/alcohol-poisoning/"><b>Signs of alcohol poisoning</b></a><span>NHS: what to look for and what to do.</span></li>
@@ -304,16 +301,16 @@ HELP = """
   <li><a href="https://www.drinkaware.co.uk/facts/information-about-alcohol/alcoholic-drinks-and-units/what-is-an-alcohol-unit"><b>What a unit is</b></a><span>Drinkaware: the units in your drinks.</span></li>
   <li><a href="https://www.drinkaware.co.uk/advice-and-support/alcohol-support-services"><b>Support services</b></a><span>Drinkaware's list, for you or someone close.</span></li>
 </ul>
-<p class="note">These links leave this site. Last Round and this site send nothing with them.</p>
+<p class="note">These links leave this site. Half Past and this site send nothing with them.</p>
 </article>
 """
 
 PAGES = [
-    ("index", "Last Round · Good nights, well kept", "A drink tracker for nights out. Two taps a drink, points for a good pace and for water, a receipt and a map of your nights, and everything kept on your phone. In alpha.", INDEX, True),
-    ("privacy", "Privacy · Last Round", "What Last Round keeps, and where: everything stays on your phone and nothing is sent to us. On iPhone, bar suggestions and the map use Apple Maps.", PRIVACY, False),
-    ("alpha", "Alpha terms · Last Round", "The terms for Last Round alpha testers: 18+, a test build, drink responsibly, no guarantees.", ALPHA, False),
-    ("support", "Support · Last Round", "Get help with the Last Round app, report a bug, or ask about your data.", SUPPORT, False),
-    ("help", "Help and advice · Last Round", "Free and confidential alcohol advice and support: 999, NHS, Drinkline, Samaritans and Drinkaware.", HELP, False),
+    ("index", "Half Past · Good nights, well kept", "A drink tracker for nights out. Two taps a drink, points for a good pace and for water, a receipt and a map of your nights, and everything kept on your phone. In alpha.", INDEX, True),
+    ("privacy", "Privacy · Half Past", "What Half Past keeps, and where: everything stays on your phone and nothing is sent to us. Bar suggestions and the map use Apple Maps on iPhone and Google on Android.", PRIVACY, False),
+    ("alpha", "Alpha terms · Half Past", "The terms for Half Past alpha testers: 18+, a test build, drink responsibly, no guarantees.", ALPHA, False),
+    ("support", "Support · Half Past", "Get help with the Half Past app, report a bug, or ask about your data.", SUPPORT, False),
+    ("help", "Help and advice · Half Past", "Free and confidential alcohol advice and support: 999, NHS, Drinkline, Samaritans and Drinkaware.", HELP, False),
 ]
 
 
@@ -321,7 +318,7 @@ def main():
     if os.path.isdir(OUT):
         shutil.rmtree(OUT)
     os.makedirs(OUT)
-    for name in ("screen-map.webp", "app-icon.svg", "launch-mark.svg", "og.png", "apple-touch-icon.png", "robots.txt"):
+    for name in ("screen-map.webp", "app-icon.svg", "launch-mark.svg", "og-halfpast.png", "apple-touch-icon.png", "robots.txt"):
         p = os.path.join(SRC, name)
         if os.path.exists(p):
             shutil.copy(p, OUT)
