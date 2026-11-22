@@ -181,6 +181,32 @@ main.col{max-width:760px}
 }
 .cta{display:inline-flex;align-items:center;min-height:48px;margin-top:22px;padding:12px 26px;border-radius:999px;background:var(--amber);color:var(--paper-ink);font-weight:700;text-decoration:none;box-shadow:0 4px 0 var(--amber-shadow)}
 .cta:hover{color:var(--paper-ink);background:#FFB54F}
+
+/* the alpha sign-up form, on paper. No JavaScript: the browser checks the
+   required fields, and the form posts straight to the sign-up sheet. */
+.formcard{margin:24px 0 0;border:1.5px solid var(--paper-line);border-radius:16px;padding:clamp(18px,4vw,28px);background:var(--receipt)}
+.formcard .field{margin:0 0 18px;max-width:none}
+.formcard label,.formcard legend{display:block;font-weight:700;margin-bottom:6px}
+.formcard .hint{display:block;font-weight:400;font-size:16px;color:#5a4636}
+.formcard input[type=text],.formcard input[type=email]{width:100%;box-sizing:border-box;min-height:56px;padding:14px 16px;font:inherit;color:var(--paper-ink);background:#fff;border:1.5px solid var(--paper-line);border-radius:12px}
+.formcard input:focus-visible{outline:3px solid var(--amber-ink);outline-offset:2px}
+.formcard fieldset{border:0;padding:0;margin:0 0 18px}
+.choices{display:flex;gap:10px}
+.choice{flex:1;position:relative;margin:0!important}
+.choice input{position:absolute;opacity:0;width:1px;height:1px}
+.choice span{display:flex;align-items:center;justify-content:center;min-height:56px;border:1.5px solid var(--paper-line);border-radius:12px;background:#fff;cursor:pointer}
+.choice input:checked+span{border-color:var(--amber-ink);background:#FCE6C4}
+.choice input:focus-visible+span{outline:3px solid var(--amber-ink);outline-offset:2px}
+.tick{display:flex!important;gap:12px;align-items:flex-start;font-weight:400!important;margin:0 0 14px;cursor:pointer;max-width:62ch}
+.tick input{width:24px;height:24px;margin:2px 0 0;flex:none;accent-color:var(--amber-ink)}
+.trap{position:absolute!important;left:-9999px;width:1px;height:1px;overflow:hidden}
+.formcard button{width:100%;min-height:64px;margin-top:6px;font:inherit;font-weight:700;font-size:19px;color:var(--paper-ink);background:var(--amber);border:0;border-radius:999px;box-shadow:0 4px 0 var(--amber-shadow);cursor:pointer}
+.formcard button:hover{background:#FFB54F}
+.formcard button:focus-visible{outline:3px solid var(--paper-ink);outline-offset:3px}
+.formcard .small{font-size:16px;color:#5a4636;margin:14px 0 0}
+.notice{margin:20px 0 0;padding:14px 18px;border:2px solid var(--paper-ink);border-radius:14px;font-weight:700}
+.howto{padding-left:22px;margin:10px 0}
+.howto li{margin-bottom:12px}
 </style>
 </head>
 <body>
@@ -249,11 +275,23 @@ main.col{max-width:760px}
 <h2>Age</h2>
 <p>Half Past is for adults aged 18 and over. It is not for children.</p>
 
+<h2>If you sign up for the alpha</h2>
+<p>This is the one place we hold anything about you. The <a href="/join">sign-up form</a> asks for:</p>
+<ul>
+  <li>Your name and email address. Use the email on your Apple ID or Google account, because that is where the test invite goes.</li>
+  <li>Whether you are on iPhone or Android.</li>
+  <li>Your Instagram name, only if you choose to give it.</li>
+  <li>A yes that you are 18 or over, and a yes that you are happy to get emails about the alpha.</li>
+</ul>
+<p>We use it only to run the alpha: to send your invite through Apple's TestFlight or Google Play, to tell you about new builds and changes to these terms, and to send two short feedback forms, one after your first week and one at the end. We do not send marketing, and we never share or sell your details.</p>
+<p>When you press Sign up, your answers go to a private Google Sheet kept by Suraj Shaw, through Google Apps Script, and a short note about the sign-up is emailed to halfpast@shawlabs.dev. Google handles that under Google's own terms. To send your invite, your email also goes to Apple or Google, whichever your phone uses. Nothing you log in the app is ever added to it.</p>
+<p>We delete your details when the alpha ends, unless you ask to join the beta. You can see what we hold, correct it, or have it deleted at any time: email <a href="mailto:halfpast@shawlabs.dev?subject=Half%20Past%20sign-up">halfpast@shawlabs.dev</a>. Leaving the alpha does not affect anything on your phone.</p>
+
 <h2>Our legal basis</h2>
-<p>Because nothing you log ever reaches us, we do not collect or process it, and we are not a controller of the data kept on your phone. If you email us, we use your email address and message only to reply, on the basis of our legitimate interest in answering you, and we delete them when the conversation is over.</p>
+<p>Because nothing you log ever reaches us, we do not collect or process it, and we are not a controller of the data kept on your phone. For the alpha sign-up, we are the controller, and we rely on your consent, which you give with the two ticks on the form. You can withdraw it at any time by emailing us. If you email us, we use your email address and message only to reply, on the basis of our legitimate interest in answering you, and we delete them when the conversation is over.</p>
 
 <h2>This website</h2>
-<p>This site sets no cookies and runs no analytics or third-party scripts. Its fonts are served from this site. Our host, Vercel, keeps standard server logs, such as IP addresses, for a short time to run and secure the site.</p>
+<p>This site sets no cookies and runs no analytics or third-party scripts. Its fonts are served from this site. The sign-up form sends nothing until you press Sign up, and then only what you typed, to Google as set out above. Our host, Vercel, keeps standard server logs, such as IP addresses, for a short time to run and secure the site.</p>
 
 <h2>Changes</h2>
 <p>If this policy changes, the date at the top changes with it, and testers hear about it in the alpha group before the build that needs it.</p>

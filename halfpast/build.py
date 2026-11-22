@@ -13,6 +13,12 @@ HOST = "https://halfpast.shawlabs.dev"
 EMAIL = "halfpast@shawlabs.dev"
 UPDATED = "22 November 2026"
 
+# The Apps Script web app that receives the /join form (signups/SETUP.md).
+# While it is empty, /join shows the email route instead of the form.
+SIGNUP_URL = ""
+# vercel.json lets /join and /join-check post only to script.google.com and
+# script.googleusercontent.com, where Apps Script redirects the post.
+
 CSS = open(os.path.join(SRC, "site.css")).read()
 
 NAV = [("/", "Home"), ("/privacy", "Privacy"), ("/help", "Help"), ("/support", "Support")]
@@ -175,7 +181,8 @@ INDEX = f"""
     </div>
     <div><p class="kicker">Later</p><h3>With friends</h3><p>Whose round it is, a water break for the whole table, and a "home safe" for the group. Each one waits for its own privacy review first, because it means a server, and today there is none.</p></div>
   </div>
-  <p class="ask" id="join">Want to test the alpha? Email <a href="mailto:{EMAIL}?subject=Half%20Past%20alpha">{EMAIL}</a> and say if you are on iPhone or Android. You must be 18 or over.</p>
+  <p class="ask" id="join">Want to test the alpha? Sign-up takes a minute. You must be 18 or over.</p>
+  <p><a class="cta" href="/join">Sign up for the alpha</a></p>
 </section>
 
 <section class="maker">
@@ -242,11 +249,23 @@ PRIVACY = f"""
 <h2>Age</h2>
 <p>Half Past is for adults aged 18 and over. It is not for children.</p>
 
+<h2>If you sign up for the alpha</h2>
+<p>This is the one place we hold anything about you. The <a href="/join">sign-up form</a> asks for:</p>
+<ul>
+  <li>Your name and email address. Use the email on your Apple ID or Google account, because that is where the test invite goes.</li>
+  <li>Whether you are on iPhone or Android.</li>
+  <li>Your Instagram name, only if you choose to give it.</li>
+  <li>A yes that you are 18 or over, and a yes that you are happy to get emails about the alpha.</li>
+</ul>
+<p>We use it only to run the alpha: to send your invite through Apple's TestFlight or Google Play, to tell you about new builds and changes to these terms, and to send two short feedback forms, one after your first week and one at the end. We do not send marketing, and we never share or sell your details.</p>
+<p>When you press Sign up, your answers go to a private Google Sheet kept by Suraj Shaw, through Google Apps Script, and a short note about the sign-up is emailed to {EMAIL}. Google handles that under Google's own terms. To send your invite, your email also goes to Apple or Google, whichever your phone uses. Nothing you log in the app is ever added to it.</p>
+<p>We delete your details when the alpha ends, unless you ask to join the beta. You can see what we hold, correct it, or have it deleted at any time: email <a href="mailto:{EMAIL}?subject=Half%20Past%20sign-up">{EMAIL}</a>. Leaving the alpha does not affect anything on your phone.</p>
+
 <h2>Our legal basis</h2>
-<p>Because nothing you log ever reaches us, we do not collect or process it, and we are not a controller of the data kept on your phone. If you email us, we use your email address and message only to reply, on the basis of our legitimate interest in answering you, and we delete them when the conversation is over.</p>
+<p>Because nothing you log ever reaches us, we do not collect or process it, and we are not a controller of the data kept on your phone. For the alpha sign-up, we are the controller, and we rely on your consent, which you give with the two ticks on the form. You can withdraw it at any time by emailing us. If you email us, we use your email address and message only to reply, on the basis of our legitimate interest in answering you, and we delete them when the conversation is over.</p>
 
 <h2>This website</h2>
-<p>This site sets no cookies and runs no analytics or third-party scripts. Its fonts are served from this site. Our host, Vercel, keeps standard server logs, such as IP addresses, for a short time to run and secure the site.</p>
+<p>This site sets no cookies and runs no analytics or third-party scripts. Its fonts are served from this site. The sign-up form sends nothing until you press Sign up, and then only what you typed, to Google as set out above. Our host, Vercel, keeps standard server logs, such as IP addresses, for a short time to run and secure the site.</p>
 
 <h2>Changes</h2>
 <p>If this policy changes, the date at the top changes with it, and testers hear about it in the alpha group before the build that needs it.</p>
@@ -258,7 +277,7 @@ ALPHA = f"""
 <p class="kicker">Last updated {UPDATED}</p>
 <h1>Alpha terms</h1>
 <p class="lede">Thank you for testing Half Past. By installing the alpha, you agree to the following.</p>
-<p>Not in yet? Email <a href="mailto:{EMAIL}?subject=Half%20Past%20alpha">{EMAIL}</a> and say if you are on iPhone or Android.</p>
+<p>Not in yet? <a href="/join">Sign up for the alpha</a>.</p>
 <ul>
   <li><b>You are 18 or over.</b> Half Past tracks drinking and is for adults only.</li>
   <li><b>This is a test build.</b> It may have bugs, and it may lose your data. Do not rely on it for anything that matters.</li>
@@ -305,9 +324,73 @@ HELP = """
 </article>
 """
 
+TESTING = f"""
+<h2>How testing works</h2>
+<ol class="howto">
+  <li><b>You get an invite by email.</b> On iPhone it comes from Apple's TestFlight. On Android it is a Google Play testing link. Invites go out in small groups, so yours may take a little while.</li>
+  <li><b>Use it on your nights out for about four weeks.</b> Log each drink, take water breaks, and open your receipt the morning after. Use it however feels natural. That is the test.</li>
+  <li><b>Tell us what you think.</b> Your invite comes with a link to a small WhatsApp group for testers. Post anything there: what you like, what annoys you, what confuses you.</li>
+  <li><b>Found a bug?</b> Send a screenshot and a line on what you tapped, in the group or to <a href="mailto:{EMAIL}?subject=Half%20Past%20bug">{EMAIL}</a>. That is all we need.</li>
+  <li><b>Two short forms.</b> One after your first week and one at the end. A few minutes each, by email.</li>
+  <li><b>The app tells us nothing on its own.</b> No analytics, no tracking. Your nights stay on your phone. We only learn what you choose to send.</li>
+</ol>
+<p>The full terms are on the <a href="/alpha">alpha page</a>. It is a test build, so things will break. Please drink responsibly.</p>
+"""
+
+
+def join_body(notice=""):
+    """The sign-up page. A plain HTML form: no JavaScript, and nothing is sent
+    anywhere until the person presses Sign up."""
+    if notice:
+        notice = f'<p class="notice" role="alert">{notice}</p>'
+    if not SIGNUP_URL:
+        form = f"""<p class="formcard">Sign-ups open here very soon. Until then, email <a href="mailto:{EMAIL}?subject=Half%20Past%20alpha">{EMAIL}</a> and say if you are on iPhone or Android.</p>"""
+    else:
+        form = f"""<form class="formcard" action="{html.escape(SIGNUP_URL)}" method="post" accept-charset="utf-8">
+  <p class="field"><label for="name">Your name</label>
+    <input id="name" name="name" type="text" autocomplete="name" maxlength="80" required></p>
+  <p class="field"><label for="email">Email <span class="hint">Use the one on your Apple ID (iPhone) or Google account (Android). Your invite goes there.</span></label>
+    <input id="email" name="email" type="email" autocomplete="email" inputmode="email" maxlength="120" required></p>
+  <fieldset class="field"><legend>Which phone?</legend>
+    <div class="choices">
+      <label class="choice"><input type="radio" name="phone" value="iPhone" required><span>iPhone</span></label>
+      <label class="choice"><input type="radio" name="phone" value="Android"><span>Android</span></label>
+    </div>
+  </fieldset>
+  <p class="field"><label for="instagram">Instagram <span class="hint">Optional, so we know it is you.</span></label>
+    <input id="instagram" name="instagram" type="text" autocomplete="off" autocapitalize="none" spellcheck="false" maxlength="40" placeholder="@yourname"></p>
+  <label class="tick"><input type="checkbox" name="adult" value="yes" required><span>I am 18 or over.</span></label>
+  <label class="tick"><input type="checkbox" name="emails" value="yes" required><span>I am happy to get emails about the alpha: my invite, news about new builds, and two short feedback forms.</span></label>
+  <p class="trap" aria-hidden="true"><label for="website">Leave this empty</label><input id="website" name="website" type="text" tabindex="-1" autocomplete="off"></p>
+  <p><button type="submit">Sign me up</button></p>
+  <p class="small">We keep your details only to run the alpha, delete them when it ends, and never share them. Leave any time by emailing <a href="mailto:{EMAIL}?subject=Half%20Past%20sign-up">{EMAIL}</a>. See <a href="/privacy">privacy</a>.</p>
+</form>"""
+    return f"""
+<article class="doc">
+<p class="kicker">Alpha · 18+ only</p>
+<h1>Join the alpha</h1>
+<p class="lede">Half Past tracks your drinks and rewards a steady pace and water breaks. We are looking for 10 to 20 people to try it on real nights out, on iPhone or Android.</p>
+{notice}
+{form}
+{TESTING}
+</article>
+"""
+
+
+THANKS = f"""
+<article class="doc">
+<p class="kicker">Alpha</p>
+<h1>You are on the list</h1>
+<p class="lede">Thank you. We will email you when your invite is ready. Look out for an email from Apple (TestFlight) or Google Play.</p>
+<p>Nothing after a while? Check your spam folder, or email <a href="mailto:{EMAIL}?subject=Half%20Past%20alpha">{EMAIL}</a>.</p>
+{TESTING}
+</article>
+"""
+
 PAGES = [
     ("index", "Half Past · Good nights, well kept", "A drink tracker for nights out. Two taps a drink, points for a good pace and for water, a receipt and a map of your nights, and everything kept on your phone. In alpha.", INDEX, True),
     ("privacy", "Privacy · Half Past", "What Half Past keeps, and where: everything stays on your phone and nothing is sent to us. Bar suggestions and the map use Apple Maps on iPhone and Google on Android.", PRIVACY, False),
+    ("join", "Join the alpha · Half Past", "Sign up to test Half Past on your nights out, on iPhone or Android. 18+ only.", join_body(), False),
     ("alpha", "Alpha terms · Half Past", "The terms for Half Past alpha testers: 18+, a test build, drink responsibly, no guarantees.", ALPHA, False),
     ("support", "Support · Half Past", "Get help with the Half Past app, report a bug, or ask about your data.", SUPPORT, False),
     ("help", "Help and advice · Half Past", "Free and confidential alcohol advice and support: 999, NHS, Drinkline, Samaritans and Drinkaware.", HELP, False),
@@ -324,6 +407,15 @@ def main():
             shutil.copy(p, OUT)
     shutil.copytree(os.path.join(SRC, "fonts"), os.path.join(OUT, "fonts"))
     for slug, title, desc, body, wide in PAGES:
+        with open(os.path.join(OUT, slug + ".html"), "w") as f:
+            f.write(page(slug, title, desc, body, wide))
+    # Pages the sign-up form returns to. Left out of the sitemap.
+    extra = [
+        ("thanks", "You are on the list · Half Past", "Thanks for signing up for the Half Past alpha.", THANKS, False),
+        ("join-check", "Join the alpha · Half Past", "Sign up to test Half Past.",
+         join_body("Something was missing or did not look right. Please check your answers and try again."), False),
+    ]
+    for slug, title, desc, body, wide in extra:
         with open(os.path.join(OUT, slug + ".html"), "w") as f:
             f.write(page(slug, title, desc, body, wide))
     urls = "".join(f"<url><loc>{HOST}{'/' if s == 'index' else '/' + s}</loc></url>" for s, *_ in PAGES)
