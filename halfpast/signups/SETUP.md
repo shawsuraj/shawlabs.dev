@@ -44,6 +44,17 @@ Deploy. The URL stays the same, so the site needs no change.
   can slip a formula into the sheet.
 - Bots that fill the hidden field are dropped and still see /thanks.
 
+## Formatting and the Summary tab
+
+`setup` also runs `tidy`, which formats the sheet in the Half Past colours:
+a dark header with amber text, set column widths, alternate row shading,
+coloured Status values, frozen header and Name column, and filter buttons.
+It also builds a Summary tab with live counts (sign-ups, iPhone and Android,
+each status, last sign-up).
+
+Run `tidy` again from the function menu whenever the sheet looks messy. It
+only changes formatting, never the data. Running it needs no new deployment.
+
 ## Privacy rules this setup keeps
 
 - The sheet is private. Do not share it.
