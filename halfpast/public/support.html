@@ -181,6 +181,32 @@ main.col{max-width:760px}
 }
 .cta{display:inline-flex;align-items:center;min-height:48px;margin-top:22px;padding:12px 26px;border-radius:999px;background:var(--amber);color:var(--paper-ink);font-weight:700;text-decoration:none;box-shadow:0 4px 0 var(--amber-shadow)}
 .cta:hover{color:var(--paper-ink);background:#FFB54F}
+
+/* the alpha sign-up form, on paper. No JavaScript: the browser checks the
+   required fields, and the form posts straight to the sign-up sheet. */
+.formcard{margin:24px 0 0;border:1.5px solid var(--paper-line);border-radius:16px;padding:clamp(18px,4vw,28px);background:var(--receipt)}
+.formcard .field{margin:0 0 18px;max-width:none}
+.formcard label,.formcard legend{display:block;font-weight:700;margin-bottom:6px}
+.formcard .hint{display:block;font-weight:400;font-size:16px;color:#5a4636}
+.formcard input[type=text],.formcard input[type=email]{width:100%;box-sizing:border-box;min-height:56px;padding:14px 16px;font:inherit;color:var(--paper-ink);background:#fff;border:1.5px solid var(--paper-line);border-radius:12px}
+.formcard input:focus-visible{outline:3px solid var(--amber-ink);outline-offset:2px}
+.formcard fieldset{border:0;padding:0;margin:0 0 18px}
+.choices{display:flex;gap:10px}
+.choice{flex:1;position:relative;margin:0!important}
+.choice input{position:absolute;opacity:0;width:1px;height:1px}
+.choice span{display:flex;align-items:center;justify-content:center;min-height:56px;border:1.5px solid var(--paper-line);border-radius:12px;background:#fff;cursor:pointer}
+.choice input:checked+span{border-color:var(--amber-ink);background:#FCE6C4}
+.choice input:focus-visible+span{outline:3px solid var(--amber-ink);outline-offset:2px}
+.tick{display:flex!important;gap:12px;align-items:flex-start;font-weight:400!important;margin:0 0 14px;cursor:pointer;max-width:62ch}
+.tick input{width:24px;height:24px;margin:2px 0 0;flex:none;accent-color:var(--amber-ink)}
+.trap{position:absolute!important;left:-9999px;width:1px;height:1px;overflow:hidden}
+.formcard button{width:100%;min-height:64px;margin-top:6px;font:inherit;font-weight:700;font-size:19px;color:var(--paper-ink);background:var(--amber);border:0;border-radius:999px;box-shadow:0 4px 0 var(--amber-shadow);cursor:pointer}
+.formcard button:hover{background:#FFB54F}
+.formcard button:focus-visible{outline:3px solid var(--paper-ink);outline-offset:3px}
+.formcard .small{font-size:16px;color:#5a4636;margin:14px 0 0}
+.notice{margin:20px 0 0;padding:14px 18px;border:2px solid var(--paper-ink);border-radius:14px;font-weight:700}
+.howto{padding-left:22px;margin:10px 0}
+.howto li{margin-bottom:12px}
 </style>
 </head>
 <body>

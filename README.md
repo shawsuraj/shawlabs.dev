@@ -17,8 +17,8 @@ Add a new case study: copy `src/pages/world-chaos-map.html`, add it to `PAGES` i
 
 Then run `python3 build.py`.
 
-## lastround.shawlabs.dev
+## halfpast.shawlabs.dev
 
-The `lastround/` folder is a separate site for the Last Round app: home, privacy policy, alpha terms, support and help. It has no JavaScript and makes no third-party requests; its fonts are served from the site.
+The `halfpast/` folder is a separate site for the Half Past app (formerly Last Round): home, alpha sign-up, privacy policy, alpha terms, support and help. It has no JavaScript and makes no third-party requests; its fonts are served from the site. The one exception is the alpha sign-up form on `/join`, which posts to a Google Apps Script only when someone presses Sign up (see `halfpast/signups/SETUP.md`).
 
-Deploy it as its own Vercel project from this repo with **Root Directory** set to `lastround`, then add the domain `lastround.shawlabs.dev`. Build locally with `python3 lastround/build.py`.
+Deploy it as its own Vercel project from this repo with **Root Directory** set to `halfpast`, then add the domain `halfpast.shawlabs.dev`. The old `lastround.shawlabs.dev` domain redirects there. Build locally with `python3 halfpast/build.py`.

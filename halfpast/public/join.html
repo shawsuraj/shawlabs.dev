@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Join the alpha · Half Past</title>
+<meta name="description" content="Sign up to test Half Past on your nights out, on iPhone or Android. 18+ only.">
+<link rel="canonical" href="https://halfpast.shawlabs.dev/join">
+<meta name="theme-color" content="#2A1A10">
+<meta name="color-scheme" content="dark">
+<meta property="og:title" content="Join the alpha · Half Past">
+<meta property="og:description" content="Sign up to test Half Past on your nights out, on iPhone or Android. 18+ only.">
+<meta property="og:url" content="https://halfpast.shawlabs.dev/join">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://halfpast.shawlabs.dev/og-halfpast.png">
+<link rel="icon" href="/app-icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preload" href="/fonts/unbounded.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/instrument-sans.woff2" as="font" type="font/woff2" crossorigin>
+<style>/* Half Past · the bar shelf, on the web.
+   Tokens from docs/design-notes.md 1.7.0. Dark only, like the app: bars are dark.
+   Amber means drinks and actions. Teal means water and nothing else. No red, no green. */
+@font-face{font-family:"Unbounded";src:url(/fonts/unbounded.woff2) format("woff2");font-weight:200 900;font-display:swap}
+@font-face{font-family:"Instrument Sans";src:url(/fonts/instrument-sans.woff2) format("woff2");font-weight:400 700;font-stretch:75% 100%;font-display:swap}
+@font-face{font-family:"IBM Plex Mono";src:url(/fonts/plex-mono-regular.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"IBM Plex Mono";src:url(/fonts/plex-mono-semibold.woff2) format("woff2");font-weight:600;font-display:swap}
+:root{
+  --wood:#2A1A10;--ledge-top:#6B4326;--ledge-bot:#2E1B0E;
+  --amber:#F5A73B;--amber-shadow:#9A5A12;--amber-ink:#8F4E0A;
+  --paper:#F4E8D2;--paper-line:#CBB08A;--paper-ink:#2E1B0E;
+  --receipt:#F4EDE4;
+  --cream:#F6EBD9;--cream-muted:#DCC7A8;
+  --teal:#3FC7BA;
+  --display:"Unbounded",system-ui,sans-serif;
+  --text:"Instrument Sans",-apple-system,system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;min-height:100vh;color:var(--cream);font-family:var(--text);font-size:18px;line-height:1.55;
+  background-color:var(--wood);
+  background-image:
+    radial-gradient(ellipse at 50% 30%,transparent 40%,rgba(0,0,0,.55) 100%),
+    repeating-linear-gradient(90deg,rgba(255,214,160,.035) 0 3px,transparent 3px 21px,rgba(0,0,0,.08) 21px 23px,transparent 23px 44px),
+    linear-gradient(180deg,#3B2516,#160D07);
+  background-attachment:fixed;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:var(--amber);text-underline-offset:3px;text-decoration-thickness:1.5px}
+a:hover{color:#FFC067}
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px;border-radius:4px}
+h1,h2,h3{font-family:var(--display);font-weight:700;letter-spacing:-.01em;line-height:1.1;margin:0;text-wrap:balance}
+
+/* three slow lights behind everything: two amber, one faint teal */
+.bokeh{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.bokeh i{position:absolute;border-radius:50%;filter:blur(70px);opacity:.28;animation:drift 14s ease-in-out infinite alternate}
+.bokeh i:nth-child(1){width:420px;height:420px;background:var(--amber);top:-120px;left:8%}
+.bokeh i:nth-child(2){width:300px;height:300px;background:var(--amber);top:40%;right:-80px;animation-delay:-5s;opacity:.18}
+.bokeh i:nth-child(3){width:260px;height:260px;background:var(--teal);bottom:-80px;left:30%;animation-delay:-9s;opacity:.12}
+@keyframes drift{to{transform:translate(40px,30px) scale(1.08)}}
+@media (prefers-reduced-motion:reduce){.bokeh i{animation:none}}
+
+.top,main,.foot{position:relative;z-index:1}
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px 24px;flex-wrap:wrap;max-width:1080px;margin:0 auto;
+  padding-block:20px;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.mark{display:flex;align-items:center;gap:10px;color:var(--cream);text-decoration:none;font-family:var(--display);font-weight:700;font-size:19px;letter-spacing:-.01em}
+.mark img{display:block}
+.top nav{display:flex;flex-wrap:wrap;gap:4px}
+.top nav a{color:var(--cream-muted);text-decoration:none;font-weight:600;font-size:16px;padding:10px 14px;border-radius:999px;min-height:44px;display:inline-flex;align-items:center}
+.top nav a:hover{color:var(--cream);background:rgba(246,235,217,.08)}
+.top nav a[aria-current=page]{color:var(--paper-ink);background:var(--amber)}
+
+main{margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px));padding-block:12px 40px;display:grid;gap:56px}
+main.wide{max-width:1080px}
+main.col{max-width:760px}
+
+.chip{display:inline-block;margin:0 0 18px;font-weight:600;font-size:15px;color:var(--paper-ink);background:var(--amber);border-radius:999px;padding:6px 14px;box-shadow:0 3px 0 var(--amber-shadow)}
+.kicker{margin:0 0 8px;font-weight:700;font-size:14px;letter-spacing:.08em;text-transform:uppercase;color:var(--amber)}
+
+.hero{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:32px;padding-top:28px}
+.hero h1{font-size:clamp(44px,8vw,92px);font-weight:800;line-height:.98}
+.lede{font-size:clamp(20px,2.3vw,24px);color:var(--cream);max-width:30em;margin:22px 0 0}
+.sub{color:var(--cream-muted);margin:12px 0 0}
+.hero .icon{width:clamp(180px,24vw,260px);height:auto;border-radius:22%;box-shadow:0 30px 60px rgba(0,0,0,.5),0 0 0 1px rgba(255,214,160,.12)}
+
+/* paper: the printed menu */
+.paper{background:var(--paper);color:var(--paper-ink);border-radius:20px;padding:clamp(24px,4vw,40px);box-shadow:0 18px 40px rgba(0,0,0,.35)}
+.paper .kicker{color:var(--amber-ink)}
+.paper h2{font-size:clamp(24px,3vw,34px)}
+.rules ol{list-style:none;padding:0;margin:22px 0 0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;counter-reset:r}
+.rules li{border-top:2px dashed var(--paper-line);padding-top:14px;counter-increment:r}
+.rules li::before{content:counter(r);display:block;font-family:var(--display);font-weight:800;font-size:28px;color:var(--amber-ink);margin-bottom:6px}
+.rules li b{display:block;font-size:19px;margin-bottom:4px}
+.never ul{margin:16px 0 0;padding:0;list-style:none;display:grid;gap:10px}
+.never li{padding-left:28px;position:relative}
+.never li::before{content:"";position:absolute;left:0;top:.62em;width:14px;height:2px;background:var(--amber-ink)}
+
+.split{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:40px;align-items:start}
+.split h2,.status h2{font-size:clamp(26px,3.2vw,38px);margin-bottom:18px}
+.plain{list-style:none;padding:0;margin:0;display:grid;gap:16px}
+.plain li{color:var(--cream-muted)}
+.plain b{color:var(--cream)}
+
+/* the receipt: the only place mono appears */
+.receipt{margin:0;background:var(--receipt);color:var(--paper-ink);font-family:var(--mono);font-size:16px;line-height:1.5;padding:26px 24px 30px;border-radius:4px;transform:rotate(1.5deg);box-shadow:0 20px 40px rgba(0,0,0,.4);
+  -webkit-mask:radial-gradient(circle 7px at 50% 100%,transparent 6.5px,#000 7px) 0 0/18px 100% repeat-x;mask:radial-gradient(circle 7px at 50% 100%,transparent 6.5px,#000 7px) 0 0/18px 100% repeat-x;padding-bottom:36px}
+.receipt p{margin:0;display:flex;justify-content:space-between;gap:12px}
+.receipt .r-head{justify-content:center;font-weight:600;font-size:18px;letter-spacing:.12em}
+.receipt .r-sub{justify-content:center;color:#7a6650;font-size:14px}
+.receipt .r-rule{border-top:1.5px dashed #b9a586;margin:12px 0}
+.receipt .r-total{font-weight:600;font-size:18px}
+.receipt .r-note{justify-content:center;font-size:15px}
+
+.steps{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.steps>div{border:1.5px solid rgba(246,235,217,.18);border-radius:18px;padding:22px 24px;background:rgba(0,0,0,.18)}
+.steps>div.now{border-color:var(--amber)}
+.steps h3{font-size:22px;margin-bottom:8px}
+.steps.three{grid-template-columns:minmax(0,.8fr) minmax(0,1.4fr) minmax(0,.8fr);align-items:start}
+.beta{list-style:none;padding:0;margin:8px 0 0;display:grid;gap:12px}
+.beta li{color:var(--cream-muted);padding-left:18px;position:relative}
+.beta li::before{content:"";position:absolute;left:0;top:.6em;width:8px;height:8px;border-radius:50%;background:var(--amber)}
+.beta b{color:var(--cream)}
+.steps p:last-child{margin:0;color:var(--cream-muted)}
+.ask{margin:20px 0 0;font-size:19px}
+.maker{border-top:1.5px solid rgba(246,235,217,.14);padding-top:22px;color:var(--cream-muted)}
+.maker p{margin:0}
+
+/* documents: privacy, terms, support, help, set on paper */
+.doc{background:var(--paper);color:var(--paper-ink);border-radius:20px;padding:clamp(24px,5vw,52px);box-shadow:0 18px 40px rgba(0,0,0,.35);margin-top:12px}
+.doc a{color:var(--amber-ink)}
+.doc .kicker{color:var(--amber-ink)}
+.doc h1{font-size:clamp(34px,6vw,54px);font-weight:800}
+.doc .lede{color:var(--paper-ink);font-size:20px}
+.doc h2{font-size:20px;margin:32px 0 8px;padding-top:20px;border-top:2px dashed var(--paper-line)}
+.doc p,.doc li{max-width:62ch}
+.doc ul{padding-left:22px;margin:10px 0}
+.doc li{margin-bottom:8px}
+.doc .note{font-size:16px;color:#5a4636;margin-top:20px}
+.help{list-style:none;padding:0!important;margin:24px 0 0!important;display:grid;gap:10px}
+.help li{max-width:none;margin:0;border:1.5px solid var(--paper-line);border-radius:14px;padding:14px 18px;display:grid;gap:2px}
+.help li.urgent{border:2px solid var(--paper-ink)}
+.help a{font-size:19px;text-decoration:none}
+.help a b{text-decoration:underline;text-underline-offset:3px}
+.help span{color:#5a4636}
+
+.foot{max-width:1080px;margin:0 auto;padding-block:28px 40px;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px));border-top:1.5px solid rgba(246,235,217,.14);color:var(--cream-muted);font-size:16px}
+.foot p{margin:0 0 10px}
+.foot .links{display:flex;flex-wrap:wrap;gap:6px 18px}
+.foot .links a{color:var(--cream)}
+
+@media (max-width:820px){
+  .hero{grid-template-columns:1fr}
+  .hero .icon{order:-1;width:120px}
+  .rules ol{grid-template-columns:1fr}
+  .split{grid-template-columns:1fr}
+  .receipt{max-width:340px;justify-self:center;width:100%}
+  .steps,.steps.three{grid-template-columns:1fr}
+}
+
+/* the alpha: what you get, what is on the bench */
+.inalpha h2,.asks h2{font-size:clamp(26px,3.2vw,38px);margin-bottom:22px}
+.feats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.feat{border:1.5px solid rgba(246,235,217,.18);border-radius:18px;padding:22px 24px;background:rgba(0,0,0,.18)}
+.feat h3{font-size:20px;margin-bottom:8px;color:var(--cream)}
+.feat p{margin:0;color:var(--cream-muted)}
+.feat-wide{grid-column:1/-1}
+.feat-map{grid-column:span 2;grid-row:span 2;border-color:var(--amber);display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:24px;align-items:center}
+.phone{display:block;width:100%;max-width:240px;height:auto;margin:0 auto;border-radius:30px;border:6px solid #120B06;box-shadow:0 24px 50px rgba(0,0,0,.5),0 0 0 1px rgba(255,214,160,.12)}
+.feat-map h3{font-size:24px}
+.bench ul{list-style:none;padding:0;margin:22px 0 0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 28px}
+.bench li{border-top:2px dashed var(--paper-line);padding-top:14px}
+.bench li b{display:block;font-size:19px;margin-bottom:4px}
+.bench .small{margin:22px 0 0;font-size:16px;color:#5a4636}
+.note-card{border:1.5px dashed rgba(246,235,217,.3);border-radius:18px;padding:22px 24px;background:rgba(0,0,0,.18);color:var(--cream-muted)}
+.note-card p{margin:0}
+@media (max-width:820px){
+  .feats{grid-template-columns:1fr}
+  .feat-map{grid-column:auto;grid-row:auto;grid-template-columns:1fr}
+  .phone{max-width:220px}
+  .bench ul{grid-template-columns:1fr}
+}
+.cta{display:inline-flex;align-items:center;min-height:48px;margin-top:22px;padding:12px 26px;border-radius:999px;background:var(--amber);color:var(--paper-ink);font-weight:700;text-decoration:none;box-shadow:0 4px 0 var(--amber-shadow)}
+.cta:hover{color:var(--paper-ink);background:#FFB54F}
+
+/* the alpha sign-up form, on paper. No JavaScript: the browser checks the
+   required fields, and the form posts straight to the sign-up sheet. */
+.formcard{margin:24px 0 0;border:1.5px solid var(--paper-line);border-radius:16px;padding:clamp(18px,4vw,28px);background:var(--receipt)}
+.formcard .field{margin:0 0 18px;max-width:none}
+.formcard label,.formcard legend{display:block;font-weight:700;margin-bottom:6px}
+.formcard .hint{display:block;font-weight:400;font-size:16px;color:#5a4636}
+.formcard input[type=text],.formcard input[type=email]{width:100%;box-sizing:border-box;min-height:56px;padding:14px 16px;font:inherit;color:var(--paper-ink);background:#fff;border:1.5px solid var(--paper-line);border-radius:12px}
+.formcard input:focus-visible{outline:3px solid var(--amber-ink);outline-offset:2px}
+.formcard fieldset{border:0;padding:0;margin:0 0 18px}
+.choices{display:flex;gap:10px}
+.choice{flex:1;position:relative;margin:0!important}
+.choice input{position:absolute;opacity:0;width:1px;height:1px}
+.choice span{display:flex;align-items:center;justify-content:center;min-height:56px;border:1.5px solid var(--paper-line);border-radius:12px;background:#fff;cursor:pointer}
+.choice input:checked+span{border-color:var(--amber-ink);background:#FCE6C4}
+.choice input:focus-visible+span{outline:3px solid var(--amber-ink);outline-offset:2px}
+.tick{display:flex!important;gap:12px;align-items:flex-start;font-weight:400!important;margin:0 0 14px;cursor:pointer;max-width:62ch}
+.tick input{width:24px;height:24px;margin:2px 0 0;flex:none;accent-color:var(--amber-ink)}
+.trap{position:absolute!important;left:-9999px;width:1px;height:1px;overflow:hidden}
+.formcard button{width:100%;min-height:64px;margin-top:6px;font:inherit;font-weight:700;font-size:19px;color:var(--paper-ink);background:var(--amber);border:0;border-radius:999px;box-shadow:0 4px 0 var(--amber-shadow);cursor:pointer}
+.formcard button:hover{background:#FFB54F}
+.formcard button:focus-visible{outline:3px solid var(--paper-ink);outline-offset:3px}
+.formcard .small{font-size:16px;color:#5a4636;margin:14px 0 0}
+.notice{margin:20px 0 0;padding:14px 18px;border:2px solid var(--paper-ink);border-radius:14px;font-weight:700}
+.howto{padding-left:22px;margin:10px 0}
+.howto li{margin-bottom:12px}
+</style>
+</head>
+<body>
+<div class="bokeh" aria-hidden="true"><i></i><i></i><i></i></div>
+<header class="top">
+  <a class="mark" href="/" aria-label="Half Past home"><img src="/launch-mark.svg" alt="" width="40" height="40"><span>half past</span></a>
+  <nav aria-label="Main"><a href="/">Home</a><a href="/privacy">Privacy</a><a href="/help">Help</a><a href="/support">Support</a></nav>
+</header>
+<main class="col">
+
+<article class="doc">
+<p class="kicker">Alpha · 18+ only</p>
+<h1>Join the alpha</h1>
+<p class="lede">Half Past tracks your drinks and rewards a steady pace and water breaks. We are looking for 10 to 20 people to try it on real nights out, on iPhone or Android.</p>
+
+<p class="formcard">Sign-ups open here very soon. Until then, email <a href="mailto:halfpast@shawlabs.dev?subject=Half%20Past%20alpha">halfpast@shawlabs.dev</a> and say if you are on iPhone or Android.</p>
+
+<h2>How testing works</h2>
+<ol class="howto">
+  <li><b>You get an invite by email.</b> On iPhone it comes from Apple's TestFlight. On Android it is a Google Play testing link. Invites go out in small groups, so yours may take a little while.</li>
+  <li><b>Use it on your nights out for about four weeks.</b> Log each drink, take water breaks, and open your receipt the morning after. Use it however feels natural. That is the test.</li>
+  <li><b>Tell us what you think.</b> Your invite comes with a link to a small WhatsApp group for testers. Post anything there: what you like, what annoys you, what confuses you.</li>
+  <li><b>Found a bug?</b> Send a screenshot and a line on what you tapped, in the group or to <a href="mailto:halfpast@shawlabs.dev?subject=Half%20Past%20bug">halfpast@shawlabs.dev</a>. That is all we need.</li>
+  <li><b>Two short forms.</b> One after your first week and one at the end. A few minutes each, by email.</li>
+  <li><b>The app tells us nothing on its own.</b> No analytics, no tracking. Your nights stay on your phone. We only learn what you choose to send.</li>
+</ol>
+<p>The full terms are on the <a href="/alpha">alpha page</a>. It is a test build, so things will break. Please drink responsibly.</p>
+
+</article>
+
+</main>
+<footer class="foot">
+  <p>18+ only. Half Past is not medical advice. If you are worried about your drinking, <a href="/help">help is here</a>.</p>
+  <p class="links"><a href="/privacy">Privacy</a><a href="/alpha">Alpha terms</a><a href="/support">Support</a><a href="/help">Help</a><a href="https://www.shawlabs.dev">A Shaw Labs project</a></p>
+</footer>
+</body>
+</html>
