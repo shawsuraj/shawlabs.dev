@@ -13,11 +13,12 @@ HOST = "https://halfpast.shawlabs.dev"
 EMAIL = "halfpast@shawlabs.dev"
 UPDATED = "22 November 2026"
 
-# The Apps Script web app that receives the /join form (signups/SETUP.md).
-# While it is empty, /join shows the email route instead of the form.
-SIGNUP_URL = "https://script.google.com/macros/s/AKfycbzoxROz9ClZnRHltlf3ayOOsTMCDVWMfjTzgoLwqnZFXb9D_wGFoIjd-_Lda_Voi-6TZA/exec"
-# vercel.json lets /join and /join-check post only to script.google.com and
-# script.googleusercontent.com, where Apps Script redirects the post.
+# Sign-ups are open: /join shows the form. Set False to show the email route.
+# The form posts to our own /api/join (api/join.js), which passes it on to the
+# Apps Script web app (signups/SETUP.md) and sends the person to /thanks.
+# Nobody sees a Google page, so it works in Instagram's in-app browser.
+SIGNUP_OPEN = True
+SIGNUP_ACTION = "/api/join"
 
 CSS = open(os.path.join(SRC, "site.css")).read()
 
@@ -343,10 +344,10 @@ def join_body(notice=""):
     anywhere until the person presses Sign up."""
     if notice:
         notice = f'<p class="notice" role="alert">{notice}</p>'
-    if not SIGNUP_URL:
+    if not SIGNUP_OPEN:
         form = f"""<p class="formcard">Sign-ups open here very soon. Until then, email <a href="mailto:{EMAIL}?subject=Half%20Past%20alpha">{EMAIL}</a> and say if you are on iPhone or Android.</p>"""
     else:
-        form = f"""<form class="formcard" action="{html.escape(SIGNUP_URL)}" method="post" accept-charset="utf-8">
+        form = f"""<form class="formcard" action="{SIGNUP_ACTION}" method="post" accept-charset="utf-8">
   <p class="field"><label for="name">Your name</label>
     <input id="name" name="name" type="text" autocomplete="name" maxlength="80" required></p>
   <p class="field"><label for="email">Email <span class="hint">Use the one on your Apple ID (iPhone) or Google account (Android). Your invite goes there.</span></label>
@@ -414,6 +415,8 @@ def main():
         ("thanks", "You are on the list · Half Past", "Thanks for signing up for the Half Past alpha.", THANKS, False),
         ("join-check", "Join the alpha · Half Past", "Sign up to test Half Past.",
          join_body("Something was missing or did not look right. Please check your answers and try again."), False),
+        ("join-error", "Join the alpha · Half Past", "Sign up to test Half Past.",
+         join_body(f'Something went wrong on our side, so your sign-up may not have saved. Please try again in a minute, or email <a href="mailto:{EMAIL}?subject=Half%20Past%20alpha">{EMAIL}</a>.'), False),
     ]
     for slug, title, desc, body, wide in extra:
         with open(os.path.join(OUT, slug + ".html"), "w") as f:
