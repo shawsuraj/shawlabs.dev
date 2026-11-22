@@ -222,7 +222,25 @@ main.col{max-width:760px}
 <h1>Join the alpha</h1>
 <p class="lede">Half Past tracks your drinks and rewards a steady pace and water breaks. We are looking for 10 to 20 people to try it on real nights out, on iPhone or Android.</p>
 
-<p class="formcard">Sign-ups open here very soon. Until then, email <a href="mailto:halfpast@shawlabs.dev?subject=Half%20Past%20alpha">halfpast@shawlabs.dev</a> and say if you are on iPhone or Android.</p>
+<form class="formcard" action="https://script.google.com/macros/s/AKfycbzoxROz9ClZnRHltlf3ayOOsTMCDVWMfjTzgoLwqnZFXb9D_wGFoIjd-_Lda_Voi-6TZA/exec" method="post" accept-charset="utf-8">
+  <p class="field"><label for="name">Your name</label>
+    <input id="name" name="name" type="text" autocomplete="name" maxlength="80" required></p>
+  <p class="field"><label for="email">Email <span class="hint">Use the one on your Apple ID (iPhone) or Google account (Android). Your invite goes there.</span></label>
+    <input id="email" name="email" type="email" autocomplete="email" inputmode="email" maxlength="120" required></p>
+  <fieldset class="field"><legend>Which phone?</legend>
+    <div class="choices">
+      <label class="choice"><input type="radio" name="phone" value="iPhone" required><span>iPhone</span></label>
+      <label class="choice"><input type="radio" name="phone" value="Android"><span>Android</span></label>
+    </div>
+  </fieldset>
+  <p class="field"><label for="instagram">Instagram <span class="hint">Optional, so we know it is you.</span></label>
+    <input id="instagram" name="instagram" type="text" autocomplete="off" autocapitalize="none" spellcheck="false" maxlength="40" placeholder="@yourname"></p>
+  <label class="tick"><input type="checkbox" name="adult" value="yes" required><span>I am 18 or over.</span></label>
+  <label class="tick"><input type="checkbox" name="emails" value="yes" required><span>I am happy to get emails about the alpha: my invite, news about new builds, and two short feedback forms.</span></label>
+  <p class="trap" aria-hidden="true"><label for="website">Leave this empty</label><input id="website" name="website" type="text" tabindex="-1" autocomplete="off"></p>
+  <p><button type="submit">Sign me up</button></p>
+  <p class="small">We keep your details only to run the alpha, delete them when it ends, and never share them. Leave any time by emailing <a href="mailto:halfpast@shawlabs.dev?subject=Half%20Past%20sign-up">halfpast@shawlabs.dev</a>. See <a href="/privacy">privacy</a>.</p>
+</form>
 
 <h2>How testing works</h2>
 <ol class="howto">
