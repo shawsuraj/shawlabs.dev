@@ -25,14 +25,138 @@ function setup() {
   const book = SpreadsheetApp.getActiveSpreadsheet();
   let sheet = book.getSheetByName(SHEET_NAME);
   if (!sheet) sheet = book.insertSheet(SHEET_NAME);
-  sheet.getRange(1, 1, 1, HEADERS.length).setValues([HEADERS]).setFontWeight('bold');
+  sheet.getRange(1, 1, 1, HEADERS.length).setValues([HEADERS]);
+  tidy();
+}
+
+// Half Past colours, from the site.
+const DARK = '#2A1A10';
+const AMBER = '#F5A73B';
+const CREAM = '#FBF5EC';
+const STATUS_COLOURS = {
+  'New':            ['#FCE6C4', '#7A4A0E'],
+  'Invited':        ['#DCE8F8', '#1F4E8C'],
+  'Joined':         ['#DDF0DC', '#1E6B2E'],
+  'Not this round': ['#ECECEC', '#666666'],
+  'Left':           ['#F8DCDC', '#9B2C2C']
+};
+// Column widths in pixels, in the order of HEADERS.
+const WIDTHS = [140, 160, 240, 90, 140, 70, 70, 120, 300];
+
+/**
+ * Formats the Sign-ups tab and builds the Summary tab. Safe to run again
+ * any time the sheet looks messy. It never changes the data.
+ */
+function tidy() {
+  const book = SpreadsheetApp.getActiveSpreadsheet();
+  const sheet = book.getSheetByName(SHEET_NAME);
+  const cols = HEADERS.length;
+  const rows = sheet.getMaxRows();
+  const col = name => HEADERS.indexOf(name) + 1;
+
+  // Shorter labels for the two narrow tick columns.
+  const labels = HEADERS.slice();
+  labels[col('18+ confirmed') - 1] = '18+';
+  labels[col('Happy to get emails') - 1] = 'Emails ok';
+  sheet.getRange(1, 1, 1, cols).setValues([labels]);
+
+  // Whole sheet: font, height, vertical centring.
+  const all = sheet.getRange(1, 1, rows, cols);
+  all.setFontFamily('Arial').setFontSize(10).setVerticalAlignment('middle')
+     .setWrap(false);
+  sheet.setRowHeights(2, rows - 1, 28);
+  sheet.setHiddenGridlines(true);
+
+  // Header.
+  sheet.getRange(1, 1, 1, cols)
+    .setBackground(DARK).setFontColor(AMBER).setFontWeight('bold')
+    .setFontSize(11).setHorizontalAlignment('left');
+  sheet.setRowHeight(1, 38);
   sheet.setFrozenRows(1);
-  const status = SpreadsheetApp.newDataValidation()
+  sheet.setFrozenColumns(col('Name'));
+
+  // Widths.
+  WIDTHS.forEach((w, i) => sheet.setColumnWidth(i + 1, w));
+
+  // Per column formats.
+  const body = (name) => sheet.getRange(2, col(name), rows - 1, 1);
+  body('Signed up').setNumberFormat('d mmm, HH:mm').setFontColor('#6B5B4E');
+  body('Name').setFontWeight('bold');
+  ['Phone', '18+ confirmed', 'Happy to get emails']
+    .forEach(n => body(n).setHorizontalAlignment('center'));
+  ['18+ confirmed', 'Happy to get emails']
+    .forEach(n => body(n).setFontColor('#1E6B2E'));
+  body('Notes').setWrap(true);
+  body('Status').setHorizontalAlignment('center').setFontWeight('bold');
+
+  // Status dropdown.
+  const rule = SpreadsheetApp.newDataValidation()
     .requireValueInList(STATUSES, true)
     .setAllowInvalid(false)
     .build();
-  sheet.getRange(2, HEADERS.indexOf('Status') + 1, 999, 1).setDataValidation(status);
-  sheet.autoResizeColumns(1, HEADERS.length);
+  body('Status').setDataValidation(rule);
+
+  // Alternate row shading, header included in the band.
+  sheet.getBandings().forEach(b => b.remove());
+  all.applyRowBanding(SpreadsheetApp.BandingTheme.LIGHT_GREY, true, false)
+    .setHeaderRowColor(DARK)
+    .setFirstRowColor('#FFFFFF')
+    .setSecondRowColor(CREAM);
+
+  // Status colours, which sit on top of the shading.
+  const statusRange = body('Status');
+  const kept = sheet.getConditionalFormatRules().filter(r =>
+    !r.getRanges().some(g => g.getColumn() === col('Status')));
+  const statusRules = Object.keys(STATUS_COLOURS).map(s =>
+    SpreadsheetApp.newConditionalFormatRule()
+      .whenTextEqualTo(s)
+      .setBackground(STATUS_COLOURS[s][0])
+      .setFontColor(STATUS_COLOURS[s][1])
+      .setRanges([statusRange])
+      .build());
+  sheet.setConditionalFormatRules(kept.concat(statusRules));
+
+  // Filter buttons on the header.
+  if (sheet.getFilter()) sheet.getFilter().remove();
+  all.createFilter();
+
+  summary(book);
+}
+
+/** A small Summary tab with live counts. */
+function summary(book) {
+  let s = book.getSheetByName('Summary');
+  if (!s) s = book.insertSheet('Summary');
+  s.clear();
+  const src = "'" + SHEET_NAME + "'!";
+  const rows = [
+    ['Half Past alpha', ''],
+    ['', ''],
+    ['Sign-ups', '=COUNTA(' + src + 'C2:C)'],
+    ['iPhone', '=COUNTIF(' + src + 'D2:D,"iPhone")'],
+    ['Android', '=COUNTIF(' + src + 'D2:D,"Android")'],
+    ['', ''],
+    ['Status', '']
+  ].concat(STATUSES.map(st => [st, '=COUNTIF(' + src + 'H2:H,"' + st + '")']))
+   .concat([['', ''], ['Last sign-up', '=IFERROR(MAX(' + src + 'A2:A),"")']]);
+  s.getRange(1, 1, rows.length, 2).setValues(rows);
+
+  s.setHiddenGridlines(true);
+  s.setColumnWidth(1, 160);
+  s.setColumnWidth(2, 140);
+  s.getRange(1, 1, rows.length, 2).setFontFamily('Arial').setFontSize(11)
+    .setVerticalAlignment('middle');
+  s.setRowHeights(1, rows.length, 28);
+  s.getRange(1, 1, 1, 2).merge().setBackground(DARK).setFontColor(AMBER)
+    .setFontWeight('bold').setFontSize(14);
+  s.setRowHeight(1, 40);
+  s.getRange(3, 1, 1, 2).setFontWeight('bold').setFontSize(13);
+  s.getRange(7, 1).setFontWeight('bold').setFontColor('#6B5B4E');
+  s.getRange(3, 2, rows.length - 2, 1).setHorizontalAlignment('right');
+  STATUSES.forEach((st, i) => s.getRange(8 + i, 1)
+    .setBackground(STATUS_COLOURS[st][0]).setFontColor(STATUS_COLOURS[st][1])
+    .setFontWeight('bold'));
+  s.getRange(rows.length, 2).setNumberFormat('d mmm, HH:mm');
 }
 
 /**
