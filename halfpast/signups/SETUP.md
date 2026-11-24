@@ -76,5 +76,6 @@ only changes formatting, never the data. Running it needs no new deployment.
 2. iPhone: App Store Connect > TestFlight > the Alpha external group > add
    their email. Android: Play Console > Closed testing > the tester list >
    add their email, then send them the opt-in link.
-3. Email them from halfpast@shawlabs.dev with the WhatsApp group link.
+3. Email them from halfpast@shawlabs.dev: how to install, and that feedback
+   goes to that address (or Share Beta Feedback in TestFlight on iPhone).
 4. Set Status to Invited, then Joined once they install.
