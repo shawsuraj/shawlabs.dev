@@ -304,7 +304,7 @@ PRIVACY = f"""
 </ul>
 <p>We use it only to run the alpha: to send your invite through Apple's TestFlight or Google Play, to tell you about new builds and changes to these terms, and to send two short feedback forms, one after your first week and one at the end. We do not send marketing, and we never share or sell your details.</p>
 <p>When you press Sign up, your answers pass through this site's host, Vercel, to a private Google Sheet kept by Suraj Shaw, through Google Apps Script. A short note about the sign-up is emailed to {EMAIL}. To send your invite, your email also goes to Apple or Google, whichever your phone uses. Vercel, Google and Apple act for us here under their own terms, and some of their servers are outside the UK, protected by the safeguards those terms set out. Only Suraj Shaw can see the sheet. Nothing you log in the app is ever added to it.</p>
-<p>The alpha WhatsApp group is optional. If you join, everyone in the group can see your phone number and what you post, and WhatsApp handles it under its own privacy policy. We do not copy your number anywhere else. The two feedback forms are optional too, and each says what it asks before you start.</p>
+<p>We never ask for your phone number. If you send feedback from TestFlight on iPhone, Apple passes us your message, screenshot, email and device details, under Apple's own terms. The two feedback forms are optional, and each says what it asks before you start.</p>
 <p>We delete your details, and the email notes about them, when the alpha ends, unless you ask to join the beta. If you leave early, tell us and we delete them then. You can see what we hold, correct it, or have it deleted at any time: email <a href="mailto:{EMAIL}?subject=Half%20Past%20sign-up">{EMAIL}</a>. Leaving the alpha does not affect anything on your phone.</p>
 <p>If you are unhappy with how we handle your details, please tell us first. You also have the right to complain to the Information Commissioner's Office at <a href="https://ico.org.uk/make-a-complaint/">ico.org.uk</a>.</p>
 
@@ -315,7 +315,7 @@ PRIVACY = f"""
 <p>This site sets no cookies and runs no analytics or third-party scripts. Its fonts are served from this site. The sign-up form sends nothing until you press Sign up, and then only what you typed, through our host to Google as set out above. Our host, Vercel, keeps standard server logs, such as IP addresses, for a short time to run and secure the site.</p>
 
 <h2>Changes</h2>
-<p>If this policy changes, the date at the top changes with it, and testers hear about it in the alpha group before the build that needs it.</p>
+<p>If this policy changes, the date at the top changes with it, and testers hear about it by email before the build that needs it.</p>
 </article>
 """
 
@@ -337,7 +337,7 @@ ALPHA = f"""
   <li><b>You can stop at any time.</b> Use Delete everything, then remove the app. Tell us if you want your sign-up details deleted too.</li>
 </ul>
 <h2>Reporting a bug</h2>
-<p>Send a screenshot and what you tapped in the alpha WhatsApp group, or email <a href="mailto:{EMAIL}?subject=Half%20Past%20bug">{EMAIL}</a>. Every bug becomes a test before it is fixed.</p>
+<p>On iPhone, take a screenshot in the app and tap Share Beta Feedback in TestFlight. On any phone, email a screenshot and what you tapped to <a href="mailto:{EMAIL}?subject=Half%20Past%20bug">{EMAIL}</a>. Every bug becomes a test before it is fixed.</p>
 </article>
 """
 
@@ -346,7 +346,7 @@ SUPPORT = f"""
 <h1>Support</h1>
 <p class="lede">Something not working, or a question about the app? Email <a href="mailto:{EMAIL}?subject=Half%20Past%20support">{EMAIL}</a>. A person reads every message.</p>
 <h2>Reporting a bug</h2>
-<p>A screenshot plus what you tapped is perfect. Alpha testers can also post it in the alpha WhatsApp group.</p>
+<p>A screenshot plus what you tapped is perfect. On iPhone, alpha testers can also take a screenshot and tap Share Beta Feedback in TestFlight.</p>
 <h2>Your data</h2>
 <p>We cannot see or recover your nights, because they never leave your phone. To remove everything, open You in the app and tap Delete everything. See the <a href="/privacy">privacy policy</a>.</p>
 <h2>Help with drinking</h2>
@@ -379,8 +379,8 @@ TESTING = f"""
 <ol class="howto">
   <li><b>You get an invite by email.</b> On iPhone it comes from Apple's TestFlight. On Android it is a Google Play testing link. Invites go out in small groups, so yours may take a little while.</li>
   <li><b>Use it on your nights out for about four weeks.</b> Log each drink, take water breaks, and open your receipt the morning after. Use it however feels natural. That is the test.</li>
-  <li><b>Tell us what you think.</b> Your invite comes with a link to a small WhatsApp group for testers. Post anything there: what you like, what annoys you, what confuses you.</li>
-  <li><b>Found a bug?</b> Send a screenshot and a line on what you tapped, in the group or to <a href="mailto:{EMAIL}?subject=Half%20Past%20bug">{EMAIL}</a>. That is all we need.</li>
+  <li><b>Tell us what you think.</b> Email <a href="mailto:{EMAIL}?subject=Half%20Past%20feedback">{EMAIL}</a> any time: what you like, what annoys you, what confuses you. A person reads every message.</li>
+  <li><b>Found a bug?</b> On iPhone, take a screenshot in the app and tap Share Beta Feedback. On Android, email a screenshot and a line on what you tapped. That is all we need.</li>
   <li><b>Two short forms.</b> One after your first week and one at the end. A few minutes each, by email.</li>
   <li><b>The app tells us nothing on its own.</b> No analytics, no tracking. Your nights stay on your phone. We only learn what you choose to send.</li>
 </ol>
