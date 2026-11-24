@@ -11,7 +11,7 @@ SRC = os.path.join(ROOT, "src")
 OUT = os.path.join(ROOT, "public")
 HOST = "https://halfpast.shawlabs.dev"
 EMAIL = "halfpast@shawlabs.dev"
-UPDATED = "22 November 2026"
+UPDATED = "24 November 2026"
 
 # Sign-ups are open: /join shows the form. Set False to show the email route.
 # The form posts to our own /api/join (api/join.js), which passes it on to the
@@ -299,18 +299,20 @@ PRIVACY = f"""
 <ul>
   <li>Your name and email address. Use the email on your Apple ID or Google account, because that is where the test invite goes.</li>
   <li>Whether you are on iPhone or Android.</li>
-  <li>Your Instagram name, only if you choose to give it.</li>
+  <li>Your Instagram name, only if you choose to give it. It helps us tell who you are if we do not know your email.</li>
   <li>A yes that you are 18 or over, and a yes that you are happy to get emails about the alpha.</li>
 </ul>
 <p>We use it only to run the alpha: to send your invite through Apple's TestFlight or Google Play, to tell you about new builds and changes to these terms, and to send two short feedback forms, one after your first week and one at the end. We do not send marketing, and we never share or sell your details.</p>
-<p>When you press Sign up, your answers go to a private Google Sheet kept by Suraj Shaw, through Google Apps Script, and a short note about the sign-up is emailed to {EMAIL}. Google handles that under Google's own terms. To send your invite, your email also goes to Apple or Google, whichever your phone uses. Nothing you log in the app is ever added to it.</p>
-<p>We delete your details when the alpha ends, unless you ask to join the beta. You can see what we hold, correct it, or have it deleted at any time: email <a href="mailto:{EMAIL}?subject=Half%20Past%20sign-up">{EMAIL}</a>. Leaving the alpha does not affect anything on your phone.</p>
+<p>When you press Sign up, your answers pass through this site's host, Vercel, to a private Google Sheet kept by Suraj Shaw, through Google Apps Script. A short note about the sign-up is emailed to {EMAIL}. To send your invite, your email also goes to Apple or Google, whichever your phone uses. Vercel, Google and Apple act for us here under their own terms, and some of their servers are outside the UK, protected by the safeguards those terms set out. Only Suraj Shaw can see the sheet. Nothing you log in the app is ever added to it.</p>
+<p>The alpha WhatsApp group is optional. If you join, everyone in the group can see your phone number and what you post, and WhatsApp handles it under its own privacy policy. We do not copy your number anywhere else. The two feedback forms are optional too, and each says what it asks before you start.</p>
+<p>We delete your details, and the email notes about them, when the alpha ends, unless you ask to join the beta. If you leave early, tell us and we delete them then. You can see what we hold, correct it, or have it deleted at any time: email <a href="mailto:{EMAIL}?subject=Half%20Past%20sign-up">{EMAIL}</a>. Leaving the alpha does not affect anything on your phone.</p>
+<p>If you are unhappy with how we handle your details, please tell us first. You also have the right to complain to the Information Commissioner's Office at <a href="https://ico.org.uk/make-a-complaint/">ico.org.uk</a>.</p>
 
 <h2>Our legal basis</h2>
 <p>Because nothing you log ever reaches us, we do not collect or process it, and we are not a controller of the data kept on your phone. For the alpha sign-up, we are the controller, and we rely on your consent, which you give with the two ticks on the form. You can withdraw it at any time by emailing us. If you email us, we use your email address and message only to reply, on the basis of our legitimate interest in answering you, and we delete them when the conversation is over.</p>
 
 <h2>This website</h2>
-<p>This site sets no cookies and runs no analytics or third-party scripts. Its fonts are served from this site. The sign-up form sends nothing until you press Sign up, and then only what you typed, to Google as set out above. Our host, Vercel, keeps standard server logs, such as IP addresses, for a short time to run and secure the site.</p>
+<p>This site sets no cookies and runs no analytics or third-party scripts. Its fonts are served from this site. The sign-up form sends nothing until you press Sign up, and then only what you typed, through our host to Google as set out above. Our host, Vercel, keeps standard server logs, such as IP addresses, for a short time to run and secure the site.</p>
 
 <h2>Changes</h2>
 <p>If this policy changes, the date at the top changes with it, and testers hear about it in the alpha group before the build that needs it.</p>
@@ -329,7 +331,10 @@ ALPHA = f"""
   <li><b>Drink responsibly.</b> Points are a game, not a goal. Never drink more to score, and never drive after drinking.</li>
   <li><b>No guarantees.</b> The alpha is given as it is, and it is not medical advice. If you are worried about your drinking, see <a href="/help">Help</a>.</li>
   <li><b>Your data stays yours.</b> Everything stays on your phone, as the <a href="/privacy">privacy policy</a> sets out.</li>
-  <li><b>You can stop at any time.</b> Use Delete everything, then remove the app.</li>
+  <li><b>Signing up is not a place.</b> Invites go out in small groups, and not everyone who signs up gets one in this round.</li>
+  <li><b>We may email you</b> about the alpha: your invite, news about new builds, changes to these terms, and two short feedback forms. Nothing else.</li>
+  <li><b>Your sign-up details</b> (name, email, phone type and Instagram, if given) are used only to run the alpha and are deleted when it ends, as the <a href="/privacy">privacy policy</a> sets out.</li>
+  <li><b>You can stop at any time.</b> Use Delete everything, then remove the app. Tell us if you want your sign-up details deleted too.</li>
 </ul>
 <h2>Reporting a bug</h2>
 <p>Send a screenshot and what you tapped in the alpha WhatsApp group, or email <a href="mailto:{EMAIL}?subject=Half%20Past%20bug">{EMAIL}</a>. Every bug becomes a test before it is fixed.</p>
